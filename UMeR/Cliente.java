@@ -1,11 +1,6 @@
 
-public class Cliente
+public class Cliente extends Actor
 {
-    private String email;
-    private String nome;
-    private String password;
-    private String morada;
-    private String dataNasc;
-    private int gpsX;
-    private int gpsY;
+   
+    private Coords posicao //nao sei se precisamos disto
 }

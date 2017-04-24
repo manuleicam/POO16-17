@@ -1,12 +1,7 @@
 
-public class Motorista
+public class Motorista extends Actor
 {
-    private String email;
-    private String nome;
-    private String password;
-    private String morada;
-    private String dataNasc;
-    private int grauCumpHorario;
+    private int grauCumpHorario; 
     private int classificacao;
     private int viagens;
     private int numKMs;

@@ -1,5 +1,5 @@
 
-public class NoveLugares extends Veiculos
+public class NoveLugares extends Veiculo
 {
     
 }

@@ -22,10 +22,10 @@ public class Coords
     }
 
 
-    public int setx(x){
+    public void setx(int x){
     	 this.x = x;
 	}
-	public int sety(y){
+	public void sety(int y){
     	 this.y = y;
 	}
 }

@@ -5,9 +5,10 @@ import java.util.Date;
 
 public class UMer{
     
-    private static HashMap<String,Actor> listaCliente;
+    private static HashMap<String,Actor> listaCliente = new HashMap<String,Actor>();
     private static Actor currentUser;
     
+
 
     public int login(String email, String pass)
     {
@@ -25,13 +26,13 @@ public class UMer{
     }
 
 
-    public int register (String tudoAoMolho){
+    public static int register (String tudoAoMolho){
         Actor temp;
         Date data = new Date();
         int dia, mes, ano;
         String[] lista = tudoAoMolho.split(",");
 
-        if (listaCliente.containsKey(lista[0])) return 0;
+        // if (listaCliente.containsKey(lista[0])) return 0;
 
         ano = Integer.parseInt(lista[4]);
         data.setYear(ano);
@@ -42,7 +43,18 @@ public class UMer{
 
         temp = new Actor (lista[0]/*email*/, lista[1]/*nome*/, lista[2]/*pass*/, lista[3]/*morada*/, data);
         listaCliente.put(lista[0],temp);
+
+        testeActor(lista[0]); //teste, remover!
+
         return 1;
     }
 
+    public static void testeActor (String email){
+        Actor ze = new Actor();
+        if (listaCliente.containsKey(email)) System.out.println("asdasdasasdasddsa");
+        ze = listaCliente.get(email);
+        String nome = new String();
+        nome = ze.getNome();
+        System.out.println(nome);
+    }
 }

@@ -3,10 +3,10 @@
  public class Actor 
  {
  	private String email;
-    private String nome;
-    private String password;
-    private String morada;
-    private Date nascimento;
+  private String nome;
+  private String password;
+  private String morada;
+  private Date nascimento;
 
 
    public Actor(){
@@ -24,6 +24,13 @@
    		this.morada = morada;
    		this.nascimento = nascimento;
    }
+
+
+   public String getNome(){
+     return this.nome;
+   }
+
+
 
    public boolean logIn (String pass){
    		if (this.password.equals(pass))

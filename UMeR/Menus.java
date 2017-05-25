@@ -5,12 +5,16 @@ public class Menus {
 
     public static Scanner escolha = new Scanner(System.in);
     public static int esc;
+    public static UMer umer;
+
 
     public static void main(String args[]) {
         inicial();
     }
 
-    public static String inicial() {
+
+
+    public static void inicial() {
         String dados = "";
         System.out.println("#######################");
         System.out.println("BEM VINDO AO SISTEMA");
@@ -25,11 +29,9 @@ public class Menus {
                 break;
             case 2:
                 System.out.println("2");
-                dados = registar();
+                registar();
                 break;
         }
-        
-        return dados;
 
     }
 
@@ -47,7 +49,7 @@ public class Menus {
         return dados;
     }
     
-    public static String registar(){
+    public static void  registar(){
         String user, password, dados, morada, data, nome;
         String[] datapartida;
         
@@ -73,7 +75,7 @@ public class Menus {
         password = escolha.nextLine();
         dados = user + ","  + nome + "," + password + "," + morada + "," + datapartida[0] + "," + datapartida[1] + "," + datapartida[2];
         System.out.println(dados); //PRINT DADOS TESTE
-        return dados;
+        umer.register(dados);
     }
 
     public static void menu1() {

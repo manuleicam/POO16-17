@@ -1,9 +1,12 @@
 #BlueJ class context
-comment0.target=UMer
+comment0.params=
+comment0.target=UMer()
 comment1.params=email\ pass
 comment1.target=int\ login(java.lang.String,\ java.lang.String)
 comment2.params=tudoAoMolho
 comment2.target=int\ register(java.lang.String)
 comment3.params=email
-comment3.target=void\ testeActor(java.lang.String)
-numComments=4
+comment3.target=boolean\ verificarMail(java.lang.String)
+comment4.params=email
+comment4.target=void\ testeActor(java.lang.String)
+numComments=5

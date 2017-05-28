@@ -3,59 +3,89 @@ import java.util.Scanner;
 
 public class Menus {
 
-    public static Scanner escolha = new Scanner(System.in);
-    public static int esc;
-    public static UMer umer;
+    public Scanner escolha = new Scanner(System.in);
+    public int esc;
+    public UMer umer = new UMer();
 
-
+        
     public static void main(String args[]) {
+        Menus m = new Menus();
+        m.run();
+    }
+    
+    public void run(){
         inicial();
     }
 
 
 
-    public static void inicial() {
-        String dados = "";
+    public void inicial() {
         System.out.println("#######################");
         System.out.println("BEM VINDO AO SISTEMA");
         System.out.println("Escolha uma das opções a baixo");
         System.out.println("1-LogIn");
         System.out.println("2-Registar");
+        System.out.println("0-Sair");
         esc = escolha.nextInt();
         switch (esc) {
             case 1:
-                System.out.println("1");
-                dados = logIN();
+                logIN();
                 break;
             case 2:
-                System.out.println("2");
                 registar();
+                break;
+            case 0:
+                System.out.println("Adeus!");
                 break;
         }
 
     }
 
-    public static String logIN() {
-        String user, dados, password = " ";
+    public void logIN() {
+        String user, password;
+        int flagLog;
         
         escolha.nextLine();
         System.out.println("Insira o seu user");
         user = escolha.nextLine();
-        if (user == "\n") System.out.println("ENTER");
-        System.out.println("Insira a sua password");
+        
+        System.out.println("Insira a sua password");        
         password = escolha.nextLine();
-        dados = user + "," + password;
-        System.out.println(dados);
-        return dados;
+        
+        flagLog = umer.login(user, password);
+        while(flagLog != 1){
+            if (flagLog == 0){
+                System.out.println("Password não corresponde ao Email inserido");
+            }
+            else {
+                System.out.println("O email inserido não se encontra registado");
+            }
+            System.out.println("Insira o seu user");
+            user = escolha.nextLine();
+        
+            System.out.println("Insira a sua password");        
+            password = escolha.nextLine();
+            
+            flagLog = umer.login(user,password);
+        }
+        menu1();
+
     }
     
-    public static void  registar(){
+    public void  registar(){
         String user, password, dados, morada, data, nome;
         String[] datapartida;
         
         escolha.nextLine();
         System.out.println("Insira o email desejado");
         user = escolha.nextLine();
+        
+        while (umer.verificarMail(user)){
+            System.out.println("Email já em uso");
+            System.out.println("Insira o email desejado");
+            user = escolha.nextLine();
+        }
+        
         System.out.println("Insira o seu nome");
         nome = escolha.nextLine();
         System.out.println("Insira a sua data de nascimento com o seguinte formato YYYY-MM-DD");
@@ -76,9 +106,10 @@ public class Menus {
         dados = user + ","  + nome + "," + password + "," + morada + "," + datapartida[0] + "," + datapartida[1] + "," + datapartida[2];
         System.out.println(dados); //PRINT DADOS TESTE
         umer.register(dados);
+        inicial();
     }
 
-    public static void menu1() {
+    public void menu1() {
         System.out.println("#######################");
         System.out.println("BEM VINDO AO SISTEMA");
         System.out.println("Escolha uma das opções a baixo");

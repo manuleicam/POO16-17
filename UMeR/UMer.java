@@ -1,23 +1,25 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Date;
+import java.util.ArrayList;
 
 
 public class UMer{
     
     private HashMap<String,Actor> listaCliente = new HashMap<String,Actor>();
+    private HashMap<String,Veiculo> listaVeiculo= new HashMap<String,Veiculo>();
     private Actor currentUser;
     
     public UMer(){
         Date da = new Date(2000,01,01);
-        Date db = new Date(1994,06,8);
+        Date db = new Date(1994,06,8); //08 é muito grande diz ele ??
         Date dc = new Date(1995,01,20);
         
         Actor a = new Actor("jonas@gmail.com","joao","jo","todoolado",da);
         Actor b = new Actor("rui@gmail.com","rui","321","nunca",db);
         Actor c = new Actor("manu@gmail.com","manu","123","wow",dc);
         
-        listaCliente.put("jonas@gmail.com",a);
+        listaCliente.put("jonas@gmail.com",a); // cuidado que este é sensivel
         listaCliente.put("rui@gmail.com", b);
         listaCliente.put("manu@gmail.com", c);
                
@@ -47,7 +49,7 @@ public class UMer{
         int dia, mes, ano;
         String[] lista = tudoAoMolho.split(",");
 
-        // if (listaCliente.containsKey(lista[0])) return 0;
+        if (listaCliente.containsKey(lista[0])) return 0;
 
         ano = Integer.parseInt(lista[4]);
         data.setYear(ano);
@@ -58,8 +60,6 @@ public class UMer{
 
         temp = new Actor (lista[0]/*email*/, lista[1]/*nome*/, lista[2]/*pass*/, lista[3]/*morada*/, data);
         listaCliente.put(lista[0],temp);
-
-        testeActor(lista[0]); //teste, remover!
 
         return 1;
     }

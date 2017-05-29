@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Cliente extends Actor
 {
-
+	private int totalGasto;
 
    public Cliente()
    {

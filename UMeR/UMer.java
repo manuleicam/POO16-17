@@ -6,6 +6,9 @@ import java.util.Date;
 public class UMer {
 
     private HashMap<String, Actor> listaCliente = new HashMap<String, Actor>();
+    private HashMap<String, Veiculo> listaVeiculo = new HashMap<String, Veiculo>();
+    private Map<Integer,Viagem> listaViagens = new HashMap<Integer,Viagem>();
+    private static int id = 0;
     private Actor currentUser;
 
     public UMer() {

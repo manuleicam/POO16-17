@@ -6,6 +6,7 @@ public class Motorista extends Actor
     private int classificacao;
     private int nrViagens;
     private int numKms;
+    private Empresa empresa;
     private Boolean estado; //true livre, false ocupado, mais facil
     private ArrayList<Viagem> viagens;//Fazer uma lista central (hash) e guarda so os id's da viagem aqui
 

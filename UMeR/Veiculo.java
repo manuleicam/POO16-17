@@ -7,4 +7,5 @@ public class Veiculo
     private int precoPorKM;
     private int fiabilidade;
     private Coords posicao;
+    private int totalFaturado;
 }

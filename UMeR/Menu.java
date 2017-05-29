@@ -12,6 +12,7 @@ public class Menu {
     private String[] menuPrinc = {"LogIn", "Registar"};
     private String[] menuCliente = {"Bla1", "Bla2", "Bla3", "Bla4"};
     private String[] menuMotorista = {"MM1","MM2"};
+    private String[] menuEmpresa = {"em1","em2"};
     private int op, esc;
     public UMer umer;
     public Scanner escolha; 

@@ -1,13 +1,16 @@
+ import java.util.Date;
+ import java.util.*;
 
-import java.util.Date;
-
-public class Actor {
-
+ public class Actor 
+ {
     private String email;
     private String nome;
     private String password;
     private String morada;
     private Date nascimento;
+    private ArrayList<Viagem> viagens;
+
+
 
     public Actor() {
         this.email = "";

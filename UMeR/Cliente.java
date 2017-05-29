@@ -1,7 +1,19 @@
+import java.util.*;
 
 public class Cliente extends Actor
 {
+
+
+   public Cliente()
+   {
+   		super();
+   }
    
-    private Coords posicao;//nao sei se precisamos disto
-    //lista de viagens efetuadas. talvez seja melhor criar a class viagem
+
+   public Cliente(String email, String nome, String password, String morada, Date nascimento)
+   {
+		super(email, nome, password, morada, nascimento);
+   }
+
+
 }

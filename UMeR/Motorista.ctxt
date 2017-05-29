@@ -1,2 +1,7 @@
 #BlueJ class context
-numComments=0
+comment0.target=Motorista
+comment1.params=
+comment1.target=Motorista()
+comment2.params=email\ nome\ password\ morada\ nascimento
+comment2.target=Motorista(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.util.Date)
+numComments=3

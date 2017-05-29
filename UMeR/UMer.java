@@ -84,7 +84,7 @@ public class UMer {
         float  rng = ((rando.nextInt(21) + (float)90)/100); //de 0.9 a 1.1
         int distancia = 1; //discantica por calcular funçao manu
         Date data = new Date(); //current date?
-        int precoFinal = precoAcordado * rng;
+        float precoFinal = precoAcordado * rng;
         
         Viagem nova = new Viagem(id, cliente, inicio, fim, distancia, precoAcordado, precoFinal, condutor, veiculo, data);
         idViagem++;

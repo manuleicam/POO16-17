@@ -2,7 +2,7 @@
 comment0.target=Viagem
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Viagem\ here.\r\n\r\n\ @author\ My\ name\r\n\ @version\ 1\r\n
 comment1.params=id\ cliente\ inicio\ fim\ distancia\ precoAcordado\ precoFinal\ condutor\ veiculo\ data
-comment1.target=Viagem(int,\ Cliente,\ Coords,\ Coords,\ int,\ int,\ int,\ Motorista,\ Veiculo,\ java.util.Date)
+comment1.target=Viagem(int,\ Cliente,\ Coords,\ Coords,\ int,\ int,\ float,\ Motorista,\ Veiculo,\ java.util.Date)
 comment10.params=
 comment10.target=java.util.Date\ getData()
 comment11.params=cliente
@@ -38,7 +38,7 @@ comment3.target=Coords\ getInicio()
 comment4.params=
 comment4.target=Coords\ getFim()
 comment5.params=
-comment5.target=int\ getPrecoFinal()
+comment5.target=float\ getPrecoFinal()
 comment6.params=
 comment6.target=int\ getDistancia()
 comment7.params=

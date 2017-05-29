@@ -8,7 +8,6 @@ public class Motorista extends Actor
     private int numKms;
     private Empresa empresa;
     private Boolean estado; //true livre, false ocupado, mais facil
-    private ArrayList<Viagem> viagens;//Fazer uma lista central (hash) e guarda so os id's da viagem aqui
 
    public Motorista()
    {
@@ -18,7 +17,7 @@ public class Motorista extends Actor
         this.nrViagens=0;
         this.numKms=0;
         this.estado=true;
-        this.viagens = new ArrayList<Viagem>();
+        this.listaViagens = new ArrayList<Viagem>();
         
    }
 
@@ -31,9 +30,20 @@ public class Motorista extends Actor
         this.nrViagens=0;
         this.numKms=0;
         this.estado=true;
-        this.viagens = new ArrayList<Viagem>();
+        this.listaViagens = new ArrayList<Viagem>();
    }
 
 
-   
+   public void addViagem(Viagem nova){
+      
+      this.listaViagens.add(nova);
+      this.numKms += nova.getDistancia();
+
+    }
+
+    public void adicionarKms (int kms){
+        this.numKms += kms;
+        this.nrViagens++;
+   }
+
 }

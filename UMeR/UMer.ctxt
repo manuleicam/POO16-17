@@ -10,4 +10,6 @@ comment4.params=email
 comment4.target=boolean\ verificarMail(java.lang.String)
 comment5.params=email
 comment5.target=void\ testeActor(java.lang.String)
-numComments=6
+comment6.params=cliente\ id\ inicio\ fim\ precoAcordado\ condutor\ veiculo
+comment6.target=void\ inserirViagem(Cliente,\ int,\ Coords,\ Coords,\ int,\ Motorista,\ Veiculo)
+numComments=7

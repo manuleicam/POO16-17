@@ -8,7 +8,7 @@ public class UMer {
     private HashMap<String, Actor> listaCliente = new HashMap<String, Actor>();
     private HashMap<String, Veiculo> listaVeiculo = new HashMap<String, Veiculo>();
     private Map<Integer,Viagem> listaViagens = new HashMap<Integer,Viagem>();
-    private static int id = 0;
+    private static int idViagem = 0;
     private Actor currentUser;
 
     public UMer() {
@@ -73,4 +73,23 @@ public class UMer {
         nome = ze.getNome();
         System.out.println(nome);
     }
+
+    public void inserirViagem(Cliente cliente, int id, Coords inicio, Coords fim, int precoAcordado, Motorista condutor, Veiculo veiculo){
+
+        int precoFinal = precoAcordado * 1; //RNG POR FAZER
+        int distancia = 1; //discantica por calcular funçao manu
+        Date data = new Date(); //current date?
+        
+        
+        Viagem nova = new Viagem(id, cliente, inicio, fim, distancia, precoAcordado, precoFinal, condutor, veiculo, data);
+        idViagem++;
+        listaViagens.put(id,nova);
+
+        cliente.addViagem(nova);
+        condutor.addViagem(nova);
+        veiculo.addViagem(nova);
+
+    }
+
+
 }

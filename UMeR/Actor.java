@@ -8,7 +8,7 @@
     private String password;
     private String morada;
     private Date nascimento;
-    private ArrayList<Viagem> viagens;
+    public ArrayList<Viagem> listaViagens;
 
 
 
@@ -37,6 +37,7 @@
         this.nascimento = a.getNascimento();
     }
     
+
     public String getEmail(){
         return this.email;
     }

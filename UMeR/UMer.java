@@ -2,6 +2,7 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Date;
+import java.util.ArrayList;
 
 public class UMer {
 
@@ -89,6 +90,23 @@ public class UMer {
         condutor.addViagem(nova);
         veiculo.addViagem(nova);
 
+    }
+    
+    public ArrayList<String> top5CondutoresMaisPerto(int x, int y) {
+        ArrayList<String> resp = new ArrayList<>();
+        String dados;
+        int tempX, tempY;
+        double dist, distMin;
+        Coords coordsAux, coords;
+        ArrayList<String> viaturas = new ArrayList<>();
+        coords = new Coords(x, y);
+        for (Veiculo d : listaVeiculo.values()) {
+            coordsAux = d.getPosicao();
+            dist = coords.distancia(coordsAux);
+            dados = "Viatura: " + d.getId() + " Fiabilidade: " + d.getFiabilidade() + " distância: " + dist;
+            resp.add(dados);
+        }
+        return resp;
     }
 
 

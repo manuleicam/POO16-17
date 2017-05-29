@@ -8,11 +8,14 @@ import java.util.InputMismatchException;
 
 public class Menu {
     // variáveis de instância
-    private List<String> opcoes;    
+    private List<String> opcoes;
     private String[] menuPrinc = {"LogIn", "Registar"};
-    private String[] menuCliente = {"Bla1", "Bla2", "Bla3", "Bla4"};
+    private String[] menuCliente = {"Realizar Viagem", "Bla2", "Bla3", "Bla4"};
+    private String[] menuViagem = {"Escolher viatura", "Viatura mais próxima"};
     private String[] menuMotorista = {"MM1","MM2"};
+    private String[] menuMotoristaPrivado = {"sss","sss"};
     private String[] menuEmpresa = {"em1","em2"};
+    
     private int op, esc;
     public UMer umer;
     public Scanner escolha; 
@@ -54,7 +57,22 @@ public class Menu {
         switch(esc){
             case 1: 
                 System.out.println("1");
-                menuCliente();
+                menuViagem();
+                break;
+        }
+    }
+    
+    public void menuViagem(){
+        setOpcoes(menuViagem);
+        executa();
+        esc = getOpcao();
+        switch(esc){
+            case 1:
+                escolherCondutor();
+                System.out.print("1");
+                break;
+            case 2:
+                System.out.println("2");
                 break;
         }
     }
@@ -208,4 +226,13 @@ public class Menu {
         menuPrinc();
     }
     
+    public void escolherCondutor(){
+        int x, y;
+        System.out.println("Insira a coordenada X onde se encontra");
+        x = escolha.nextInt();
+        System.out.println("Insira a coordenada Y onde se encontra");
+        y = escolha.nextInt();
+        umer.top5CondutoresMaisPerto(x, y);
+        System.out.println("Insira o email do condutor que deseja");
+    }
 }

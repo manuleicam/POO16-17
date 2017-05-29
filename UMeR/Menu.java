@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.Random;
 
 public class Menu {
     // variáveis de instância

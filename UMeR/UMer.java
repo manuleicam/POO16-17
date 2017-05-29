@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class UMer {
 
@@ -20,11 +21,12 @@ public class UMer {
         Cliente a = new Cliente("jonas@gmail.com", "joao", "jo", "todoolado", da);
         Cliente b = new Cliente("rui@gmail.com", "rui", "321", "nunca", db);
         Cliente c = new Cliente("manu@gmail.com", "manu", "123", "wow", dc);
+        Cliente d = new Cliente("email", "joao", "qwerty", "todoolado", da);
 
         listaCliente.put("jonas@gmail.com", a);
         listaCliente.put("rui@gmail.com", b);
         listaCliente.put("manu@gmail.com", c);
-
+        listaCliente.put("email", d);
     }
 
     public int login(String email, String pass) {
@@ -77,10 +79,12 @@ public class UMer {
 
     public void inserirViagem(Cliente cliente, int id, Coords inicio, Coords fim, int precoAcordado, Motorista condutor, Veiculo veiculo){
 
-        int precoFinal = precoAcordado * 1; //RNG POR FAZER
+      
+        Random rando = new Random();
+        float  rng = ((rando.nextInt(21) + (float)90)/100); //de 0.9 a 1.1
         int distancia = 1; //discantica por calcular funçao manu
         Date data = new Date(); //current date?
-        
+        int precoFinal = precoAcordado * rng;
         
         Viagem nova = new Viagem(id, cliente, inicio, fim, distancia, precoAcordado, precoFinal, condutor, veiculo, data);
         idViagem++;

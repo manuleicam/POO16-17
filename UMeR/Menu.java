@@ -2,6 +2,7 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
@@ -154,8 +155,20 @@ public class Menu {
     public void registar() {
         String user, password, dados, morada, data, nome;
         String[] datapartida;
+        int tipoReg = 0, flagTipo = 0;
 
+        
+        
+        while(tipoReg > 2 || tipoReg<1){
+            if (flagTipo != 0) System.out.println("Opção inválida!");
+            System.out.println("Qual o tipo de registo?");
+            System.out.println("1 - Cliente");
+            System.out.println("2 - Motorista");
+            tipoReg = escolha.nextInt();
+        }
+        
         escolha.nextLine();
+        
         System.out.println("Insira o email desejado");
         user = escolha.nextLine();
 
@@ -177,14 +190,20 @@ public class Menu {
             data = escolha.nextLine();
             datapartida = data.split("-");
         }
+        
+        int ano = Integer.parseInt(datapartida[0]);
+        int mes = Integer.parseInt(datapartida[1]);
+        int dia = Integer.parseInt(datapartida[2]);
+        Date dataFinal = new Date(ano, mes, dia);
 
         System.out.println("Insira a sua morada");
         morada = escolha.nextLine();
         System.out.println("Insira a password desejada");
         password = escolha.nextLine();
-        dados = user + "," + nome + "," + password + "," + morada + "," + datapartida[0] + "," + datapartida[1] + "," + datapartida[2];
-        System.out.println(dados); //PRINT DADOS TESTE
-        umer.register(dados);
+        
+        
+        umer.register(user, nome, password, morada, dataFinal, tipoReg);
+        
         menuPrinc();
     }
     

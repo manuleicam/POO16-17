@@ -259,18 +259,21 @@ public class Menu {
         int ano = Integer.parseInt(datapartida[0]);
         int mes = Integer.parseInt(datapartida[1]);
         int dia = Integer.parseInt(datapartida[2]);
-        Date dataInicial = new Date(ano, mes, dia);
+        LocalDate dataInicial = LocalDate.of(ano, mes, dia);
         ano = Integer.parseInt(datapartida2[0]);
         mes = Integer.parseInt(datapartida2[1]);
         dia = Integer.parseInt(datapartida2[2]);
-        Date dataFinal = new Date(ano,mes,dia);
-        //viagens.addAll(umer.procuraEntreDatas(dataInicial, dataFinal));
+        LocalDate dataFinal = LocalDate.of(ano,mes,dia);
+        viagens.addAll(umer.procuraEntreDatas(dataInicial, dataFinal));
         System.out.println(dataInicial.toString());
         System.out.println(dataFinal.toString());
         
         for(Viagem v : viagens){
+            System.out.println();
             System.out.println(v.toString());
         }
+        System.out.println();
+        menuCliente();
     }
     
     public void escolherCondutor(){

@@ -11,10 +11,16 @@ public class Empresa extends Actor {
     
     public Empresa(){
         super();
+        this.motoristas = new ArrayList<>();
+        this.viaturas = new ArrayList<>();
+        this.viagens = new ArrayList<>();
     }
     
     public Empresa(String email, String nome, String password, String morada, LocalDate nascimento){
         super(email,nome,password,morada,nascimento);
+        this.motoristas = new ArrayList<>();
+        this.viaturas = new ArrayList<>();
+        this.viagens = new ArrayList<>();
     }
     
 }

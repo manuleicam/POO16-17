@@ -113,21 +113,19 @@ public class UMer {
         return resp;    
     }
     
-    /* public ArrayList<Viagem> procuraEntreDatas(Date dataInicial, LocalDate dataFinal){
+    public ArrayList<Viagem> procuraEntreDatas(LocalDate dataInicial, LocalDate dataFinal){
         ArrayList<Viagem> tempV = new ArrayList<>();
         ArrayList<Viagem> tempVf = new ArrayList<>();
         
         tempV.addAll(this.currentUser.getListaViagens());
         for(Viagem v : tempV){
-            if (v.getData().isAfter(dataInicial) || v.getData().isBefore(dataFinal)){
-                System.out.println(dataInicial);
-                System.out.println(v.getData());
+            if (v.getData().isAfter(dataInicial) && v.getData().isBefore(dataFinal)){
                 tempVf.add(v);
             }
         }
         return tempVf;
         
-    } */
+    }
 
 
 }

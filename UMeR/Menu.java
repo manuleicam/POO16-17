@@ -11,7 +11,7 @@ public class Menu {
     // variáveis de instância
     private List<String> opcoes;
     private String[] menuPrinc = {"LogIn", "Registar"};
-    private String[] menuCliente = {"Realizar Viagem", "Bla2", "Bla3", "Bla4"};
+    private String[] menuCliente = {"Realizar Viagem", "Ver Viagens Efectuadas", "Bla3", "Bla4"};
     private String[] menuViagem = {"Escolher viatura", "Viatura mais próxima"};
     private String[] menuMotorista = {"MM1","MM2"};
     private String[] menuMotoristaPrivado = {"sss","sss"};
@@ -60,6 +60,9 @@ public class Menu {
                 System.out.println("1");
                 menuViagem();
                 break;
+            case 2:
+                System.out.println("2");
+                verViagens();
         }
     }
     
@@ -225,6 +228,48 @@ public class Menu {
         umer.register(user, nome, password, morada, dataFinal, tipoReg);
         
         menuPrinc();
+    }
+    
+    public void verViagens(){
+        escolha.nextLine();
+        ArrayList<Viagem> viagens = new ArrayList<>();
+        System.out.println("Insira a data incial da procura com o seguinte formato YYYY-MM-DD");
+        String data = escolha.nextLine();
+        String[] datapartida = data.split("-");
+
+        while (data.length() != 10 || datapartida[0].length() != 4 || datapartida[1].length() != 2 || datapartida[2].length() != 2) {
+            System.out.println("Por favor use o formato descrito");
+            System.out.println("Insira a data incial da procura com o seguinte formato YYYY-MM-DD");
+            data = escolha.nextLine();
+            datapartida = data.split("-");
+        }
+        
+        System.out.println("Insira a data final da procura com o seguinte formato YYYY-MM-DD");
+        data = escolha.nextLine();
+        String[] datapartida2 = data.split("-");
+
+        while (data.length() != 10 || datapartida[0].length() != 4 || datapartida[1].length() != 2 || datapartida[2].length() != 2) {
+            System.out.println("Por favor use o formato descrito");
+            System.out.println("Insira a data final da procura com o seguinte formato YYYY-MM-DD");
+            data = escolha.nextLine();
+            datapartida2 = data.split("-");
+        }
+        
+        int ano = Integer.parseInt(datapartida[0]);
+        int mes = Integer.parseInt(datapartida[1]);
+        int dia = Integer.parseInt(datapartida[2]);
+        Date dataInicial = new Date(ano, mes, dia);
+        ano = Integer.parseInt(datapartida2[0]);
+        mes = Integer.parseInt(datapartida2[1]);
+        dia = Integer.parseInt(datapartida2[2]);
+        Date dataFinal = new Date(ano,mes,dia);
+        viagens.addAll(umer.procuraEntreDatas(dataInicial, dataFinal));
+        System.out.println(dataInicial.toString());
+        System.out.println(dataFinal.toString());
+        
+        for(Viagem v : viagens){
+            System.out.println(v.toString());
+        }
     }
     
     public void escolherCondutor(){

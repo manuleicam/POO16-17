@@ -82,7 +82,7 @@ public class UMer {
       
         Random rando = new Random();
         float  rng = ((rando.nextInt(21) + (float)90)/100); //de 0.9 a 1.1
-        int distancia = 1; //discantica por calcular funçao manu
+        double distancia = inicio.distancia(fim); //float//discantica por calcular funçao manu
         Date data = new Date(); //current date?
         float precoFinal = precoAcordado * rng;
         
@@ -110,7 +110,23 @@ public class UMer {
             dados = "Viatura: " + d.getId() + " Fiabilidade: " + d.getFiabilidade() + " distância: " + dist;
             resp.add(dados);
         }
-        return resp;
+        return resp;    
+    }
+    
+    public ArrayList<Viagem> procuraEntreDatas(Date dataInicial, Date dataFinal){
+        ArrayList<Viagem> tempV = new ArrayList<>();
+        ArrayList<Viagem> tempVf = new ArrayList<>();
+        
+        tempV.addAll(this.currentUser.getListaViagens());
+        for(Viagem v : tempV){
+            if (v.getData().after(dataInicial) || v.getData().before(dataFinal)){
+                System.out.println(dataInicial);
+                System.out.println(v.getData());
+                tempVf.add(v);
+            }
+        }
+        return tempVf;
+        
     }
 
 

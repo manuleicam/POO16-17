@@ -11,14 +11,14 @@ public class Viagem
     private Cliente cliente;
     private Coords inicio;
     private Coords fim;
-    private int distancia;
+    private double distancia;
     private int precoAcordado;
     private float precoFinal;
     private Motorista condutor;
     private Veiculo veiculo;
     private Date data;
 
-    public Viagem(int id, Cliente cliente, Coords inicio, Coords fim, int distancia, int precoAcordado, float precoFinal, Motorista condutor, Veiculo veiculo, Date data) {
+    public Viagem(int id, Cliente cliente, Coords inicio, Coords fim, double distancia, int precoAcordado, float precoFinal, Motorista condutor, Veiculo veiculo, Date data) {
         this.id = id;
         this.cliente = cliente;
         this.inicio = inicio;
@@ -47,7 +47,7 @@ public class Viagem
         return precoFinal;
     }
 
-    public int getDistancia() {
+    public double getDistancia() {
         return distancia;
     }
 
@@ -112,7 +112,7 @@ public class Viagem
 
     @Override
     public String toString() {
-        return "Viagem{" + "id=" + id + ", cliente=" + cliente + ", inicio=" + inicio + ", fim=" + fim + ", distancia=" + distancia + ", precoAcordado=" + precoAcordado + ", precoFinal=" + precoFinal + ", condutor=" + condutor + ", veiculo=" + veiculo + ", data=" + data + '}';
+        return "Viagem{" + "id=" + id + ", cliente=" + cliente + ", inicio=" + inicio + ", fim=" + fim + ", distancia=" + distancia + ", precoAcordado=" + precoAcordado + ", precoFinal=" + precoFinal + ", condutor=" + condutor.getNome() + ", veiculo=" + veiculo.getId() + ", data=" + data + '}';
     }
 
 

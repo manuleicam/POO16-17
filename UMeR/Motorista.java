@@ -8,6 +8,7 @@ public class Motorista extends Actor
     private int numKms;
     private Empresa empresa;
     private Boolean estado; //true livre, false ocupado, mais facil
+    private float desvioAcumulado;
 
    public Motorista()
    {
@@ -38,6 +39,7 @@ public class Motorista extends Actor
       
       this.listaViagens.add(nova);
       this.numKms += nova.getDistancia();
+      this.desvioAcumulado += (nova.getPrecoFinal() - nova.getPrecoAcordado());
 
     }
 

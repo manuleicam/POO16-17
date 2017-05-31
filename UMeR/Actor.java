@@ -10,7 +10,7 @@
     private Date nascimento;
     public ArrayList<Viagem> listaViagens;
 
-
+    
 
 
     public Actor() {
@@ -28,6 +28,7 @@
         this.password = password;
         this.morada = morada;
         this.nascimento = nascimento;
+        this.listaViagens = new ArrayList<Viagem>();
     }
     
     public Actor(Actor a){

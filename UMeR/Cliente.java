@@ -5,18 +5,17 @@ public class Cliente extends Actor
 {
     private int totalGasto = 0;
 
-    public Cliente()
-    {
-        super();
-        
+    public Cliente(){
+        super();  
     }
    
-
+ 
 
     public Cliente(String email, String nome, String password, String morada, LocalDate nascimento)
     {
         super(email, nome, password, morada, nascimento);
-        Coords x = new Coords(3,3);
+        
+        Coords x = new Coords(3,3); //mete 4 viagens num cliente
         Coords y = new Coords(5,5);
         
         LocalDate da = LocalDate.of(2000,01,01);
@@ -35,10 +34,7 @@ public class Cliente extends Actor
         listaViagens.add(via2);
         listaViagens.add(via3);
         listaViagens.add(via4);
-        for(Viagem viag : listaViagens){
-            String viagem = viag.toString();
-            System.out.println(viagem);
-        }
+        
     }
 
     public void addViagem(Viagem nova){

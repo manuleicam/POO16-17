@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.Random;
+import java.time.LocalDate;
 
 public class Menu {
     // variáveis de instância
@@ -217,7 +218,7 @@ public class Menu {
         int ano = Integer.parseInt(datapartida[0]);
         int mes = Integer.parseInt(datapartida[1]);
         int dia = Integer.parseInt(datapartida[2]);
-        Date dataFinal = new Date(ano, mes, dia);
+        LocalDate dataFinal = LocalDate.of(ano, mes, dia);
 
         System.out.println("Insira a sua morada");
         morada = escolha.nextLine();
@@ -263,7 +264,7 @@ public class Menu {
         mes = Integer.parseInt(datapartida2[1]);
         dia = Integer.parseInt(datapartida2[2]);
         Date dataFinal = new Date(ano,mes,dia);
-        viagens.addAll(umer.procuraEntreDatas(dataInicial, dataFinal));
+        //viagens.addAll(umer.procuraEntreDatas(dataInicial, dataFinal));
         System.out.println(dataInicial.toString());
         System.out.println(dataFinal.toString());
         

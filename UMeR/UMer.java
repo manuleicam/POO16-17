@@ -1,4 +1,4 @@
-
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Date;
@@ -14,9 +14,9 @@ public class UMer {
     private Actor currentUser;
 
     public UMer() {
-        Date da = new Date(2000, 01, 01);
-        Date db = new Date(1994, 06, 8);
-        Date dc = new Date(1995, 01, 20);
+        LocalDate da = LocalDate.of(2000,01,01);
+        LocalDate db = LocalDate.of(1994,06,8);
+        LocalDate dc = LocalDate.of(1995,01,20);
 
         Cliente a = new Cliente("jonas@gmail.com", "joao", "jo", "todoolado", da);
         Cliente b = new Cliente("rui@gmail.com", "rui", "321", "nunca", db);
@@ -44,7 +44,7 @@ public class UMer {
         }
     }
 
-    public int register(String email, String nome,String password, String morada, Date dataRecebida, int tipoReg) {
+    public int register(String email, String nome,String password, String morada, LocalDate dataRecebida, int tipoReg) {
         Cliente tempC;
         Motorista tempM;
         
@@ -83,7 +83,7 @@ public class UMer {
         Random rando = new Random();
         float  rng = ((rando.nextInt(21) + (float)90)/100); //de 0.9 a 1.1
         double distancia = inicio.distancia(fim); //float//discantica por calcular funçao manu
-        Date data = new Date(); //current date?
+        LocalDate data = LocalDate.now(); //current date?
         float precoFinal = precoAcordado * rng;
         
         Viagem nova = new Viagem(id, cliente, inicio, fim, distancia, precoAcordado, precoFinal, condutor, veiculo, data);
@@ -113,13 +113,13 @@ public class UMer {
         return resp;    
     }
     
-    public ArrayList<Viagem> procuraEntreDatas(Date dataInicial, Date dataFinal){
+    /* public ArrayList<Viagem> procuraEntreDatas(Date dataInicial, LocalDate dataFinal){
         ArrayList<Viagem> tempV = new ArrayList<>();
         ArrayList<Viagem> tempVf = new ArrayList<>();
         
         tempV.addAll(this.currentUser.getListaViagens());
         for(Viagem v : tempV){
-            if (v.getData().after(dataInicial) || v.getData().before(dataFinal)){
+            if (v.getData().isAfter(dataInicial) || v.getData().isBefore(dataFinal)){
                 System.out.println(dataInicial);
                 System.out.println(v.getData());
                 tempVf.add(v);
@@ -127,7 +127,7 @@ public class UMer {
         }
         return tempVf;
         
-    }
+    } */
 
 
 }

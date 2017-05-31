@@ -1,5 +1,6 @@
  import java.util.Date;
  import java.util.*;
+ import java.time.LocalDate;
 
  public class Actor 
  {
@@ -7,22 +8,22 @@
     private String nome;
     private String password;
     private String morada;
-    private Date nascimento;
+    private LocalDate nascimento;
     public ArrayList<Viagem> listaViagens;
 
     
 
 
-    public Actor() {
+    public Actor() {  
         this.email = "";
         this.nome = "";
         this.password = "";
         this.morada = "";
-        this.nascimento = new Date();
+        //this.nascimento = new LocalDate();  // no idea, inicializo uma data com cenas ja? acho que nao da para ter uma data sem nada
         this.listaViagens = new ArrayList<Viagem>();
     }
 
-    public Actor(String email, String nome, String password, String morada, Date nascimento) {
+    public Actor(String email, String nome, String password, String morada, LocalDate nascimento) {
         this.email = email;
         this.nome = nome;
         this.password = password;
@@ -55,7 +56,7 @@
         return morada;
     }
 
-    public Date getNascimento() {
+    public LocalDate getNascimento() {
         return nascimento;
     }
 
@@ -79,7 +80,7 @@
         this.morada = morada;
     }
 
-    public void setNascimento(Date nascimento) {
+    public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
     }
 

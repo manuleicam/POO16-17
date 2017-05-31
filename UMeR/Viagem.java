@@ -1,4 +1,7 @@
 import java.util.*;
+import java.time.LocalDate;
+
+
 /**
  * Write a description of class Viagem here.
  *
@@ -16,9 +19,9 @@ public class Viagem
     private float precoFinal;
     private Motorista condutor;
     private Veiculo veiculo;
-    private Date data;
+    private LocalDate data;
 
-    public Viagem(int id, Cliente cliente, Coords inicio, Coords fim, double distancia, int precoAcordado, float precoFinal, Motorista condutor, Veiculo veiculo, Date data) {
+    public Viagem(int id, Cliente cliente, Coords inicio, Coords fim, double distancia, int precoAcordado, float precoFinal, Motorista condutor, Veiculo veiculo, LocalDate data) {
         this.id = id;
         this.cliente = cliente;
         this.inicio = inicio;
@@ -63,7 +66,7 @@ public class Viagem
         return veiculo;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
     
@@ -106,7 +109,7 @@ public class Viagem
         this.veiculo = veiculo;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

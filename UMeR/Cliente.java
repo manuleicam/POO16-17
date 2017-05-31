@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDate;
 
 public class Cliente extends Actor
 {
@@ -12,15 +13,17 @@ public class Cliente extends Actor
    
 
 
-    public Cliente(String email, String nome, String password, String morada, Date nascimento)
+    public Cliente(String email, String nome, String password, String morada, LocalDate nascimento)
     {
         super(email, nome, password, morada, nascimento);
         Coords x = new Coords(3,3);
         Coords y = new Coords(5,5);
-        Date da = new Date(2000, 01, 01);
-        Date db = new Date(2010, 01, 01);
-        Date dc = new Date(2005, 01, 01);
-        Date di = new Date(2003, 01, 01);
+        
+        LocalDate da = LocalDate.of(2000,01,01);
+        LocalDate db = LocalDate.of(2010, 01, 01);
+        LocalDate dc = LocalDate.of(2005, 01, 01);
+        LocalDate di = LocalDate.of(2003, 01, 01);
+        
         Motorista m = new Motorista("ola","ola","ola","ola",da);
         Veiculo v = new Veiculo(2,"ola",2,3,3,x,3);
         

@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDate;
 
 public class Motorista extends Actor
 {
@@ -23,7 +24,7 @@ public class Motorista extends Actor
    }
 
 
-    public Motorista(String email, String nome, String password, String morada, Date nascimento)
+    public Motorista(String email, String nome, String password, String morada, LocalDate nascimento)
    {
         super(email,nome, password, morada, nascimento);
         this.grauCumpHorario=0;

@@ -1,5 +1,4 @@
-
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,7 +13,7 @@ public class Empresa extends Actor {
         super();
     }
     
-    public Empresa(String email, String nome, String password, String morada, Date nascimento){
+    public Empresa(String email, String nome, String password, String morada, LocalDate nascimento){
         super(email,nome,password,morada,nascimento);
     }
     

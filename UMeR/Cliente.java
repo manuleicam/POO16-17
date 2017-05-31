@@ -24,7 +24,7 @@ public class Cliente extends Actor
         LocalDate di = LocalDate.of(2003, 01, 01);
         
         Motorista m = new Motorista("ola","ola","ola","ola",da);
-        Veiculo v = new Veiculo(2,"ola",2,3,3,x,3);
+        Veiculo v = new Veiculo(2,"ola",2,3,x);
         
         Viagem via = new Viagem(1,this,x,y,10,2,3,m,v,da);
         Viagem via2 = new Viagem(2,this,x,y,10,2,3,m,v,db);

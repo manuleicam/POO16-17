@@ -13,6 +13,7 @@ public class Veiculo {
     private Coords posicao;
     private int totalFaturado;
     public ArrayList<Viagem> listaViagens = new ArrayList<Viagem>();
+    public Motorista motorista;
 
     public Veiculo(){
         this.id = 0;
@@ -22,15 +23,16 @@ public class Veiculo {
         this.fiabilidade = 0;
         this.posicao = new Coords();;
         this.totalFaturado = 0;
+        this.motorista = null;
     }
-    public Veiculo(int id, String matricula, int velMediaKM, int precoPorKM, int fiabilidade, Coords posicao, int totalFaturado) {
+    public Veiculo(int id, String matricula, int velMediaKM, int precoPorKM, Coords posicao) {
         this.id = id;
         this.matricula = matricula;
         this.velMediaKM = velMediaKM;
         this.precoPorKM = precoPorKM;
-        this.fiabilidade = fiabilidade;
+        this.fiabilidade = 0;
         this.posicao = posicao;
-        this.totalFaturado = totalFaturado;
+        this.totalFaturado = 0;
     }
 
     public int getId() {

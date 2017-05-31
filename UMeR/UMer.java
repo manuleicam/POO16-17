@@ -35,6 +35,9 @@ public class UMer {
         if (temp != null) {
             if (temp.logIn(pass)) {
                 this.currentUser = temp;
+                if(temp.getClass().getSimpleName() == "Cliente") return 1;
+                if(temp.getClass().getSimpleName() == "Motorista") return 2;
+                if(temp.getClass().getSimpleName() == "Empresa") return 3;
                 return 1; //ok
             } else {
                 return 0; //pass mal
@@ -44,22 +47,29 @@ public class UMer {
         }
     }
 
-    public int register(String email, String nome,String password, String morada, LocalDate dataRecebida, int tipoReg) {
+    public void register(String email, String nome,String password, String morada, LocalDate dataRecebida, int tipoReg) {
         Cliente tempC;
         Motorista tempM;
+        Empresa tempE;
         
-        if (tipoReg == 2) {
-            tempM = new Motorista(email,nome, password, morada, dataRecebida);
-            listaCliente.put(email, tempM); 
-            return 1; 
+        switch(tipoReg){
+            case 1:
+                tempC = new Cliente(email,nome, password, morada, dataRecebida);
+                listaCliente.put(email, tempC);
+                break;
+            case 2:
+                tempM = new Motorista(email, nome, password, morada, dataRecebida);
+                listaCliente.put(email, tempM);
+                break;
+            case 3:
+                tempE = new Empresa(email, nome, password, morada, dataRecebida);
+                listaCliente.put(email, tempE);
+                System.out.println(tempE.toString());
+                break;
         }
-        
-        tempC = new Cliente(email, nome, password, morada, dataRecebida);
-        listaCliente.put(email, tempC);
+       
 
         testeActor(email); //teste, remover!
-
-        return 1;
     }
 
     public boolean verificarMail(String email) {
@@ -125,6 +135,27 @@ public class UMer {
         }
         return tempVf;
         
+    }
+    
+    public void registarNovaViatura(String matricula, int tipoVeiculo, int velMediaKm, int precoPorKM, Coords c){
+        NoveLugares vNL;
+        Ligeiros vL;
+        Motos vM;
+        
+        switch(tipoVeiculo){
+            case 1:
+                vL = new Ligeiros(1, matricula, velMediaKm, precoPorKM, c);
+                this.listaVeiculo.put(matricula, vL);
+                break;
+            case 2:
+                vM = new Motos(1,matricula, velMediaKm, precoPorKM, c);
+                this.listaVeiculo.put(matricula, vM);
+                break;
+            case 3:
+                vNL = new NoveLugares(1,matricula, velMediaKm, precoPorKM, c);
+                this.listaVeiculo.put(matricula,vNL);
+                break;
+        }
     }
 
 

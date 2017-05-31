@@ -14,9 +14,9 @@ public class Menu {
     private String[] menuPrinc = {"LogIn", "Registar"};
     private String[] menuCliente = {"Realizar Viagem", "Ver Viagens Efectuadas", "Bla3", "Bla4"};
     private String[] menuViagem = {"Escolher viatura", "Viatura mais próxima"};
-    private String[] menuMotorista = {"MM1","MM2"};
+    private String[] menuMotorista = {"Registar Nova Viatura","MM2"};
     private String[] menuMotoristaPrivado = {"sss","sss"};
-    private String[] menuEmpresa = {"em1","em2"};
+    private String[] menuEmpresa = {"Registar Nova Viatura","em2"};
     
     private int op, esc;
     public UMer umer;
@@ -89,7 +89,19 @@ public class Menu {
         switch(esc){
             case 1: 
                 System.out.println("1");
-                menuCliente();
+                registarNovaViatura();
+                break;
+        }
+    }
+    
+    public void menuEmpresa(){
+        setOpcoes(menuEmpresa);
+        executa();
+        esc = getOpcao();
+        switch(esc){
+            case 1: 
+                System.out.println("1");
+                menuEmpresa();
                 break;
         }
     }
@@ -158,7 +170,7 @@ public class Menu {
         password = escolha.nextLine();
 
         flagLog = umer.login(user, password);
-        while (flagLog != 1) {
+        while (flagLog != 1 && flagLog != 2 && flagLog != 3) {
             if (flagLog == 0) {
                 System.out.println("Password não corresponde ao Email inserido");
             } else {
@@ -172,7 +184,9 @@ public class Menu {
 
             flagLog = umer.login(user, password);
         }
-        menuCliente();
+        if (flagLog == 1) menuCliente();
+        else if(flagLog == 2) menuMotorista();
+        else menuEmpresa();
 
     }
 
@@ -183,11 +197,12 @@ public class Menu {
 
         
         
-        while(tipoReg > 2 || tipoReg<1){
+        while(tipoReg > 3 || tipoReg<1){
             if (flagTipo != 0) System.out.println("Opção inválida!");
             System.out.println("Qual o tipo de registo?");
             System.out.println("1 - Cliente");
             System.out.println("2 - Motorista");
+            System.out.println("3 - Empresa");
             tipoReg = escolha.nextInt();
         }
         
@@ -284,5 +299,36 @@ public class Menu {
         y = escolha.nextInt();
         umer.top5CondutoresMaisPerto(x, y);
         System.out.println("Insira o email do condutor que deseja");
+    }
+    
+    public void registarNovaViatura(){
+        String matricula;
+        int velMediaKm, precoPorKM;
+        int x, y, res, tipoVeiculo = 0;
+        Coords c;
+        escolha.nextLine();
+        while(tipoVeiculo > 3 || tipoVeiculo<1){
+            if (tipoVeiculo != 0) System.out.println("Opção inválida!");
+            System.out.println("Qual o tipo de registo?");
+            System.out.println("1 - Ligeiro");
+            System.out.println("2 - Mota");
+            System.out.println("3 - NoveLugares");
+            tipoVeiculo = escolha.nextInt();
+        }
+        System.out.println("Insira a matricula do veiculo no formato XX-XX-XX");
+        matricula=escolha.nextLine();
+        System.out.println("Insira a velocidade média do veiculo");
+        velMediaKm = escolha.nextInt();
+        System.out.println("Insira o preço que irá cobrar por KM");
+        precoPorKM = escolha.nextInt();
+        System.out.println("Insira a coordenada X onde se encontra o veiculo");
+        x = escolha.nextInt();
+        System.out.println("Insira a coordenada Y onde se encontra o veiculo");
+        y = escolha.nextInt();
+        c = new Coords(x,y);
+        
+        umer.registarNovaViatura(matricula, tipoVeiculo, velMediaKm, precoPorKM, c);
+        
+        // É PRECISO METER O MOTORISTA!!! ACABAR!!
     }
 }

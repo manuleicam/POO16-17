@@ -7,5 +7,11 @@
  */
 public class Motos extends Veiculo
 {
+    public Motos(){
+        super();
+    }
     
+    public Motos(int id, String matricula, int velMediaKM, int precoPorKM, Coords posicao){
+        super(id, matricula, velMediaKM, precoPorKM, posicao);
+    }
 }

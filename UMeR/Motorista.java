@@ -28,6 +28,13 @@ public class Motorista extends Actor
 
     public Motorista(String email, String nome, String password, String morada, LocalDate nascimento) {
         super(email,nome,password,morada,nascimento);
+        this.grauCumpHorario=0;
+        this.classificacao=0;
+        this.nrViagens=0;
+        this.numKms=0;
+        this.estado=true;
+        this.listaViagens = new ArrayList<Viagem>();
+        this.desvioAcumulado = desvioAcumulado;
     }
     
     public Motorista(String email, String nome, String password, String morada, LocalDate nascimento, int grauCumpHorario, int classificacao, int nrViagens, int numKms, Empresa empresa, boolean estado, float desvioAcumulado) {
@@ -38,6 +45,7 @@ public class Motorista extends Actor
         this.numKms = numKms;
         this.empresa = empresa;
         this.estado = estado;
+        this.listaViagens = new ArrayList<Viagem>();
         this.desvioAcumulado = desvioAcumulado;
     }
 

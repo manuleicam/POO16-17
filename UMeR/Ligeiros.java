@@ -1,33 +1,11 @@
 
-/**
- * Escreva a descrição da classe Ligeiros aqui.
- * 
- * @author (seu nome) 
- * @version (número de versão ou data)
- */
 public class Ligeiros extends Veiculo
 {
-    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
-    private int x;
-
-    /**
-     * COnstrutor para objetos da classe Ligeiros
-     */
-    public Ligeiros()
-    {
-        // inicializa variáveis de instância
-        x = 0;
+    public Ligeiros(){
+        super();
     }
-
-    /**
-     * Exemplo de método - substitua este comentário pelo seu próprio
-     * 
-     * @param  y   exemplo de um parâmetro de método
-     * @return     a soma de x com y 
-     */
-    public int sampleMethod(int y)
-    {
-        // ponha seu código aqui
-        return x + y;
+    
+    public Ligeiros(int id, String matricula, int velMediaKM, int precoPorKM, Coords posicao){
+        super(id, matricula, velMediaKM, precoPorKM, posicao);
     }
 }

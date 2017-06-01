@@ -47,7 +47,7 @@ public class Menu {
                 registar();
                 break;
             case 3:
-                umer.top10clientes();
+                umer.piores5condutores();
                 break;
             case 0:
                 System.out.println("Adeus!");

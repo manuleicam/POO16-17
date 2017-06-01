@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.SortedSet;
 import java.util.TreeMap;
+import java.util.*;
 
 public class UMer {
 
@@ -27,7 +28,7 @@ public class UMer {
         Cliente d = new Cliente("email", "joao", "qwerty", "todoolado", da);
         
         Motorista m = new Motorista("rute@gmail.com", "rute", "123","morada",da);
-        Motorista m2 = new Motorista("bre", "bru", "123","morada",dc);
+        Motorista m2 = new Motorista("bre", "bru", "123","morada",dc); // fite mi irl bru
         
         Veiculo v = new Veiculo("11-11-11",1,2,co);
         listaVeiculo.put("11-11-11", v);
@@ -236,35 +237,94 @@ public class UMer {
     }
 
 
-    private Map sortByValue(Map unsortedMap) {
-        Map sortedMap = new TreeMap<>(new ValueComparator(unsortedMap));
+    private Map<Cliente,Float> sortByValueCliente(Map<Cliente,Float> unsortedMap) {
+        Map<Cliente,Float> sortedMap = new TreeMap<Cliente,Float>(new ValueComparator(unsortedMap));
+
         sortedMap.putAll(unsortedMap);
-        
+        return sortedMap;
+    }
+    
+    private Map<Motorista,Float> sortByValueMotorista(Map<Motorista,Float> unsortedMap) {
+        Map<Motorista,Float> sortedMap = new TreeMap<Motorista,Float>(new ValueComparator(unsortedMap));
+
+        sortedMap.putAll(unsortedMap);
+        return sortedMap;
+    }
+    
+        private Map<Veiculo,Float> sortByValueViatura(Map<Veiculo,Float> unsortedMap) {
+        Map<Veiculo,Float> sortedMap = new TreeMap<Veiculo,Float>(new ValueComparator(unsortedMap));
+
+        sortedMap.putAll(unsortedMap);
         return sortedMap;
     }
 
     public Map<Cliente,Float> top10clientes () {
         Cliente aux = new Cliente();
-        Map<Actor, Float> temp = new HashMap <Actor, Float>();
+        Map<Cliente, Float> temp = new HashMap <Cliente, Float>();
         
         for (Actor a : this.listaCliente.values()){
             if (a.getClass().getSimpleName() == "Cliente"){
                 aux = (Cliente) a;
                 temp.put((aux), (Float)aux.getTotalGasto());//mapa com cliente e valor gasto total
-                System.out.print("CLIENTE ADDED \n"  );
+                //System.out.print("CLIENTE ADDED \n"  );
              }
         }
         
+        Map<Cliente,Float> sortedMap = sortByValueCliente(temp);
+        
+       /* System.out.println(temp.size());
+        System.out.println(sortedMap.size());
+        for (Map.Entry<Cliente, Float> e : sortedMap.entrySet()) {  
+            System.out.println(e.getKey().getNome() + " " + e.getValue() + "\n");
+        }*/ //TESTES
+
+        return sortedMap;
+    }
+
+
+    public Map<Motorista,Float> piores5condutores () {
+        Motorista aux = new Motorista();
+        Map<Motorista, Float> temp = new HashMap <Motorista, Float>();
+        
+        for (Actor a : this.listaCliente.values()){
+            if (a.getClass().getSimpleName() == "Motorista"){
+                aux = (Motorista) a;
+                temp.put((aux), (Float)aux.getDesvioAcumulado());//mapa com cliente e valor gasto total
+                //System.out.print("motorista ADDED \n"  );
+             }
+        }
+        
+        Map<Motorista,Float> sortedMap = sortByValueMotorista(temp);
+        
+        /*System.out.println(temp.size());
+        System.out.println(sortedMap.size());
+        for (Map.Entry<Motorista, Float> e : sortedMap.entrySet()) {  
+            System.out.println(e.getKey().getNome() + " " + e.getValue() + "\n");
+        } *///TESTES
+
+        return sortedMap;
+    }
+
+     public Map<Veiculo,Double> viaturasProx (Coords posicao) {
+        Veiculo aux = new Veiculo();
+        Map<Veiculo, Double> temp = new HashMap <Veiculo, Double>();
+        
+        for (Veiculo a : this.listaVeiculo.values()){
+            if (a.getClass().getSimpleName() == "Veiculo"){
+                aux = (Veiculo) a;
+                double i = a.getPosicao().distancia(posicao);
+                temp.put((aux), i);//mapa com cliente e valor gasto total
+                System.out.print("motorista ADDED \n"  );
+             }
+        }
+        
+        Map<Veiculo,Double> sortedMap = sortByValueMotorista(temp);
         
         System.out.println(temp.size());
-        Map<Cliente,Float> sortedMap = sortByValue(temp);
         System.out.println(sortedMap.size());
-        
-        
-        for (Map.Entry<Cliente, Float> e : sortedMap.entrySet()) {
-            
+        for (Map.Entry<Motorista, Double> e : sortedMap.entrySet()) {  
             System.out.println(e.getKey().getNome() + " " + e.getValue() + "\n");
-        }
+        } //TESTES
 
         return sortedMap;
     }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Veiculo {
 
-    private int id;
     private String matricula;
     private int velMediaKM; //o que caralho é uma velocidade média por kilomtero, velocidade media ou uma lista de velocidades médias por cada km?
     private int precoPorKM;
@@ -13,10 +12,9 @@ public class Veiculo {
     private Coords posicao;
     private int totalFaturado;
     public ArrayList<Viagem> listaViagens = new ArrayList<Viagem>();
-    public Motorista motorista;
+    public Motorista motorista = new Motorista();
 
     public Veiculo(){
-        this.id = 0;
         this.matricula = "";
         this.velMediaKM = 0;
         this.precoPorKM = 0;
@@ -25,18 +23,33 @@ public class Veiculo {
         this.totalFaturado = 0;
         this.motorista = null;
     }
-    public Veiculo(int id, String matricula, int velMediaKM, int precoPorKM, Coords posicao) {
-        this.id = id;
+    public Veiculo(String matricula, int velMediaKM, int precoPorKM, Coords posicao) {
         this.matricula = matricula;
         this.velMediaKM = velMediaKM;
         this.precoPorKM = precoPorKM;
         this.fiabilidade = 0;
         this.posicao = posicao;
         this.totalFaturado = 0;
+        this.motorista = null;
     }
-
-    public int getId() {
-        return id;
+    public Veiculo(String matricula, int velMediaKM, int precoPorKM, Coords posicao, Actor m) {
+        this.matricula = matricula;
+        this.velMediaKM = velMediaKM;
+        this.precoPorKM = precoPorKM;
+        this.fiabilidade = 0;
+        this.posicao = posicao;
+        this.totalFaturado = 0;
+        this.motorista = (Motorista) m;
+    }
+    public Veiculo(Veiculo v){
+        this.matricula = v.getMatricula();
+        this.velMediaKM = v.getVelMediaKM();
+        this.precoPorKM = v.getPrecoPorKM();
+        this.fiabilidade = v.getFiabilidade();
+        this.posicao = v.getPosicao();
+        this.totalFaturado = v.getTotalFaturado();
+        this.motorista = v.getMotorista();
+        this.listaViagens = v.getlistaViagens();
     }
 
     public String getMatricula() {
@@ -62,13 +75,17 @@ public class Veiculo {
     public int getTotalFaturado() {
         return totalFaturado;
     }
+    
+    public Motorista getMotorista(){
+        return this.motorista;
+    }
+    
+    public void setMotorista(Motorista m){
+        this.motorista = m;
+    }
 
     public ArrayList getlistaViagens() {
         return listaViagens;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setMatricula(String matricula) {
@@ -95,11 +112,6 @@ public class Veiculo {
         this.totalFaturado = totalFaturado;
     }
 
-    public void setlistaViagens(ArrayList listaViagens) {
-        this.listaViagens = listaViagens;
-    }
-
-
 
     @Override
     public boolean equals(Object obj) {
@@ -113,9 +125,6 @@ public class Veiculo {
             return false;
         }
         final Veiculo other = (Veiculo) obj;
-        if (this.id != other.id) {
-            return false;
-        }
         if (this.velMediaKM != other.velMediaKM) {
             return false;
         }
@@ -144,7 +153,11 @@ public class Veiculo {
     
     @Override
     public String toString() {
-        return "Veiculo{" + "id=" + id + ", matricula=" + matricula + ", velMediaKM=" + velMediaKM + ", precoPorKM=" + precoPorKM + ", fiabilidade=" + fiabilidade + ", posicao=" + posicao + ", totalFaturado=" + totalFaturado + ", listaViagens=" + listaViagens + '}';
+        return "Veiculo{" + "matricula=" + matricula + ", velMediaKM=" + velMediaKM + ", precoPorKM=" + precoPorKM + ", fiabilidade=" + fiabilidade + ", posicao=" + posicao + ", totalFaturado=" + totalFaturado + ", listaViagens=" + listaViagens + '}';
+    }
+    
+    public Veiculo clone(){
+        return new Veiculo(this);
     }
 
     public void addViagem(Viagem nova){

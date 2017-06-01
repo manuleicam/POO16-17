@@ -14,8 +14,8 @@ public class Menu {
     private String[] menuPrinc = {"LogIn", "Registar"};
     private String[] menuCliente = {"Realizar Viagem", "Ver Viagens Efectuadas", "Bla3", "Bla4"};
     private String[] menuViagem = {"Escolher viatura", "Viatura mais próxima"};
-    private String[] menuMotorista = {"Registar Nova Viatura","MM2"};
-    private String[] menuMotoristaPrivado = {"sss","sss"};
+    private String[] menuMotoristaComEmpresa = {"Associar-se a uma viatura","MM2"};
+    private String[] menuMotoristaPrivado = {"Registar Nova Viatura","Associar-se a uma empresa"};
     private String[] menuEmpresa = {"Registar Nova Viatura","em2"};
     
     private int op, esc;
@@ -82,8 +82,20 @@ public class Menu {
         }
     }
     
-    public void menuMotorista(){
-        setOpcoes(menuMotorista);
+    public void menuMotoristaComEmpresa(){
+        setOpcoes(menuMotoristaComEmpresa);
+        executa();
+        esc = getOpcao();
+        switch(esc){
+            case 1: 
+                System.out.println("1");
+                associarAViatura();
+                break;
+        }
+    }
+    
+    public void menuMotoristaPrivado(){
+        setOpcoes(menuMotoristaPrivado);
         executa();
         esc = getOpcao();
         switch(esc){
@@ -101,7 +113,7 @@ public class Menu {
         switch(esc){
             case 1: 
                 System.out.println("1");
-                menuEmpresa();
+                registarNovaViatura();
                 break;
         }
     }
@@ -160,7 +172,7 @@ public class Menu {
     
     public void logIN() {
         String user, password;
-        int flagLog;
+        int flagLog, empresaPertence;
 
         escolha.nextLine();
         System.out.println("Insira o seu user");
@@ -185,7 +197,11 @@ public class Menu {
             flagLog = umer.login(user, password);
         }
         if (flagLog == 1) menuCliente();
-        else if(flagLog == 2) menuMotorista();
+        else if(flagLog == 2) {
+            empresaPertence = umer.getTipoMotorista(user);
+            if(empresaPertence == 1) menuMotoristaComEmpresa();
+            else menuMotoristaPrivado();
+        }
         else menuEmpresa();
 
     }
@@ -315,6 +331,7 @@ public class Menu {
             System.out.println("3 - NoveLugares");
             tipoVeiculo = escolha.nextInt();
         }
+        escolha.nextLine();
         System.out.println("Insira a matricula do veiculo no formato XX-XX-XX");
         matricula=escolha.nextLine();
         System.out.println("Insira a velocidade média do veiculo");
@@ -327,8 +344,16 @@ public class Menu {
         y = escolha.nextInt();
         c = new Coords(x,y);
         
-        umer.registarNovaViatura(matricula, tipoVeiculo, velMediaKm, precoPorKM, c);
-        
-        // É PRECISO METER O MOTORISTA!!! ACABAR!!
+        res = umer.registarNovaViatura(matricula, tipoVeiculo, velMediaKm, precoPorKM, c);
+        if (res == 1 || res == 2) System.out.println("Registo Efectuado com sucesso");
+        else System.out.println("Ocorreu um erro durante o registo");
+    }
+    
+    public void associarAViatura(){
+        String matricula;
+        escolha.nextLine();
+        System.out.println("Insira a matricula do veiculo no formato XX-XX-XX");
+        matricula = escolha.nextLine();
+        umer.motoristaAssociarAVeiculoDaEmpresa(matricula);
     }
 }

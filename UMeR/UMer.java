@@ -17,16 +17,31 @@ public class UMer {
         LocalDate da = LocalDate.of(2000,01,01);
         LocalDate db = LocalDate.of(1994,06,8);
         LocalDate dc = LocalDate.of(1995,01,20);
+        Coords co = new Coords(3,3);
 
         Cliente a = new Cliente("jonas@gmail.com", "joao", "jo", "todoolado", da);
         Cliente b = new Cliente("rui@gmail.com", "rui", "321", "nunca", db);
         Cliente c = new Cliente("manu@gmail.com", "manu", "123", "wow", dc);
         Cliente d = new Cliente("email", "joao", "qwerty", "todoolado", da);
+        
+        Motorista m = new Motorista("rute@gmail.com", "rute", "123","morada",da);
+        Motorista m2 = new Motorista("bre", "bru", "123","morada",dc);
+        
+        Veiculo v = new Veiculo("11-11-11",1,2,co);
+        listaVeiculo.put("11-11-11", v);
+        
+        Empresa e = new Empresa("js","juve sao","321","morada",db);
+        m2.setEmpresa(e);
+        e.viaturas.add(v);
 
         listaCliente.put("jonas@gmail.com", a);
         listaCliente.put("rui@gmail.com", b);
         listaCliente.put("manu@gmail.com", c);
         listaCliente.put("email", d);
+        listaCliente.put("rute@gmail.com",m);
+        listaCliente.put("js",e);
+        listaCliente.put("bre",m2);
+        
     }
 
     public int login(String email, String pass) {
@@ -117,7 +132,7 @@ public class UMer {
         for (Veiculo d : listaVeiculo.values()) {
             coordsAux = d.getPosicao();
             dist = coords.distancia(coordsAux);
-            dados = "Viatura: " + d.getId() + " Fiabilidade: " + d.getFiabilidade() + " distância: " + dist;
+            dados = "Viatura: " + d.toString() + " Fiabilidade: " + d.getFiabilidade() + " distância: " + dist;
             resp.add(dados);
         }
         return resp;    
@@ -137,26 +152,75 @@ public class UMer {
         
     }
     
-    public void registarNovaViatura(String matricula, int tipoVeiculo, int velMediaKm, int precoPorKM, Coords c){
+    public int getTipoMotorista(String user){
+        Motorista m = (Motorista) this.currentUser;
+        if( m.getEmpresa() == null) return 0;
+        return 1;
+    }
+    
+    public int registarNovaViatura(String matricula, int tipoVeiculo, int velMediaKm, int precoPorKM, Coords c){
         NoveLugares vNL;
         Ligeiros vL;
         Motos vM;
+        Empresa aux;
         
         switch(tipoVeiculo){
             case 1:
-                vL = new Ligeiros(1, matricula, velMediaKm, precoPorKM, c);
-                this.listaVeiculo.put(matricula, vL);
-                break;
+                if(this.currentUser.getClass().getSimpleName() == "Empresa"){
+                    vL = new Ligeiros(matricula, velMediaKm, precoPorKM,c);
+                    this.listaVeiculo.put(matricula,vL);
+                    aux = (Empresa) this.currentUser;
+                    aux.addVeiculoLigeiros(vL);
+                    return 1;
+                }
+                else{
+                    vL = new Ligeiros(matricula, velMediaKm, precoPorKM, c,this.currentUser);
+                    this.listaVeiculo.put(matricula, vL);
+                    return 2;
+                }
             case 2:
-                vM = new Motos(1,matricula, velMediaKm, precoPorKM, c);
-                this.listaVeiculo.put(matricula, vM);
-                break;
+                if(this.currentUser.getClass().getSimpleName() == "Empresa"){
+                    vM = new Motos(matricula, velMediaKm, precoPorKM,c);
+                    this.listaVeiculo.put(matricula,vM);
+                    aux = (Empresa) this.currentUser;
+                    aux.addVeiculoMotos(vM);
+                    return 1;
+                }
+                else{
+                    vM = new Motos(matricula, velMediaKm, precoPorKM, c, this.currentUser);
+                    this.listaVeiculo.put(matricula, vM);
+                    return 2;
+                }
             case 3:
-                vNL = new NoveLugares(1,matricula, velMediaKm, precoPorKM, c);
-                this.listaVeiculo.put(matricula,vNL);
-                break;
+                if(this.currentUser.getClass().getSimpleName() == "Empresa"){
+                    vNL = new NoveLugares(matricula, velMediaKm, precoPorKM,c);
+                    this.listaVeiculo.put(matricula,vNL);
+                    aux = (Empresa) this.currentUser;
+                    aux.addVeiculoNoveLugares(vNL);
+                    return 1;
+                }
+                else{
+                    vNL = new NoveLugares(matricula, velMediaKm, precoPorKM, c, this.currentUser);
+                    this.listaVeiculo.put(matricula,vNL);
+                    return 2;
+                }
         }
+        return 0;
     }
-
+    
+    public int motoristaAssociarAVeiculoDaEmpresa(String matricula){
+        int res;
+        Empresa e;
+        Veiculo v;
+        Motorista aux = (Motorista) this.currentUser;
+        if(!this.listaVeiculo.containsKey(matricula)) return -1;
+        e = aux.getEmpresa();
+        v = e.getVeiculo(matricula);
+        
+        if(v == null) {System.out.println("não funciona"); return 0;}
+        
+        else System.out.println(v.toString()); 
+        return 1;
+    }
 
 }

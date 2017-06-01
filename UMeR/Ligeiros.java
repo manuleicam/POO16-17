@@ -5,7 +5,11 @@ public class Ligeiros extends Veiculo
         super();
     }
     
-    public Ligeiros(int id, String matricula, int velMediaKM, int precoPorKM, Coords posicao){
-        super(id, matricula, velMediaKM, precoPorKM, posicao);
+    public Ligeiros(String matricula, int velMediaKM, int precoPorKM, Coords posicao, Actor m){
+        super(matricula, velMediaKM, precoPorKM, posicao, m);
+    }
+    
+    public Ligeiros(String matricula, int velMediaKM, int precoPorKM, Coords posicao){
+        super(matricula, velMediaKM, precoPorKM, posicao);
     }
 }

@@ -11,7 +11,11 @@ public class Motos extends Veiculo
         super();
     }
     
-    public Motos(int id, String matricula, int velMediaKM, int precoPorKM, Coords posicao){
-        super(id, matricula, velMediaKM, precoPorKM, posicao);
+    public Motos(String matricula, int velMediaKM, int precoPorKM, Coords posicao){
+        super(matricula, velMediaKM, precoPorKM, posicao);
+    }
+    
+    public Motos(String matricula, int velMediaKM, int precoPorKM, Coords posicao, Actor m){
+        super(matricula, velMediaKM, precoPorKM, posicao, m);
     }
 }

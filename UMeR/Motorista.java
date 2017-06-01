@@ -35,6 +35,7 @@ public class Motorista extends Actor
         this.estado=true;
         this.listaViagens = new ArrayList<Viagem>();
         this.desvioAcumulado = desvioAcumulado;
+        this.empresa = null;
     }
     
     public Motorista(String email, String nome, String password, String morada, LocalDate nascimento, int grauCumpHorario, int classificacao, int nrViagens, int numKms, Empresa empresa, boolean estado, float desvioAcumulado) {
@@ -99,7 +100,7 @@ public class Motorista extends Actor
     }
 
     public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+        this.empresa = new Empresa(empresa);
     }
 
     public void setEstado(boolean estado) {

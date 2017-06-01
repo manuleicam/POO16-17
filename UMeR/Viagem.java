@@ -115,7 +115,7 @@ public class Viagem
 
     @Override
     public String toString() {
-        return "Viagem{" + "id=" + id + ", cliente=" + cliente + ", inicio=" + inicio + ", fim=" + fim + ", distancia=" + distancia + ", precoAcordado=" + precoAcordado + ", precoFinal=" + precoFinal + ", condutor=" + condutor.getNome() + ", veiculo=" + veiculo.getId() + ", data=" + data + '}';
+        return "Viagem{" + "id=" + id + ", cliente=" + cliente + ", inicio=" + inicio + ", fim=" + fim + ", distancia=" + distancia + ", precoAcordado=" + precoAcordado + ", precoFinal=" + precoFinal + ", condutor=" + condutor + ", veiculo=" + veiculo + ", data=" + data + '}';
     }
 
 

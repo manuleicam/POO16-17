@@ -110,10 +110,10 @@ public class UMer {
 
       
         Random rando = new Random();
-        float  rng = ((rando.nextInt(21) + (float)90)/100); //de 0.9 a 1.1
-        double distancia = inicio.distancia(fim); //float//discantica por calcular funçao manu
+        Double  rng = ((rando.nextInt(21) + (Double)90.0)/100.0); //de 0.9 a 1.1
+        double distancia = inicio.distancia(fim); //Double//discantica por calcular funçao manu
         LocalDate data = LocalDate.now(); //current date?
-        float precoFinal = precoAcordado * rng;
+        Double precoFinal = precoAcordado * rng;
         
         Viagem nova = new Viagem(id, cliente, inicio, fim, distancia, precoAcordado, precoFinal, condutor, veiculo, data);
         idViagem++;
@@ -237,44 +237,44 @@ public class UMer {
     }
 
 
-    private Map<Cliente,Float> sortByValueCliente(Map<Cliente,Float> unsortedMap) {
-        Map<Cliente,Float> sortedMap = new TreeMap<Cliente,Float>(new ValueComparator(unsortedMap));
+    private Map<Cliente,Double> sortByValueCliente(Map<Cliente,Double> unsortedMap) {
+        Map<Cliente,Double> sortedMap = new TreeMap<Cliente,Double>(new ValueComparator(unsortedMap));
 
         sortedMap.putAll(unsortedMap);
         return sortedMap;
     }
     
-    private Map<Motorista,Float> sortByValueMotorista(Map<Motorista,Float> unsortedMap) {
-        Map<Motorista,Float> sortedMap = new TreeMap<Motorista,Float>(new ValueComparator(unsortedMap));
+    private Map<Motorista,Double> sortByValueMotorista(Map<Motorista,Double> unsortedMap) {
+        Map<Motorista,Double> sortedMap = new TreeMap<Motorista,Double>(new ValueComparator(unsortedMap));
 
         sortedMap.putAll(unsortedMap);
         return sortedMap;
     }
     
-        private Map<Veiculo,Float> sortByValueViatura(Map<Veiculo,Float> unsortedMap) {
-        Map<Veiculo,Float> sortedMap = new TreeMap<Veiculo,Float>(new ValueComparator(unsortedMap));
+        private Map<Veiculo,Double> sortByValueVeiculo(Map<Veiculo,Double> unsortedMap) {
+        Map<Veiculo,Double> sortedMap = new TreeMap<Veiculo,Double>(new ValueComparator(unsortedMap));
 
         sortedMap.putAll(unsortedMap);
         return sortedMap;
     }
 
-    public Map<Cliente,Float> top10clientes () {
+    public Map<Cliente,Double> top10clientes () {
         Cliente aux = new Cliente();
-        Map<Cliente, Float> temp = new HashMap <Cliente, Float>();
+        Map<Cliente, Double> temp = new HashMap <Cliente, Double>();
         
         for (Actor a : this.listaCliente.values()){
             if (a.getClass().getSimpleName() == "Cliente"){
                 aux = (Cliente) a;
-                temp.put((aux), (Float)aux.getTotalGasto());//mapa com cliente e valor gasto total
+                temp.put((aux), (Double)aux.getTotalGasto());//mapa com cliente e valor gasto total
                 //System.out.print("CLIENTE ADDED \n"  );
              }
         }
         
-        Map<Cliente,Float> sortedMap = sortByValueCliente(temp);
+        Map<Cliente,Double> sortedMap = sortByValueCliente(temp);
         
        /* System.out.println(temp.size());
         System.out.println(sortedMap.size());
-        for (Map.Entry<Cliente, Float> e : sortedMap.entrySet()) {  
+        for (Map.Entry<Cliente, Double> e : sortedMap.entrySet()) {  
             System.out.println(e.getKey().getNome() + " " + e.getValue() + "\n");
         }*/ //TESTES
 
@@ -282,23 +282,23 @@ public class UMer {
     }
 
 
-    public Map<Motorista,Float> piores5condutores () {
+    public Map<Motorista,Double> piores5condutores () {
         Motorista aux = new Motorista();
-        Map<Motorista, Float> temp = new HashMap <Motorista, Float>();
+        Map<Motorista, Double> temp = new HashMap <Motorista, Double>();
         
         for (Actor a : this.listaCliente.values()){
             if (a.getClass().getSimpleName() == "Motorista"){
                 aux = (Motorista) a;
-                temp.put((aux), (Float)aux.getDesvioAcumulado());//mapa com cliente e valor gasto total
+                temp.put((aux), (Double)aux.getDesvioAcumulado());//mapa com cliente e valor gasto total
                 //System.out.print("motorista ADDED \n"  );
              }
         }
         
-        Map<Motorista,Float> sortedMap = sortByValueMotorista(temp);
+        Map<Motorista,Double> sortedMap = sortByValueMotorista(temp);
         
         /*System.out.println(temp.size());
         System.out.println(sortedMap.size());
-        for (Map.Entry<Motorista, Float> e : sortedMap.entrySet()) {  
+        for (Map.Entry<Motorista, Double> e : sortedMap.entrySet()) {  
             System.out.println(e.getKey().getNome() + " " + e.getValue() + "\n");
         } *///TESTES
 
@@ -318,12 +318,12 @@ public class UMer {
              }
         }
         
-        Map<Veiculo,Double> sortedMap = sortByValueMotorista(temp);
+        Map<Veiculo,Double> sortedMap = sortByValueVeiculo(temp);
         
         System.out.println(temp.size());
         System.out.println(sortedMap.size());
-        for (Map.Entry<Motorista, Double> e : sortedMap.entrySet()) {  
-            System.out.println(e.getKey().getNome() + " " + e.getValue() + "\n");
+        for (Map.Entry<Veiculo, Double> e : sortedMap.entrySet()) {  
+            System.out.println(e.getKey().getMatricula() + " " + e.getValue() + "\n");
         } //TESTES
 
         return sortedMap;

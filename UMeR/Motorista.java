@@ -9,7 +9,7 @@ public class Motorista extends Actor
     private int numKms;
     private Empresa empresa;
     private boolean estado; //true livre, false ocupado, mais facil
-    private float desvioAcumulado;
+    private Double desvioAcumulado;
     
     
     //BOB
@@ -23,7 +23,7 @@ public class Motorista extends Actor
         this.numKms=0;
         this.empresa=null;
         this.estado=true;
-        this.desvioAcumulado=0;
+        this.desvioAcumulado=0.0;
    }
 
     public Motorista(String email, String nome, String password, String morada, LocalDate nascimento) {
@@ -38,7 +38,7 @@ public class Motorista extends Actor
         this.empresa = null;
     }
     
-    public Motorista(String email, String nome, String password, String morada, LocalDate nascimento, int grauCumpHorario, int classificacao, int nrViagens, int numKms, Empresa empresa, boolean estado, float desvioAcumulado) {
+    public Motorista(String email, String nome, String password, String morada, LocalDate nascimento, int grauCumpHorario, int classificacao, int nrViagens, int numKms, Empresa empresa, boolean estado, Double desvioAcumulado) {
         super(email,nome,password,morada,nascimento);
         this.grauCumpHorario = grauCumpHorario;
         this.classificacao = classificacao;
@@ -79,7 +79,7 @@ public class Motorista extends Actor
         return estado;
     }
 
-    public float getDesvioAcumulado() {
+    public Double getDesvioAcumulado() {
         return desvioAcumulado;
     }
 
@@ -107,7 +107,7 @@ public class Motorista extends Actor
         this.estado = estado;
     }
 
-    public void setDesvioAcumulado(float desvioAcumulado) {
+    public void setDesvioAcumulado(Double desvioAcumulado) {
         this.desvioAcumulado = desvioAcumulado;
     }
     

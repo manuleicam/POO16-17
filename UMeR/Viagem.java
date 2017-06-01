@@ -16,12 +16,12 @@ public class Viagem
     private Coords fim;
     private double distancia;
     private int precoAcordado;
-    private float precoFinal;
+    private Double precoFinal;
     private Motorista condutor;
     private Veiculo veiculo;
     private LocalDate data;
 
-    public Viagem(int id, Cliente cliente, Coords inicio, Coords fim, double distancia, int precoAcordado, float precoFinal, Motorista condutor, Veiculo veiculo, LocalDate data) {
+    public Viagem(int id, Cliente cliente, Coords inicio, Coords fim, double distancia, int precoAcordado, Double precoFinal, Motorista condutor, Veiculo veiculo, LocalDate data) {
         this.id = id;
         this.cliente = cliente;
         this.inicio = inicio;
@@ -46,7 +46,7 @@ public class Viagem
         return fim;
     }
 
-    public float getPrecoFinal() {
+    public Double getPrecoFinal() {
         return precoFinal;
     }
 
@@ -97,7 +97,7 @@ public class Viagem
         this.precoAcordado = precoAcordado;
     }
     
-    public void setPrecoFinal(int precoFinal) {
+    public void setPrecoFinal(double precoFinal) {
         this.precoFinal = precoFinal;
     }
 

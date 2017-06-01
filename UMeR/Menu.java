@@ -47,7 +47,9 @@ public class Menu {
                 registar();
                 break;
             case 3:
-                umer.piores5condutores();
+                Coords coco = new Coords();
+                coco.setx(1);coco.sety(2);
+                umer.viaturasProx(coco);
                 break;
             case 0:
                 System.out.println("Adeus!");

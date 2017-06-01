@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=KeyComparator
+comment1.params=e1\ e2
+comment1.target=int\ compare(java.util.Map.Entry,\ java.util.Map.Entry)
+numComments=2

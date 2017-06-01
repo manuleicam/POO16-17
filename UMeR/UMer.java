@@ -4,13 +4,15 @@ import java.util.Map;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class UMer {
 
     private HashMap<String, Actor> listaCliente = new HashMap<String, Actor>();
     private HashMap<String, Veiculo> listaVeiculo = new HashMap<String, Veiculo>();
     private Map<Integer,Viagem> listaViagens = new HashMap<Integer,Viagem>();
-    private static int idViagem = 0;
+    private int idViagem = 0;
     private Actor currentUser;
 
     public UMer() {
@@ -223,4 +225,63 @@ public class UMer {
         return 1;
     }
 
+
+
+    public SortedSet<Map.Entry<Actor,Float>> top10clientes () {
+        Cliente aux = new Cliente();
+        Map<Actor, Float> temp = new HashMap <Actor, Float>();
+        
+        for (Map.Entry<String,Actor> a  : this.listaCliente.entrySet()){
+            if (Cliente.class.isInstance(a)){
+                aux = (Cliente)a.getValue();
+                temp.put((aux), aux.getTotalGasto());//mapa com cliente e valor gasto total
+            }
+        }
+        SortedSet<Map.Entry<Actor, Float>> set = new TreeSet(new KeyComparatorFloat()); //lista ordenada xpto
+        //SortedSet<Map.Entry<String,Integer>> set = new TreeSet<>(new KeyComparator()); //LI3 COPIA
+        
+        set.addAll(temp.entrySet());
+        
+        for (Map.Entry<Actor, Float> p : set)
+			System.out.println(p.getKey().getNome() + " " + p.getValue());
+        
+        return set;
+    }
+
+
+    public SortedSet<Map.Entry<Actor,Float>> pioresCondutores () {
+        Motorista aux = new Motorista();
+        Map<Actor, Float> temp = new HashMap <Actor, Float>();
+        
+        for (Map.Entry<String,Actor> a  : this.listaCliente.entrySet()){
+            if (Motorista.class.isInstance(a)){
+                aux = (Motorista)a.getValue();
+                temp.put((aux), aux.getDesvioAcumulado());//mapa com cliente e desvio total
+            }
+        }
+        SortedSet<Map.Entry<Actor, Float>> set = new TreeSet(new KeyComparatorFloat()); //lista ordenada xpto
+        //SortedSet<Map.Entry<String, Integer>> set = new TreeSet<>(new KeyComparator()); //LI3 COPIA
+        
+        set.addAll(temp.entrySet());
+        
+        return set;
+    }
+
+
+
+    public SortedSet<Map.Entry<Veiculo,Double>> carrosProximos (Coords posicao) {
+        Veiculo aux = new Veiculo();
+        Map<Veiculo, Double> temp = new HashMap <Veiculo, Double>();
+        
+        for (Map.Entry<String,Veiculo> a  : this.listaVeiculo.entrySet()){
+                temp.put((aux), aux.getPosicao().distancia(posicao));//mapa com cliente e desvio total
+            }
+        
+        SortedSet<Map.Entry<Veiculo, Double>> set = new TreeSet(new KeyComparatorFloat()); //lista ordenada xpto
+        //SortedSet<Map.Entry<String, Integer>> set = new TreeSet<>(new KeyComparator()); //LI3 COPIA
+        
+        set.addAll(temp.entrySet());
+        
+        return set;
+    }
 }

@@ -3,13 +3,15 @@ import java.time.LocalDate;
 
 public class Cliente extends Actor
 {
-    private int totalGasto = 0;
+    private float totalGasto = 0;
 
     public Cliente(){
         super();  
     }
    
- 
+    public float getTotalGasto(){
+        return this.totalGasto;
+    }
 
     public Cliente(String email, String nome, String password, String morada, LocalDate nascimento)
     {

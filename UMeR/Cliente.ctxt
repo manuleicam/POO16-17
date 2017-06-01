@@ -1,10 +1,13 @@
 #BlueJ class context
-comment0.params=
-comment0.target=Cliente()
-comment1.params=email\ nome\ password\ morada\ nascimento
-comment1.target=Cliente(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.time.LocalDate)
-comment2.params=nova
-comment2.target=void\ addViagem(Viagem)
-comment3.params=gasto
-comment3.target=void\ adicionarGasto(int)
-numComments=4
+comment0.target=Cliente
+comment1.params=
+comment1.target=Cliente()
+comment2.params=
+comment2.target=float\ getTotalGasto()
+comment3.params=email\ nome\ password\ morada\ nascimento
+comment3.target=Cliente(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.time.LocalDate)
+comment4.params=nova
+comment4.target=void\ addViagem(Viagem)
+comment5.params=gasto
+comment5.target=void\ adicionarGasto(int)
+numComments=6

@@ -1,8 +1,10 @@
 #BlueJ class context
-comment0.params=
-comment0.target=Motos()
-comment1.params=matricula\ velMediaKM\ precoPorKM\ posicao
-comment1.target=Motos(java.lang.String,\ int,\ int,\ Coords)
-comment2.params=matricula\ velMediaKM\ precoPorKM\ posicao\ m
-comment2.target=Motos(java.lang.String,\ int,\ int,\ Coords,\ Actor)
-numComments=3
+comment0.target=Motos
+comment0.text=\r\n\ Escreva\ a\ descri\u00E7\u00E3o\ da\ classe\ motos\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (n\u00FAmero\ de\ vers\u00E3o\ ou\ data)\r\n
+comment1.params=
+comment1.target=Motos()
+comment2.params=matricula\ velMediaKM\ precoPorKM\ posicao
+comment2.target=Motos(java.lang.String,\ int,\ int,\ Coords)
+comment3.params=matricula\ velMediaKM\ precoPorKM\ posicao\ m
+comment3.target=Motos(java.lang.String,\ int,\ int,\ Coords,\ Actor)
+numComments=4

@@ -11,6 +11,7 @@ public class Veiculo {
     private int fiabilidade;
     private Coords posicao;
     private int totalFaturado;
+    private boolean estado; // true o condutor está a usar o veiculo
     public ArrayList<Viagem> listaViagens = new ArrayList<Viagem>();
     public Motorista motorista = new Motorista();
 
@@ -29,6 +30,7 @@ public class Veiculo {
         this.precoPorKM = precoPorKM;
         this.fiabilidade = 0;
         this.posicao = posicao;
+        this.estado = false;
         this.totalFaturado = 0;
         this.motorista = null;
     }
@@ -39,6 +41,7 @@ public class Veiculo {
         this.fiabilidade = 0;
         this.posicao = posicao;
         this.totalFaturado = 0;
+        this.estado = true;
         this.motorista = (Motorista) m;
     }
     public Veiculo(Veiculo v){
@@ -49,7 +52,12 @@ public class Veiculo {
         this.posicao = v.getPosicao();
         this.totalFaturado = v.getTotalFaturado();
         this.motorista = v.getMotorista();
+        this.estado = v.getEstado();
         this.listaViagens = v.getlistaViagens();
+    }
+    
+    public boolean getEstado(){
+        return this.estado;
     }
 
     public String getMatricula() {
@@ -78,6 +86,10 @@ public class Veiculo {
     
     public Motorista getMotorista(){
         return this.motorista;
+    }
+    
+    public void setEstado(boolean estado){
+        this.estado = estado;
     }
     
     public void setMotorista(Motorista m){

@@ -223,7 +223,7 @@ public class UMer {
         
         if(v == null) return 0;
         
-        if(v.getMotorista() != null) return -1;
+        if(v.getEstado() == false) return -1;
         
         v.setMotorista(aux);
         return 1;

@@ -14,9 +14,9 @@ public class Menu {
     private String[] menuPrinc = {"LogIn", "Registar", "oo"};
     private String[] menuCliente = {"Realizar Viagem", "Ver Viagens Efectuadas", "Bla3", "Bla4"};
     private String[] menuViagem = {"Escolher viatura", "Viatura mais próxima"};
-    private String[] menuMotoristaComEmpresa = {"Associar-se a uma viatura","MM2"};
-    private String[] menuMotoristaPrivado = {"Registar Nova Viatura","Associar-se a uma empresa"};
-    private String[] menuEmpresa = {"Registar Nova Viatura","Ver Frota"};
+    private String[] menuMotoristaComEmpresa = {"Associar-se a uma viatura","Ver Viagens Efectuadas"};
+    private String[] menuMotoristaPrivado = {"Registar Nova Viatura","Associar-se a uma empresa", "Ver Viagens Efectuadas"};
+    private String[] menuEmpresa = {"Registar Nova Viatura","Ver Frota", "Ver Viagens Efectuadas"};
     
     private int op, esc;
     public UMer umer;
@@ -67,6 +67,7 @@ public class Menu {
             case 2:
                 System.out.println("2");
                 verViagens();
+                break;
         }
     }
     
@@ -94,6 +95,10 @@ public class Menu {
                 System.out.println("1");
                 associarAViatura();
                 break;
+            case 2:
+                System.out.println("2");
+                verViagens();
+                break;
         }
     }
     
@@ -105,6 +110,10 @@ public class Menu {
             case 1: 
                 System.out.println("1");
                 registarNovaViatura();
+                break;
+            case 2:
+                System.out.println("2");
+                verViagens();
                 break;
         }
     }
@@ -120,6 +129,10 @@ public class Menu {
                 break;
             case 2:
                 verFrota();
+                break;
+            case 3:
+                System.out.println("2");
+                verViagens();
                 break;
         }
     }
@@ -310,7 +323,7 @@ public class Menu {
             System.out.println(v.toString());
         }
         System.out.println();
-        menuCliente();
+        //menuCliente();
     }
     
     public void escolherCondutor(){

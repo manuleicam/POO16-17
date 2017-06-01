@@ -24,6 +24,10 @@ public class Empresa extends Actor {
         this.viagens = new ArrayList<>();
     }
     
+    public ArrayList<Veiculo> getViaturas(){
+        return this.viaturas;
+    }
+    
     public Empresa(Empresa e){
         super(e.getEmail(), e.getNome(), e.getPassword(), e.getMorada(), e.getNascimento());
         this.motoristas = new ArrayList<>();
@@ -42,19 +46,16 @@ public class Empresa extends Actor {
     }
     
     public Veiculo getVeiculo(String matricula){
-        
-        for(Veiculo v : viaturas){
-            if(v.getMatricula().equals(matricula)) return v;
+        Veiculo v;
+        System.out.println(matricula);
+        for(Veiculo ve : this.viaturas){
+            System.out.println(ve.toString());
+        }
+        for(Veiculo aux : this.viaturas){
+            if(aux.getMatricula().equals(matricula)) { v = aux; return v;}
+            else System.out.println("SSS");
         }
         return null;
-    }
-    
-    public StringBuilder listAllVeiculos(){
-        StringBuilder sb = new StringBuilder();
-        for( Veiculo v : viaturas){
-            sb.append(v.toString());
-        }
-        return sb;
     }
     
 }

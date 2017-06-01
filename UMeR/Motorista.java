@@ -100,7 +100,7 @@ public class Motorista extends Actor
     }
 
     public void setEmpresa(Empresa empresa) {
-        this.empresa = new Empresa(empresa);
+        this.empresa = empresa;
     }
 
     public void setEstado(boolean estado) {

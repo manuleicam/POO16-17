@@ -11,12 +11,12 @@ import java.time.LocalDate;
 public class Menu {
     // variáveis de instância
     private List<String> opcoes;
-    private String[] menuPrinc = {"LogIn", "Registar"};
+    private String[] menuPrinc = {"LogIn", "Registar", "oo"};
     private String[] menuCliente = {"Realizar Viagem", "Ver Viagens Efectuadas", "Bla3", "Bla4"};
     private String[] menuViagem = {"Escolher viatura", "Viatura mais próxima"};
     private String[] menuMotoristaComEmpresa = {"Associar-se a uma viatura","MM2"};
     private String[] menuMotoristaPrivado = {"Registar Nova Viatura","Associar-se a uma empresa"};
-    private String[] menuEmpresa = {"Registar Nova Viatura","em2"};
+    private String[] menuEmpresa = {"Registar Nova Viatura","Ver Frota"};
     
     private int op, esc;
     public UMer umer;
@@ -45,6 +45,9 @@ public class Menu {
                 break;
             case 2:
                 registar();
+                break;
+            case 3:
+                umer.top10clientes();
                 break;
             case 0:
                 System.out.println("Adeus!");
@@ -114,6 +117,9 @@ public class Menu {
             case 1: 
                 System.out.println("1");
                 registarNovaViatura();
+                break;
+            case 2:
+                verFrota();
                 break;
         }
     }
@@ -351,9 +357,29 @@ public class Menu {
     
     public void associarAViatura(){
         String matricula;
+        int flag;
         escolha.nextLine();
         System.out.println("Insira a matricula do veiculo no formato XX-XX-XX");
         matricula = escolha.nextLine();
-        umer.motoristaAssociarAVeiculoDaEmpresa(matricula);
+        flag = umer.motoristaAssociarAVeiculoDaEmpresa(matricula);
+        switch(flag){
+            case 1:
+                System.out.println("Associado com sucesso à viatura de matricula " + matricula);
+                break;
+            case 0:
+                System.out.println("O veiculo de matricula " + matricula + "não está associado à empresa");
+                break;
+            case -1:
+                System.out.println("Não se pode associar a um veiculo ocupado");
+                break;
+        }
+    }
+    
+    public void verFrota(){
+        ArrayList<Veiculo> vS;
+        vS = umer.verFrota();
+        for(Veiculo v : vS){
+            System.out.println(v.toString());
+        }
     }
 }

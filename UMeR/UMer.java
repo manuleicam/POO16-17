@@ -33,9 +33,10 @@ public class UMer {
         listaVeiculo.put("11-11-11", v);
         
         Empresa e = new Empresa("js","juve sao","321","morada",db);
-        m2.setEmpresa(e);
         e.viaturas.add(v);
 
+        m2.setEmpresa(e);
+        
         listaCliente.put("jonas@gmail.com", a);
         listaCliente.put("rui@gmail.com", b);
         listaCliente.put("manu@gmail.com", c);
@@ -217,11 +218,14 @@ public class UMer {
         Motorista aux = (Motorista) this.currentUser;
         if(!this.listaVeiculo.containsKey(matricula)) return -1;
         e = aux.getEmpresa();
+        
         v = e.getVeiculo(matricula);
         
-        if(v == null) {System.out.println("não funciona"); return 0;}
+        if(v == null) return 0;
         
-        else System.out.println(v.toString()); 
+        if(v.getMotorista() != null) return -1;
+        
+        v.setMotorista(aux);
         return 1;
     }
 
@@ -243,7 +247,7 @@ public class UMer {
         set.addAll(temp.entrySet());
         
         for (Map.Entry<Actor, Float> p : set)
-			System.out.println(p.getKey().getNome() + " " + p.getValue());
+            System.out.println(p.getKey().getNome() + " " + p.getValue());
         
         return set;
     }
@@ -283,5 +287,11 @@ public class UMer {
         set.addAll(temp.entrySet());
         
         return set;
+    }
+    
+    public ArrayList<Veiculo> verFrota(){
+        Empresa e = (Empresa) this.currentUser;
+        ArrayList<Veiculo> vl = e.getViaturas();
+        return vl;
     }
 }

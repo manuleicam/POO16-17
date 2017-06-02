@@ -138,24 +138,6 @@ public class UMer {
     
 
 
-
-
-    public ArrayList<String> top5CondutoresMaisPerto(int x, int y) {
-        ArrayList<String> resp = new ArrayList<>();
-        String dados;
-        int tempX, tempY;
-        double dist, distMin;
-        Coords coordsAux, coords;
-        ArrayList<String> viaturas = new ArrayList<>();
-        coords = new Coords(x, y);
-        for (Veiculo d : listaVeiculo.values()) {
-            coordsAux = d.getPosicao();
-            dist = coords.distancia(coordsAux);
-            dados = "Viatura: " + d.toString() + " Fiabilidade: " + d.getFiabilidade() + " distância: " + dist;
-            resp.add(dados);
-        }
-        return resp;    
-    }
     
     public ArrayList<Viagem> procuraEntreDatas(LocalDate dataInicial, LocalDate dataFinal){
         ArrayList<Viagem> tempV = new ArrayList<>();
@@ -321,25 +303,21 @@ public class UMer {
     }
 
      public Map<Veiculo,Double> viaturasProx (Coords posicao) {
-        Veiculo aux = new Veiculo();
         Map<Veiculo, Double> temp = new HashMap <Veiculo, Double>();
         
-        for (Veiculo a : this.listaVeiculo.values()){
-            if (a.getClass().getSimpleName() == "Veiculo"){
-                aux = (Veiculo) a;
-                double i = a.getPosicao().distancia(posicao);
-                temp.put((aux), i);//mapa com cliente e valor gasto total
+        for (Veiculo aux : this.listaVeiculo.values()){
+                double i = aux.getPosicao().distancia(posicao);
+                temp.put((aux), i);//mapa com cliente e distancia
                 System.out.print("motorista ADDED \n"  );
-             }
         }
         
         Map<Veiculo,Double> sortedMap = sortByValueVeiculo(temp);
         
-        System.out.println(temp.size());
+        /*System.out.println(temp.size());
         System.out.println(sortedMap.size());
         for (Map.Entry<Veiculo, Double> e : sortedMap.entrySet()) {  
             System.out.println(e.getKey().getMatricula() + " " + e.getValue() + "\n");
-        } //TESTES
+        } //TESTES*/
 
         return sortedMap;
     }
@@ -352,5 +330,21 @@ public class UMer {
         m.trocaEstado();
         if(m.getEstado() == false) return o;
         else return l;
+    }
+
+    public Double totalFaturado(Veiculo veiculo, LocalDate after, LocalDate before){
+
+        Double total = 0.0;
+        ArrayList<Viagem> lista =  veiculo.getListaViagens();
+        
+        for (Viagem aux : lista){
+                if (aux.getData().isBefore(before) && aux.getData().isAfter(after))
+                    total+=aux.getPrecoFinal();
+        }
+        return total;
+    }
+
+    public Double totalFaturado(Empresa empresa,LocalDate after, LocalDate before){
+    	return 0.0;
     }
 }

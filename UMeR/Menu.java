@@ -95,7 +95,7 @@ public class Menu {
             esc = getOpcao();
             switch(esc){
                 case 1:
-                    escolherCondutor();
+                    //escolherCondutor();
                     System.out.print("1");
                     break;
                 case 2:
@@ -387,15 +387,6 @@ public class Menu {
         System.out.println();
     }
     
-    public void escolherCondutor(){
-        int x, y;
-        System.out.println("Insira a coordenada X onde se encontra");
-        x = escolha.nextInt();
-        System.out.println("Insira a coordenada Y onde se encontra");
-        y = escolha.nextInt();
-        umer.top5CondutoresMaisPerto(x, y);
-        System.out.println("Insira o email do condutor que deseja");
-    }
     
     public void registarNovaViatura(){
         String matricula;

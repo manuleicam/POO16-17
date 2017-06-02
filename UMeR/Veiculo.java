@@ -53,7 +53,7 @@ public class Veiculo {
         this.totalFaturado = v.getTotalFaturado();
         this.motorista = v.getMotorista();
         this.estado = v.getEstado();
-        this.listaViagens = v.getlistaViagens();
+        this.listaViagens = v.getListaViagens();
     }
     
     public boolean getEstado(){
@@ -96,7 +96,7 @@ public class Veiculo {
         this.motorista = m;
     }
 
-    public ArrayList getlistaViagens() {
+    public ArrayList getListaViagens() {
         return listaViagens;
     }
 

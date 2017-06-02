@@ -21,7 +21,7 @@ public class Viagem
     
     //CONTRUTOR
 
-    public Viagem(Cliente cliente, Coords inicio, Coords fim, double distancia, Double precoAcordado, Double precoFinal, Double tempoEstimado, Double tempoFinal, Motorista condutor, Veiculo veiculo, LocalDate data, int nota) {
+    public Viagem(Cliente cliente, Coords inicio, Coords fim, Double distancia, Double precoAcordado, Double precoFinal, Double tempoEstimado, Double tempoFinal, Motorista condutor, Veiculo veiculo, LocalDate data, int nota) {
         this.cliente = cliente;
         this.inicio = inicio;
         this.fim = fim;
@@ -36,55 +36,9 @@ public class Viagem
         this.nota = nota;
     }
 
+   
+
     //GETS E SETS
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public Coords getInicio() {
-        return inicio;
-    }
-
-    public Coords getFim() {
-        return fim;
-    }
-
-    public double getDistancia() {
-        return distancia;
-    }
-
-    public Double getPrecoAcordado() {
-        return precoAcordado;
-    }
-
-    public Double getPrecoFinal() {
-        return precoFinal;
-    }
-
-    public Double getTempoEstimado() {
-        return tempoEstimado;
-    }
-
-    public Double getTempoFinal() {
-        return tempoFinal;
-    }
-
-    public Motorista getCondutor() {
-        return condutor;
-    }
-
-    public Veiculo getVeiculo() {
-        return veiculo;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public int getNota() {
-        return nota;
-    }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
@@ -98,7 +52,7 @@ public class Viagem
         this.fim = fim;
     }
 
-    public void setDistancia(double distancia) {
+    public void setDistancia(Double distancia) {
         this.distancia = distancia;
     }
 
@@ -134,11 +88,70 @@ public class Viagem
         this.nota = nota;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Coords getInicio() {
+        return inicio;
+    }
+
+    public Coords getFim() {
+        return fim;
+    }
+
+    public Double getDistancia() {
+        return distancia;
+    }
+
+    public Double getPrecoAcordado() {
+        return precoAcordado;
+    }
+
+    public Double getPrecoFinal() {
+        return precoFinal;
+    }
+
+    public Double getTempoEstimado() {
+        return tempoEstimado;
+    }
+
+    public Double getTempoFinal() {
+        return tempoFinal;
+    }
+
+    public Motorista getCondutor() {
+        return condutor;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public int getNota() {
+        return nota;
+    }
+
+    
+    
+    
+    
+    
+    
+    
+   //2STRING EQUALCS CLONE
+
+    
+    
+    
     @Override
     public String toString() {
         return "Viagem{" + "cliente=" + cliente + ", inicio=" + inicio + ", fim=" + fim + ", distancia=" + distancia + ", precoAcordado=" + precoAcordado + ", precoFinal=" + precoFinal + ", tempoEstimado=" + tempoEstimado + ", tempoFinal=" + tempoFinal + ", condutor=" + condutor + ", veiculo=" + veiculo + ", data=" + data + ", nota=" + nota + '}';
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -152,9 +165,6 @@ public class Viagem
             return false;
         }
         final Viagem other = (Viagem) obj;
-        if (Double.doubleToLongBits(this.distancia) != Double.doubleToLongBits(other.distancia)) {
-            return false;
-        }
         if (this.nota != other.nota) {
             return false;
         }
@@ -165,6 +175,9 @@ public class Viagem
             return false;
         }
         if (!Objects.equals(this.fim, other.fim)) {
+            return false;
+        }
+        if (!Objects.equals(this.distancia, other.distancia)) {
             return false;
         }
         if (!Objects.equals(this.precoAcordado, other.precoAcordado)) {
@@ -190,6 +203,7 @@ public class Viagem
         }
         return true;
     }
+   
     
     
     

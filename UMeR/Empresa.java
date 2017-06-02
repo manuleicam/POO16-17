@@ -2,39 +2,90 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Objects;
 
 
 public class Empresa extends Actor {
     
     public ArrayList<Actor> motoristas;
     public ArrayList<Veiculo> viaturas;
-    public ArrayList<Integer> viagens;
+
     
+    //CONSTRUTOR
     public Empresa(){
         super();
         this.motoristas = new ArrayList<>();
         this.viaturas = new ArrayList<>();
-        this.viagens = new ArrayList<>();
     }
     
     public Empresa(String email, String nome, String password, String morada, LocalDate nascimento){
         super(email,nome,password,morada,nascimento);
         this.motoristas = new ArrayList<>();
         this.viaturas = new ArrayList<>();
-        this.viagens = new ArrayList<>();
     }
-    
-    public ArrayList<Veiculo> getViaturas(){
-        return this.viaturas;
-    }
-    
+        
     public Empresa(Empresa e){
         super(e.getEmail(), e.getNome(), e.getPassword(), e.getMorada(), e.getNascimento());
         this.motoristas = new ArrayList<>();
         this.viaturas = new ArrayList<>();
-        this.viagens = new ArrayList<>();
     }
     
+    
+     //GET E SET
+
+    public ArrayList<Actor> getMotoristas() {
+        return motoristas;
+    }
+
+    public ArrayList<Veiculo> getViaturas() {
+        return viaturas;
+    }
+
+
+    public void setMotoristas(ArrayList<Actor> motoristas) {
+        this.motoristas = motoristas;
+    }
+
+    public void setViaturas(ArrayList<Veiculo> viaturas) {
+        this.viaturas = viaturas;
+    }
+
+    
+    
+    //EQUALS 2STRING
+
+    @Override
+    public String toString() {
+        return "Empresa{" + "motoristas=" + motoristas + ", viaturas=" + viaturas +  '}';
+    }
+ 
+    
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Empresa other = (Empresa) obj;
+        if (!Objects.equals(this.motoristas, other.motoristas)) {
+            return false;
+        }
+        if (!Objects.equals(this.viaturas, other.viaturas)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    
+    
+    // METODOS
     public void addVeiculoLigeiros(Ligeiros v){
         this.viaturas.add(v);
     }

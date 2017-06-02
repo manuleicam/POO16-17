@@ -15,13 +15,18 @@ public class Veiculo {
     public ArrayList<Viagem> listaViagens = new ArrayList<Viagem>();
     public Motorista motorista = new Motorista();
 
+    
+    //CONSTRUTOR
+    
     public Veiculo(){
         this.matricula = "";
         this.velMediaKM = 0;
         this.precoPorKM = 0;
         this.fiabilidade = 0;
-        this.posicao = new Coords();;
+        this.posicao = new Coords();
         this.totalFaturado = 0;
+        this.estado = false;
+        this.listaViagens = new ArrayList<Viagem>();
         this.motorista = null;
     }
     public Veiculo(String matricula, int velMediaKM, int precoPorKM, Coords posicao) {
@@ -32,6 +37,7 @@ public class Veiculo {
         this.posicao = posicao;
         this.estado = false;
         this.totalFaturado = 0;
+        this.listaViagens = new ArrayList<Viagem>();
         this.motorista = null;
     }
     public Veiculo(String matricula, int velMediaKM, int precoPorKM, Coords posicao, Actor m) {
@@ -42,6 +48,7 @@ public class Veiculo {
         this.posicao = posicao;
         this.totalFaturado = 0;
         this.estado = true;
+        this.listaViagens = new ArrayList<Viagem>();
         this.motorista = (Motorista) m;
     }
     public Veiculo(Veiculo v){
@@ -55,10 +62,7 @@ public class Veiculo {
         this.estado = v.getEstado();
         this.listaViagens = v.getListaViagens();
     }
-    
-    public boolean getEstado(){
-        return this.estado;
-    }
+    //GET E SET
 
     public String getMatricula() {
         return matricula;
@@ -83,21 +87,17 @@ public class Veiculo {
     public int getTotalFaturado() {
         return totalFaturado;
     }
-    
-    public Motorista getMotorista(){
-        return this.motorista;
-    }
-    
-    public void setEstado(boolean estado){
-        this.estado = estado;
-    }
-    
-    public void setMotorista(Motorista m){
-        this.motorista = m;
+
+    public boolean getEstado() {
+        return estado;
     }
 
-    public ArrayList getListaViagens() {
+    public ArrayList<Viagem> getListaViagens() {
         return listaViagens;
+    }
+
+    public Motorista getMotorista() {
+        return motorista;
     }
 
     public void setMatricula(String matricula) {
@@ -124,6 +124,24 @@ public class Veiculo {
         this.totalFaturado = totalFaturado;
     }
 
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public void setListaViagens(ArrayList<Viagem> listaViagens) {
+        this.listaViagens = listaViagens;
+    }
+
+    public void setMotorista(Motorista motorista) {
+        this.motorista = motorista;
+    }
+   
+    //EQUALTS 2STRING CLONE
+
+    @Override
+    public String toString() {
+        return "Veiculo{" + "matricula=" + matricula + ", velMediaKM=" + velMediaKM + ", precoPorKM=" + precoPorKM + ", fiabilidade=" + fiabilidade + ", posicao=" + posicao + ", totalFaturado=" + totalFaturado + ", estado=" + estado + ", listaViagens=" + listaViagens + ", motorista=" + motorista + '}';
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -149,6 +167,9 @@ public class Veiculo {
         if (this.totalFaturado != other.totalFaturado) {
             return false;
         }
+        if (this.estado != other.estado) {
+            return false;
+        }
         if (!Objects.equals(this.matricula, other.matricula)) {
             return false;
         }
@@ -158,20 +179,19 @@ public class Veiculo {
         if (!Objects.equals(this.listaViagens, other.listaViagens)) {
             return false;
         }
+        if (!Objects.equals(this.motorista, other.motorista)) {
+            return false;
+        }
         return true;
     }
-
-    
-    
-    @Override
-    public String toString() {
-        return "Veiculo{" + "matricula=" + matricula + ", velMediaKM=" + velMediaKM + ", precoPorKM=" + precoPorKM + ", fiabilidade=" + fiabilidade + ", posicao=" + posicao + ", totalFaturado=" + totalFaturado + ", listaViagens=" + listaViagens + '}';
-    }
-    
+ 
+  
     public Veiculo clone(){
         return new Veiculo(this);
     }
 
+    
+    
     public void addViagem(Viagem nova){
 
         this.listaViagens.add(nova);

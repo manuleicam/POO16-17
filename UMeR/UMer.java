@@ -345,6 +345,16 @@ public class UMer {
     }
 
     public Double totalFaturado(Empresa empresa,LocalDate after, LocalDate before){
-    	return 0.0;
+    	
+    	Double total = 0.0;
+    	ArrayList<Veiculo> lista = empresa.getViaturas();
+    	for(Veiculo v : lista)
+    		total+=totalFaturado(v,after,before);
+
+    	return total;
+    }
+
+    public void rate (Cliente cliente, Viagem viagem, int rate){
+    	if (rate > 0  && rate < 1);
     }
 }

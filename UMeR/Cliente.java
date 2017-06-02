@@ -28,10 +28,10 @@ public class Cliente extends Actor
         Motorista m = new Motorista("ola","ola","ola","ola",da);
         Veiculo v = new Veiculo("ola",2,3,x);
         
-        Viagem via = new Viagem(1,this,x,y,10,2,3.0,m,v,da);
-        Viagem via2 = new Viagem(2,this,x,y,10,2,3.0,m,v,db);
-        Viagem via3 = new Viagem(3,this,x,y,10,2,3.0,m,v,dc);
-        Viagem via4 = new Viagem(3,this,x,y,10,2,3.0,m,v,di);
+        Viagem via =  new Viagem(this, x,y, 1.0, 1.0 ,3.0, 3.3, 3.1, m,v,da,-1);
+        Viagem via2 = new Viagem(this, x,y, 2.0 ,2.0 ,3.0, 3.3, 3.3, m,v,db,-1);
+        Viagem via3 = new Viagem(this, x,y, 3.0, 3.0 ,3.0, 3.3, 3.3, m,v,dc,-1);
+        Viagem via4 = new Viagem(this, x,y, 3.0, 2.9 ,3.0, 3.3, 3.3, m,v,di,-1);
         listaViagens.add(via);
         listaViagens.add(via2);
         listaViagens.add(via3);

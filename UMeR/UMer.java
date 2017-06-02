@@ -106,16 +106,27 @@ public class UMer {
         System.out.println(nome);
     }
 
-    public void inserirViagem(Cliente cliente, int id, Coords inicio, Coords fim, int precoAcordado, Motorista condutor, Veiculo veiculo){
+    public void inserirViagem(Cliente cliente, int id, Coords inicio, Coords fim, double precoAcordado, Motorista condutor, Veiculo veiculo){
 
       
         Random rando = new Random();
-        Double  rng = ((rando.nextInt(21) + (Double)90.0)/100.0); //de 0.9 a 1.1
-        double distancia = inicio.distancia(fim); //Double//discantica por calcular funçao manu
-        LocalDate data = LocalDate.now(); //current date?
-        Double precoFinal = precoAcordado * rng;
+        Double  rng = ((rando.nextInt(41) + (Double)85.0)/100.0); //de 0.9 a 1.1
+        Double distancia = inicio.distancia(fim); //Double//discantica por calcular funçao manu
+        LocalDate data = LocalDate.now(); //current date
+        Double desvio = 0.0;
         
-        Viagem nova = new Viagem(id, cliente, inicio, fim, distancia, precoAcordado, precoFinal, condutor, veiculo, data);
+        Double precoFinal = precoAcordado;
+        
+        Double tempoEstimado = distancia * veiculo.getVelMediaKM();
+        Double tempoFinal = tempoEstimado * rng;
+        desvio = (tempoEstimado/tempoFinal);
+        double precoEstimado = distancia*veiculo.getPrecoPorKM();
+        if (desvio<=0.25){
+            precoFinal = precoEstimado * desvio;
+        }
+        
+        
+        Viagem nova = new Viagem(cliente, inicio, fim, distancia, precoAcordado, precoFinal,tempoEstimado, tempoFinal, condutor, veiculo, data, -1);
         idViagem++;
         listaViagens.put(id,nova);
 
@@ -125,6 +136,10 @@ public class UMer {
 
     }
     
+
+
+
+
     public ArrayList<String> top5CondutoresMaisPerto(int x, int y) {
         ArrayList<String> resp = new ArrayList<>();
         String dados;

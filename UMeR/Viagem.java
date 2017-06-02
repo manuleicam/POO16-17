@@ -1,41 +1,45 @@
-import java.util.*;
 import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Objects;
 
 
-/**
- * Write a description of class Viagem here.
- *
- * @author My name
- * @version 1
- */
 public class Viagem
 {
-    private int id;
     private Cliente cliente;
     private Coords inicio;
     private Coords fim;
-    private double distancia;
-    private int precoAcordado;
+    private Double distancia;
+    private Double precoAcordado;
     private Double precoFinal;
+    private Double tempoEstimado;
+    private Double tempoFinal;
     private Motorista condutor;
     private Veiculo veiculo;
     private LocalDate data;
+    private int nota;
 
-    public Viagem(int id, Cliente cliente, Coords inicio, Coords fim, double distancia, int precoAcordado, Double precoFinal, Motorista condutor, Veiculo veiculo, LocalDate data) {
-        this.id = id;
+    
+    //CONTRUTOR
+
+    public Viagem(Cliente cliente, Coords inicio, Coords fim, double distancia, Double precoAcordado, Double precoFinal, Double tempoEstimado, Double tempoFinal, Motorista condutor, Veiculo veiculo, LocalDate data, int nota) {
         this.cliente = cliente;
         this.inicio = inicio;
         this.fim = fim;
         this.distancia = distancia;
         this.precoAcordado = precoAcordado;
         this.precoFinal = precoFinal;
+        this.tempoEstimado = tempoEstimado;
+        this.tempoFinal = tempoFinal;
         this.condutor = condutor;
         this.veiculo = veiculo;
         this.data = data;
+        this.nota = nota;
     }
 
-    public int getId() {
-        return id;
+    //GETS E SETS
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
     public Coords getInicio() {
@@ -46,16 +50,24 @@ public class Viagem
         return fim;
     }
 
-    public Double getPrecoFinal() {
-        return precoFinal;
-    }
-
     public double getDistancia() {
         return distancia;
     }
 
-    public int getPrecoAcordado() {
+    public Double getPrecoAcordado() {
         return precoAcordado;
+    }
+
+    public Double getPrecoFinal() {
+        return precoFinal;
+    }
+
+    public Double getTempoEstimado() {
+        return tempoEstimado;
+    }
+
+    public Double getTempoFinal() {
+        return tempoFinal;
     }
 
     public Motorista getCondutor() {
@@ -69,16 +81,13 @@ public class Viagem
     public LocalDate getData() {
         return data;
     }
-    
-     public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+
+    public int getNota() {
+        return nota;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-    public void setId(int id) {
-        this.id = id;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public void setInicio(Coords inicio) {
@@ -89,16 +98,24 @@ public class Viagem
         this.fim = fim;
     }
 
-    public void setDistancia(int distancia) {
+    public void setDistancia(double distancia) {
         this.distancia = distancia;
     }
 
-    public void setPrecoAcordado(int precoAcordado) {
+    public void setPrecoAcordado(Double precoAcordado) {
         this.precoAcordado = precoAcordado;
     }
-    
-    public void setPrecoFinal(double precoFinal) {
+
+    public void setPrecoFinal(Double precoFinal) {
         this.precoFinal = precoFinal;
+    }
+
+    public void setTempoEstimado(Double tempoEstimado) {
+        this.tempoEstimado = tempoEstimado;
+    }
+
+    public void setTempoFinal(Double tempoFinal) {
+        this.tempoFinal = tempoFinal;
     }
 
     public void setCondutor(Motorista condutor) {
@@ -113,11 +130,14 @@ public class Viagem
         this.data = data;
     }
 
-    @Override
-    public String toString() {
-        return "Viagem{" + "id=" + id + ", cliente=" + cliente + ", inicio=" + inicio + ", fim=" + fim + ", distancia=" + distancia + ", precoAcordado=" + precoAcordado + ", precoFinal=" + precoFinal + ", condutor=" + condutor + ", veiculo=" + veiculo + ", data=" + data + '}';
+    public void setNota(int nota) {
+        this.nota = nota;
     }
 
+    @Override
+    public String toString() {
+        return "Viagem{" + "cliente=" + cliente + ", inicio=" + inicio + ", fim=" + fim + ", distancia=" + distancia + ", precoAcordado=" + precoAcordado + ", precoFinal=" + precoFinal + ", tempoEstimado=" + tempoEstimado + ", tempoFinal=" + tempoFinal + ", condutor=" + condutor + ", veiculo=" + veiculo + ", data=" + data + ", nota=" + nota + '}';
+    }
 
 
     @Override
@@ -132,16 +152,10 @@ public class Viagem
             return false;
         }
         final Viagem other = (Viagem) obj;
-        if (this.id != other.id) {
+        if (Double.doubleToLongBits(this.distancia) != Double.doubleToLongBits(other.distancia)) {
             return false;
         }
-        if (this.distancia != other.distancia) {
-            return false;
-        }
-        if (this.precoAcordado != other.precoAcordado) {
-            return false;
-        }
-        if (this.precoFinal != other.precoFinal) {
+        if (this.nota != other.nota) {
             return false;
         }
         if (!Objects.equals(this.cliente, other.cliente)) {
@@ -151,6 +165,18 @@ public class Viagem
             return false;
         }
         if (!Objects.equals(this.fim, other.fim)) {
+            return false;
+        }
+        if (!Objects.equals(this.precoAcordado, other.precoAcordado)) {
+            return false;
+        }
+        if (!Objects.equals(this.precoFinal, other.precoFinal)) {
+            return false;
+        }
+        if (!Objects.equals(this.tempoEstimado, other.tempoEstimado)) {
+            return false;
+        }
+        if (!Objects.equals(this.tempoFinal, other.tempoFinal)) {
             return false;
         }
         if (!Objects.equals(this.condutor, other.condutor)) {
@@ -164,6 +190,10 @@ public class Viagem
         }
         return true;
     }
+    
+    
+    
+    
 }
 
  

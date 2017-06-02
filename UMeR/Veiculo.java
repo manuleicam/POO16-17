@@ -135,12 +135,16 @@ public class Veiculo {
     public void setMotorista(Motorista motorista) {
         this.motorista = motorista;
     }
+    
+    public void removeMotorista(){
+        this.motorista = null;
+    }
    
     //EQUALTS 2STRING CLONE
 
     @Override
     public String toString() {
-        return "Veiculo{" + "matricula=" + matricula + ", velMediaKM=" + velMediaKM + ", precoPorKM=" + precoPorKM + ", fiabilidade=" + fiabilidade + ", posicao=" + posicao + ", totalFaturado=" + totalFaturado + ", estado=" + estado + ", listaViagens=" + listaViagens + ", motorista=" + motorista + '}';
+        return "Veiculo{" + "matricula=" + matricula + ", velMediaKM=" + velMediaKM + ", precoPorKM=" + precoPorKM + ", fiabilidade=" + fiabilidade + ", posicao=" + posicao + ", totalFaturado=" + totalFaturado + ", estado=" + estado + ", listaViagens=" + listaViagens + ", motorista=" + motorista + ", estado=" + estado + '}';
     }
 
     @Override

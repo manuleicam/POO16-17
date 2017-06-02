@@ -27,11 +27,13 @@ public class UMer {
         Cliente c = new Cliente("manu@gmail.com", "manu", "123", "wow", dc);
         Cliente d = new Cliente("email", "joao", "qwerty", "todoolado", da);
         
-        Motorista m = new Motorista("rute@gmail.com", "rute", "123","morada",da);
+        Motorista m = new Motorista("rute", "rute", "123","morada",da);
         Motorista m2 = new Motorista("bre", "bru", "123","morada",dc); // fite mi irl bru
         
         Veiculo v = new Veiculo("11-11-11",1,2,co);
+        Veiculo v3 = new Veiculo("33-33-33",1,2,co,m);
         listaVeiculo.put("11-11-11", v);
+        listaVeiculo.put("33-33-33", v3);
         
         Empresa e = new Empresa("js","juve sao","321","morada",db);
         e.viaturas.add(v);
@@ -159,11 +161,17 @@ public class UMer {
         return 1;
     }
     
+    public int verificarMatricula(String matricula){
+        if (this.listaVeiculo.containsKey(matricula)) return 0;
+        return 1;
+    }
+    
     public int registarNovaViatura(String matricula, int tipoVeiculo, int velMediaKm, int precoPorKM, Coords c){
         NoveLugares vNL;
         Ligeiros vL;
         Motos vM;
         Empresa aux;
+        Motorista m;
         
         switch(tipoVeiculo){
             case 1:
@@ -175,7 +183,12 @@ public class UMer {
                     return 1;
                 }
                 else{
+                    m = (Motorista) this.currentUser;
                     vL = new Ligeiros(matricula, velMediaKm, precoPorKM, c,this.currentUser);
+                    for(Veiculo v : this.listaVeiculo.values()){
+                        if(v.getMotorista()!=null)
+                            if(v.getMotorista().getEmail().equals(m.getEmail())) v.removeMotorista();
+                    }
                     this.listaVeiculo.put(matricula, vL);
                     return 2;
                 }
@@ -188,7 +201,12 @@ public class UMer {
                     return 1;
                 }
                 else{
+                    m = (Motorista) this.currentUser;
                     vM = new Motos(matricula, velMediaKm, precoPorKM, c, this.currentUser);
+                    for(Veiculo v : this.listaVeiculo.values()){
+                        if(v.getMotorista()!=null)
+                            if(v.getMotorista().getEmail().equals(m.getEmail())) v.removeMotorista();
+                    }
                     this.listaVeiculo.put(matricula, vM);
                     return 2;
                 }
@@ -201,7 +219,12 @@ public class UMer {
                     return 1;
                 }
                 else{
+                    m = (Motorista) this.currentUser;
                     vNL = new NoveLugares(matricula, velMediaKm, precoPorKM, c, this.currentUser);
+                    for(Veiculo v : this.listaVeiculo.values()){
+                        if(v.getMotorista()!=null)
+                            if(v.getMotorista().getEmail().equals(m.getEmail())) v.removeMotorista();
+                    }
                     this.listaVeiculo.put(matricula,vNL);
                     return 2;
                 }
@@ -215,15 +238,23 @@ public class UMer {
         Veiculo v;
         Motorista aux = (Motorista) this.currentUser;
         if(!this.listaVeiculo.containsKey(matricula)) return -1;
+        
         e = aux.getEmpresa();
         
         v = e.getVeiculo(matricula);
         
         if(v == null) return 0;
         
-        if(v.getEstado() == false) return -1;
+        if(v.getEstado() == true    ) return -1;
+        
+        for(Veiculo vei : this.listaVeiculo.values()){
+            if(vei.getMotorista()!=null)
+                if(vei.getMotorista().getEmail().equals(aux.getEmail())) vei.removeMotorista();
+        }
         
         v.setMotorista(aux);
+        
+        
         return 1;
     }
 
@@ -331,6 +362,17 @@ public class UMer {
         if(m.getEstado() == false) return o;
         else return l;
     }
+    
+   public String libertarCarro(){
+       Motorista aux = (Motorista) this.currentUser;
+       String l = "Carro liberto";
+       String n = "Não estavas associado a nenhum carro";
+       for(Veiculo vei : this.listaVeiculo.values()){
+            if(vei.getMotorista()!=null)
+                if(vei.getMotorista().getEmail().equals(aux.getEmail())) {vei.setEstado(false); vei.removeMotorista(); return l;}
+       }
+       return n;
+   }
 
     public Double totalFaturado(Veiculo veiculo, LocalDate after, LocalDate before){
 
@@ -345,16 +387,16 @@ public class UMer {
     }
 
     public Double totalFaturado(Empresa empresa,LocalDate after, LocalDate before){
-    	
-    	Double total = 0.0;
-    	ArrayList<Veiculo> lista = empresa.getViaturas();
-    	for(Veiculo v : lista)
-    		total+=totalFaturado(v,after,before);
+        
+        Double total = 0.0;
+        ArrayList<Veiculo> lista = empresa.getViaturas();
+        for(Veiculo v : lista)
+            total+=totalFaturado(v,after,before);
 
-    	return total;
+        return total;
     }
 
     public void rate (Cliente cliente, Viagem viagem, int rate){
-    	if (rate > 0  && rate < 1);
+        if (rate > 0  && rate < 1);
     }
 }

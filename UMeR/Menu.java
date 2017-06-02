@@ -18,7 +18,7 @@ public class Menu {
     private String[] menuCliente = {"Realizar Viagem", "Ver Viagens Efectuadas", "Bla3", "Bla4"};
     private String[] menuViagem = {"Escolher viatura", "Viatura mais próxima"};
     private String[] menuEstatistica = {"Top 10 clientes gastadores", "Piores 5 motoristas"};
-    private String[] menuMotoristaComEmpresa = {"Associar-se a uma viatura","Ver Viagens Efectuadas", "Mudar o estado"};
+    private String[] menuMotoristaComEmpresa = {"Associar-se a uma viatura","Ver Viagens Efectuadas", "Mudar o estado", "Libertar Carro"};
     private String[] menuMotoristaPrivado = {"Registar Nova Viatura","Associar-se a uma empresa", "Ver Viagens Efectuadas", "Mudar o estado"};
     private String[] menuEmpresa = {"Registar Nova Viatura","Ver Frota", "Ver Viagens Efectuadas"};
     
@@ -43,7 +43,6 @@ public class Menu {
     public void menuPrinc(){
         boolean x = true;
         while(x){
-            
             setOpcoes(menuPrinc);
             executa();
             esc = getOpcao();
@@ -145,6 +144,9 @@ public class Menu {
                 case 3:
                     mudarEstadoMotorista();
                     break;
+                case 4:
+                    libertarCarro();
+                    break;
                 case 0:
                     x = false;
                     break;
@@ -182,14 +184,12 @@ public class Menu {
             esc = getOpcao();
             switch(esc){
                 case 1: 
-                    System.out.println("1");
                     registarNovaViatura();
                     break;
                 case 2:
                     verFrota();
                     break;
                 case 3:
-                    System.out.println("2");
                     verViagens();
                     break;
                 case 0:
@@ -389,8 +389,9 @@ public class Menu {
     
     
     public void registarNovaViatura(){
-        String matricula;
-        int velMediaKm, precoPorKM;
+        String matricula = "";
+        int velMediaKm, precoPorKM, flagRep = 0;
+        int i=0;
         int x, y, res, tipoVeiculo = 0;
         Coords c;
         escolha.nextLine();
@@ -403,8 +404,13 @@ public class Menu {
             tipoVeiculo = escolha.nextInt();
         }
         escolha.nextLine();
-        System.out.println("Insira a matricula do veiculo no formato XX-XX-XX");
-        matricula=escolha.nextLine();
+        while(flagRep == 0 || matricula.length() ==0 ){
+            if(i!=0) System.out.println("Veiculo já registado no sistema");
+            System.out.println("Insira a matricula do veiculo no formato XX-XX-XX");
+            matricula=escolha.nextLine();
+            flagRep = umer.verificarMatricula(matricula);
+            i++;
+        }
         System.out.println("Insira a velocidade média do veiculo");
         velMediaKm = escolha.nextInt();
         System.out.println("Insira o preço que irá cobrar por KM");
@@ -485,5 +491,11 @@ public class Menu {
         String estado;
         estado = umer.trocaEstadoMotorista();
         System.out.println("Encontra-se neste momento " + estado);
+    }
+    
+    public void libertarCarro(){
+        String estado;
+        estado = umer.libertarCarro();
+        System.out.println(estado);
     }
 }

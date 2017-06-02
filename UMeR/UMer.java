@@ -343,4 +343,14 @@ public class UMer {
 
         return sortedMap;
     }
+    
+    public String trocaEstadoMotorista(){
+        Motorista m;
+        String o = "Ocupado";
+        String l = "Livre";
+        m = (Motorista) this.currentUser;
+        m.trocaEstado();
+        if(m.getEstado() == false) return o;
+        else return l;
+    }
 }

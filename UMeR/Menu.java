@@ -7,15 +7,19 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.time.LocalDate;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class Menu {
     // variáveis de instância
     private List<String> opcoes;
-    private String[] menuPrinc = {"LogIn", "Registar", "oo"};
+    private String[] menuPrinc = {"LogIn", "Registar", "Estatistica"};
     private String[] menuCliente = {"Realizar Viagem", "Ver Viagens Efectuadas", "Bla3", "Bla4"};
     private String[] menuViagem = {"Escolher viatura", "Viatura mais próxima"};
-    private String[] menuMotoristaComEmpresa = {"Associar-se a uma viatura","Ver Viagens Efectuadas"};
-    private String[] menuMotoristaPrivado = {"Registar Nova Viatura","Associar-se a uma empresa", "Ver Viagens Efectuadas"};
+    private String[] menuEstatistica = {"Top 10 clientes gastadores", "Piores 5 motoristas"};
+    private String[] menuMotoristaComEmpresa = {"Associar-se a uma viatura","Ver Viagens Efectuadas", "Mudar o estado"};
+    private String[] menuMotoristaPrivado = {"Registar Nova Viatura","Associar-se a uma empresa", "Ver Viagens Efectuadas", "Mudar o estado"};
     private String[] menuEmpresa = {"Registar Nova Viatura","Ver Frota", "Ver Viagens Efectuadas"};
     
     private int op, esc;
@@ -28,6 +32,7 @@ public class Menu {
     }
 
     public static void main(String[] args){
+        System.out.println('\f');
         new Menu().run();
     }
     
@@ -36,106 +41,161 @@ public class Menu {
     }
     
     public void menuPrinc(){
-        setOpcoes(menuPrinc);
-        executa();
-        esc = getOpcao();
-        switch (esc) {
-            case 1:
-                logIN();
-                break;
-            case 2:
-                registar();
-                break;
-            case 3:
-                Coords coco = new Coords();
-                coco.setx(1);coco.sety(2);
-                umer.viaturasProx(coco);
-                break;
-            case 0:
-                System.out.println("Adeus!");
-                break;
+        boolean x = true;
+        while(x){
+            
+            setOpcoes(menuPrinc);
+            executa();
+            esc = getOpcao();
+            switch (esc) {
+                case 1:
+                    logIN();
+                    break;
+                case 2:
+                    registar();
+                    break;
+                case 3:
+                    estatistica();
+                    break;
+                case 0:
+                    x = false;
+                    System.out.println("Adeus!");
+                    break;
+            }
         }
-    }
+   }
     
     public void menuCliente(){
-        setOpcoes(menuCliente);
-        executa();
-        esc = getOpcao();
-        switch(esc){
-            case 1: 
-                System.out.println("1");
-                menuViagem();
-                break;
-            case 2:
-                System.out.println("2");
-                verViagens();
-                break;
+        boolean x = true;
+        while(x){
+            setOpcoes(menuCliente);
+            executa();
+            esc = getOpcao();
+            switch(esc){
+                case 1: 
+                    System.out.println("1");
+                    menuViagem();
+                    break;
+                case 2:
+                    System.out.println("2");
+                    verViagens();
+                    break;
+                case 0:
+                    x = false;
+                    break;
+            }
         }
     }
     
     public void menuViagem(){
-        setOpcoes(menuViagem);
-        executa();
-        esc = getOpcao();
-        switch(esc){
-            case 1:
-                escolherCondutor();
-                System.out.print("1");
-                break;
-            case 2:
-                System.out.println("2");
-                break;
+        boolean x = true;
+        while(x){
+            setOpcoes(menuViagem);
+            executa();
+            esc = getOpcao();
+            switch(esc){
+                case 1:
+                    escolherCondutor();
+                    System.out.print("1");
+                    break;
+                case 2:
+                    System.out.println("2");
+                    break;
+                case 0:
+                    x = false;
+                    break;
+            }
+        }
+    }
+    
+    public void menuEstatistica(){
+        boolean x = true;
+        while(x){
+            setOpcoes(menuEstatistica);
+            executa();
+            esc = getOpcao();
+            switch(esc){
+                case 1:
+                    top10Clientes();
+                    System.out.print("1");
+                    break;
+                case 2:
+                    pioresCondutores();
+                    break;
+                case 0:
+                    x = false;
+                    break;
+            }
         }
     }
     
     public void menuMotoristaComEmpresa(){
-        setOpcoes(menuMotoristaComEmpresa);
-        executa();
-        esc = getOpcao();
-        switch(esc){
-            case 1: 
-                System.out.println("1");
-                associarAViatura();
-                break;
-            case 2:
-                System.out.println("2");
-                verViagens();
-                break;
+        boolean x = true;
+        while(x){
+            setOpcoes(menuMotoristaComEmpresa);
+            executa();
+            esc = getOpcao();
+            switch(esc){
+                case 1:
+                    associarAViatura();
+                    break;
+                case 2:
+                    verViagens();
+                    break;
+                case 3:
+                    mudarEstadoMotorista();
+                    break;
+                case 0:
+                    x = false;
+                    break;
+            }
         }
     }
     
     public void menuMotoristaPrivado(){
-        setOpcoes(menuMotoristaPrivado);
-        executa();
-        esc = getOpcao();
-        switch(esc){
-            case 1: 
-                System.out.println("1");
-                registarNovaViatura();
-                break;
-            case 2:
-                System.out.println("2");
-                verViagens();
-                break;
+        boolean x = true;
+        while(x){
+            setOpcoes(menuMotoristaPrivado);
+            executa();
+            esc = getOpcao();
+            switch(esc){
+                case 1: 
+                    System.out.println("1");
+                    registarNovaViatura();
+                    break;
+                case 2:
+                    System.out.println("2");
+                    verViagens();
+                    break;
+                case 0:
+                    x = false;
+                    break;
+            }
         }
     }
     
     public void menuEmpresa(){
-        setOpcoes(menuEmpresa);
-        executa();
-        esc = getOpcao();
-        switch(esc){
-            case 1: 
-                System.out.println("1");
-                registarNovaViatura();
-                break;
-            case 2:
-                verFrota();
-                break;
-            case 3:
-                System.out.println("2");
-                verViagens();
-                break;
+        boolean x = true;
+        while(x){
+            setOpcoes(menuEmpresa);
+            executa();
+            esc = getOpcao();
+            switch(esc){
+                case 1: 
+                    System.out.println("1");
+                    registarNovaViatura();
+                    break;
+                case 2:
+                    verFrota();
+                    break;
+                case 3:
+                    System.out.println("2");
+                    verViagens();
+                    break;
+                case 0:
+                    x = false;
+                    break;
+            }
         }
     }
     
@@ -325,7 +385,6 @@ public class Menu {
             System.out.println(v.toString());
         }
         System.out.println();
-        //menuCliente();
     }
     
     public void escolherCondutor(){
@@ -396,5 +455,44 @@ public class Menu {
         for(Veiculo v : vS){
             System.out.println(v.toString());
         }
+    }
+    
+    public void estatistica(){
+        String pass;
+        escolha.nextLine();
+        System.out.println("Porfavor Insira a password para aceder às estatisticas");
+        pass = escolha.nextLine();
+        if(pass.equals("password")) menuEstatistica();
+    }
+    
+    public void top10Clientes(){
+        Map<Cliente,Double> sortedMap;
+        int n = 0;
+        sortedMap = umer.top10clientes();
+        Iterator<Map.Entry<Cliente, Double>> it = sortedMap.entrySet().iterator();
+        while(it.hasNext() && n < 10){
+            System.out.println(it.next().getKey().getNome() + " " + it.next().getValue() + "\n");
+            n++;
+        }
+        
+    }
+    
+    public void pioresCondutores(){
+        int n = 0;
+        Map<Motorista,Double> sortedMap; 
+        sortedMap = umer.piores5condutores();
+        Iterator<Map.Entry<Motorista,Double>> it = sortedMap.entrySet().iterator();
+        while(it.hasNext() && n < 5){
+            System.out.println(it.next().getKey().getNome() + " " + it.next().getValue() + "\n");
+        }
+        //for (Map.Entry<Motorista, Double> e : sortedMap.entrySet()) {  
+        //    System.out.println(e.getKey().getNome() + " " + e.getValue() + "\n");
+        //}
+    }
+    
+    public void mudarEstadoMotorista(){
+        String estado;
+        estado = umer.trocaEstadoMotorista();
+        System.out.println("Encontra-se neste momento " + estado);
     }
 }

@@ -34,7 +34,7 @@ public class Motorista extends Actor
         this.numKms=0;
         this.estado=true;
         this.listaViagens = new ArrayList<Viagem>();
-        this.desvioAcumulado = desvioAcumulado;
+        this.desvioAcumulado = 0.0;
         this.empresa = null;
     }
     
@@ -120,6 +120,11 @@ public class Motorista extends Actor
       this.numKms += nova.getDistancia();
       this.desvioAcumulado += (nova.getPrecoFinal() - nova.getPrecoAcordado());
       this.nrViagens++;
+    }
+    
+    public void trocaEstado(){
+        if (this.estado == false) setEstado(true);
+        else setEstado(false);
     }
 
   /*  public void adicionarKms (int kms){

@@ -8,6 +8,11 @@ public class Cliente extends Actor
     public Cliente(){
         super();  
     }
+    
+    public Cliente(Cliente c){
+        super(c.getEmail(), c.getNome(), c.getPassword(), c.getMorada(), c.getNascimento());
+        this.totalGasto = c.getTotalGasto();
+    }
    
     public Double getTotalGasto(){
         return this.totalGasto;
@@ -48,6 +53,24 @@ public class Cliente extends Actor
 
     public void adicionarGasto(int gasto){
         this.totalGasto += gasto; 
+    }
+    
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cliente:");
+        sb.append("\n Email: ");
+        sb.append(this.getEmail());
+        sb.append("\n Nome: ");
+        sb.append(this.getNome());
+        sb.append("\n Morada: ");
+        sb.append(this.getMorada());
+        sb.append("\n DataNascimento: ");
+        sb.append(this.getNascimento());
+        return sb.toString();
+    }
+    
+    public Cliente clone(){
+        return new Cliente(this);
     }
 
 }

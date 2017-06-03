@@ -16,6 +16,11 @@ public class Coords
         this.x=x;
         this.y=y;
     }
+    
+    public Coords(Coords c){
+        this.x = c.getx();
+        this.y = c.gety();
+    }
 
     public int getx(){
         return this.x;
@@ -41,6 +46,28 @@ public class Coords
          tempY = this.y - tempY;
          dist = sqrt((tempX*tempX)+(tempY*tempY));
          return dist;
+    }
+    
+    public boolean equals(Object coords){
+        if(this == coords) return true;
+        if ((coords == null) || (this.getClass() != coords.getClass())) return false;
+        else {
+            Coords c = (Coords) coords;
+            return(this.x == c.getx() && this.y == c.gety());
+        }
+    }
+    
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("X: ");
+        sb.append(this.x);
+        sb.append(", Y: ");
+        sb.append(this.y);
+        return sb.toString();
+    }
+    
+    public Coords clone(){
+        return new Coords(this);
     }
     
 }

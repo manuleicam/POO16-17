@@ -35,6 +35,21 @@ public class Viagem
         this.data = data;
         this.nota = nota;
     }
+    
+    public Viagem(Viagem v){
+        this.cliente = v.getCliente();
+        this.inicio = v.getInicio();
+        this.fim = v.getFim();
+        this.distancia = v.getDistancia();
+        this.precoAcordado = v.getPrecoAcordado();
+        this.precoFinal = v.getPrecoFinal();
+        this.tempoEstimado = v.getTempoEstimado();
+        this.tempoFinal = v.getTempoFinal();
+        this.condutor = v.getCondutor();
+        this.veiculo = v.getVeiculo();
+        this.data = v.getData();
+        this.nota = v.getNota();
+    }
 
    
 
@@ -145,12 +160,37 @@ public class Viagem
     
    //2STRING EQUALCS CLONE
 
+    public Viagem clone(){
+        return new Viagem(this);
+    }
     
     
     
-    @Override
-    public String toString() {
-        return "Viagem{" + "cliente=" + cliente + ", inicio=" + inicio + ", fim=" + fim + ", distancia=" + distancia + ", precoAcordado=" + precoAcordado + ", precoFinal=" + precoFinal + ", tempoEstimado=" + tempoEstimado + ", tempoFinal=" + tempoFinal + ", condutor=" + condutor + ", veiculo=" + veiculo + ", data=" + data + ", nota=" + nota + '}';
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.cliente);
+        sb.append(this.condutor.toStringParaEmpresa());
+        sb.append("\nVeiculo: ");
+        sb.append(" " + this.veiculo.getMatricula());
+        sb.append("\n Data da viagem: ");
+        sb.append(this.data);
+        sb.append("\n Inicio da viagem: ");
+        sb.append(this.inicio);
+        sb.append(", Fim da viagem: ");
+        sb.append(this.fim);
+        sb.append(", Distância total da viagem: ");
+        sb.append(this.distancia);
+        sb.append("\n Tempo estimado de viagem: ");
+        sb.append(this.tempoEstimado);
+        sb.append(", Tempo final de viagem: ");
+        sb.append(this.tempoFinal);
+        sb.append("\n Preco Acordado Inicialmente: ");
+        sb.append(this.precoAcordado);
+        sb.append(", Preco final: ");
+        sb.append(this.precoFinal);
+        sb.append("\n Nota dada pelo cliente: ");
+        sb.append(this.nota);
+        return sb.toString();
     }
 
     @Override

@@ -99,23 +99,6 @@
         }
     }
     
-    public Actor clone(){
-        return new Actor(this);
-    }
-    
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nEmail: ");
-        sb.append(this.email);
-        sb.append("\nNome: ");
-        sb.append(this.nome);
-        sb.append("\nMorada: ");
-        sb.append(this.morada);
-        sb.append("\nDataNascimento: ");
-        sb.append(this.nascimento);
-        return sb.toString();
-    }
-    
     public boolean equals(Object actor){
         if(this == actor) return true;
         if ((actor == null) || (this.getClass() != actor.getClass())) return false;

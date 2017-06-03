@@ -16,7 +16,7 @@ public class Menu {
     private List<String> opcoes;
     private String[] menuPrinc = {"LogIn", "Registar", "Estatistica"};
     private String[] menuCliente = {"Realizar Viagem", "Ver Viagens Efectuadas", "Bla3", "Bla4"};
-    private String[] menuViagem = {"Escolher viatura", "Viatura mais próxima"};
+    private String[] menuViagem = {"Viatura mais próxima","Escolher viatura"};
     private String[] menuEstatistica = {"Top 10 clientes gastadores", "Piores 5 motoristas"};
     private String[] menuMotoristaComEmpresa = {"Associar-se a uma viatura","Ver Viagens Efectuadas", "Mudar o estado", "Libertar Carro"};
     private String[] menuMotoristaPrivado = {"Registar Nova Viatura","Associar-se a uma empresa", "Ver Viagens Efectuadas", "Mudar o estado"};
@@ -94,10 +94,11 @@ public class Menu {
             esc = getOpcao();
             switch(esc){
                 case 1:
-                    //escolherCondutor();
+                    posicaoInicialCliente(2);
                     System.out.print("1");
                     break;
                 case 2:
+                    posicaoInicialCliente(6);
                     System.out.println("2");
                     break;
                 case 0:
@@ -256,7 +257,7 @@ public class Menu {
         int flagLog, empresaPertence;
 
         escolha.nextLine();
-        System.out.println("Insira o seu user");
+        System.out.println("Insira o seu email");
         user = escolha.nextLine();
 
         System.out.println("Insira a sua password");
@@ -390,7 +391,7 @@ public class Menu {
     
     public void registarNovaViatura(){
         String matricula = "";
-        int velMediaKm, precoPorKM, flagRep = 0;
+        int velMediaKm, precoPorKM, flagRep = 1;
         int i=0;
         int x, y, res, tipoVeiculo = 0;
         Coords c;
@@ -404,7 +405,7 @@ public class Menu {
             tipoVeiculo = escolha.nextInt();
         }
         escolha.nextLine();
-        while(flagRep == 0 || matricula.length() ==0 ){
+        while(flagRep == 1 || matricula.length() ==0 ){
             if(i!=0) System.out.println("Veiculo já registado no sistema");
             System.out.println("Insira a matricula do veiculo no formato XX-XX-XX");
             matricula=escolha.nextLine();
@@ -467,9 +468,14 @@ public class Menu {
         int n = 0;
         sortedMap = umer.top10clientes();
         Iterator<Map.Entry<Cliente, Double>> it = sortedMap.entrySet().iterator();
-        while(it.hasNext() && n < 10){
-            System.out.println(it.next().getKey().getNome() + " " + it.next().getValue() + "\n");
+        //while(it.hasNext() && n < 10){
+        //    System.out.println(it.next().getKey().getNome() + " " + it.next().getValue() + "\n");
+        //    n++;
+        //}
+        for (Map.Entry<Cliente, Double> e : sortedMap.entrySet()) {  
+            System.out.println(e.getKey().getNome() + " " + e.getValue() + "\n");
             n++;
+            if (n>10) break;
         }
         
     }
@@ -479,12 +485,15 @@ public class Menu {
         Map<Motorista,Double> sortedMap; 
         sortedMap = umer.piores5condutores();
         Iterator<Map.Entry<Motorista,Double>> it = sortedMap.entrySet().iterator();
-        while(it.hasNext() && n < 5){
-            System.out.println(it.next().getKey().getNome() + " " + it.next().getValue() + "\n");
-        }
-        //for (Map.Entry<Motorista, Double> e : sortedMap.entrySet()) {  
-        //    System.out.println(e.getKey().getNome() + " " + e.getValue() + "\n");
+        //while(it.hasNext() && n < 5){
+        //    System.out.println(it.next().getKey().getNome() + " " + it.next().getValue() + "\n");
+        //    n++;
         //}
+        for (Map.Entry<Motorista, Double> e : sortedMap.entrySet()) {  
+            System.out.println(e.getKey().getNome() + " " + e.getValue() + "\n");
+            n++;
+            if (n>5) break;
+        }
     }
     
     public void mudarEstadoMotorista(){
@@ -497,5 +506,75 @@ public class Menu {
         String estado;
         estado = umer.libertarCarro();
         System.out.println(estado);
+    }
+    
+    public void posicaoInicialCliente(int flag){
+        int x, y;
+        Coords c;
+        escolha.nextLine();
+        System.out.println("Diga a posição X onde se encontra");
+        x = escolha.nextInt();
+        System.out.println("Diga a posição Y onde se encontra");
+        y = escolha.nextInt();
+        c = new Coords(x,y);
+        if(flag == 6)escolherCondutor(c);
+        else condutorMaisProximo(c);
+    }
+    
+    public Coords posicaoDestino(){
+        int x, y;
+        Coords c;
+        escolha.nextLine();
+        System.out.println("Diga a posição X do destino");
+        x = escolha.nextInt();
+        System.out.println("Diga a posição Y do destino");
+        y = escolha.nextInt();
+        c = new Coords(x,y);
+        return c;
+    }
+    
+    public void condutorMaisProximo(Coords c){
+        Map<Veiculo,Double> sortedMap;
+        Coords f;
+        int n=1;
+        String matricula = " ";
+        Veiculo v;
+        
+        sortedMap = umer.viaturasProx(c);
+        
+        for (Map.Entry<Veiculo, Double> e : sortedMap.entrySet()) {  
+            System.out.println(e.getKey().toStringCliente() + " " + e.getValue() + "\n");
+            matricula = e.getKey().getMatricula();
+            n++;
+            if (n>1) break;
+        }
+        f = posicaoDestino();
+        umer.realizarViagem(matricula,c,f);
+    }
+    
+    public void escolherCondutor(Coords c){
+        Coords f;
+        Map<Veiculo,Double> sortedMap;
+        String matricula = " ";
+        int n=1, flag = 0;
+        sortedMap = umer.viaturasProx(c);
+        Iterator<Map.Entry<Veiculo,Double>> it = sortedMap.entrySet().iterator();
+        System.out.println("Os 5 condutores mais próximos de si são: ");
+        for (Map.Entry<Veiculo, Double> e : sortedMap.entrySet()) {
+            System.out.println(n + ": ");
+            System.out.println(e.getKey().toStringCliente() + " " + e.getValue() + "\n");
+            n++;
+            if(n>5) break;
+        }
+        escolha.nextLine();
+        while(flag != 1){
+            if (flag == 2) System.out.println("Matricula inserida está errada");
+            System.out.println("Insira a matricula do veiculo que pretende escolher no formato XX-XX-XX");
+            matricula = escolha.nextLine();
+            flag = umer.verificarMatricula(matricula);
+            if (flag == 0) flag = 2;
+        }
+        f = posicaoDestino();
+        umer.realizarViagem(matricula,c,f);
     }
 }

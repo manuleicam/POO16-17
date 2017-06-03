@@ -1,9 +1,12 @@
 #BlueJ class context
-comment0.target=Coords
-comment1.params=
-comment1.target=Coords()
-comment2.params=x\ y
-comment2.target=Coords(int,\ int)
+comment0.params=
+comment0.target=Coords()
+comment1.params=x\ y
+comment1.target=Coords(int,\ int)
+comment10.params=
+comment10.target=Coords\ clone()
+comment2.params=c
+comment2.target=Coords(Coords)
 comment3.params=
 comment3.target=int\ getx()
 comment4.params=
@@ -14,4 +17,8 @@ comment6.params=y
 comment6.target=void\ sety(int)
 comment7.params=x
 comment7.target=double\ distancia(Coords)
-numComments=8
+comment8.params=coords
+comment8.target=boolean\ equals(java.lang.Object)
+comment9.params=
+comment9.target=java.lang.String\ toString()
+numComments=11

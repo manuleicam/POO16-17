@@ -53,10 +53,37 @@ public class Empresa extends Actor {
     
     
     //EQUALS 2STRING
+    
+    public String toStringParaMotoristas(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Empresa:");
+        sb.append("\n Nome: ");
+        sb.append(this.getNome());
+        sb.append("\n Morada: ");
+        sb.append(this.getMorada());
+        sb.append("\n DataCriação: ");
+        sb.append(this.getNascimento());
+        return sb.toString();
+    }
 
-    @Override
-    public String toString() {
-        return "Empresa{" + "motoristas=" + motoristas + ", viaturas=" + viaturas +  '}';
+
+    
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Empresa:");
+        sb.append("\nNome: ");
+        sb.append(this.getNome());
+        sb.append("\nMorada: ");
+        sb.append(this.getMorada());
+        sb.append("\nDataCriação: ");
+        sb.append(this.getNascimento());
+        for(Actor m : motoristas){
+            Motorista m2 = (Motorista) m;
+            sb.append(m2.toStringParaEmpresa());
+        }
+        sb.append("\nViaturas: ");
+        sb.append(this.viaturas);
+        return sb.toString();
     }
  
     

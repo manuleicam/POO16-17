@@ -141,11 +141,54 @@ public class Veiculo {
     }
    
     //EQUALTS 2STRING CLONE
-
-    @Override
-    public String toString() {
-        return "Veiculo{" + "matricula=" + matricula + ", velMediaKM=" + velMediaKM + ", precoPorKM=" + precoPorKM + ", fiabilidade=" + fiabilidade + ", posicao=" + posicao + ", totalFaturado=" + totalFaturado + ", estado=" + estado + ", listaViagens=" + listaViagens + ", motorista=" + motorista + ", estado=" + estado + '}';
+    
+    public String toStringCliente(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Veiculo:");
+        sb.append("\nMatricula: ");
+        sb.append(this.matricula);
+        sb.append("\nVelocidade média: ");
+        sb.append(this.velMediaKM);
+        sb.append("\nPreço a pagar por KM: ");
+        sb.append(this.precoPorKM);
+        sb.append("\nFiabilidade: ");
+        sb.append(this.fiabilidade);
+        sb.append("\nPosicao onde se encontra no momento: ");
+        sb.append(this.posicao);
+        sb.append("\nEstado: ");
+        if (this.estado == false) sb.append("Livre");
+        else sb.append("Ocupado");
+        if (this.motorista!= null) sb.append(this.motorista.toStringParaEmpresa());
+        else sb.append("\nSem Motorista de momento");
+        return sb.toString();
     }
+    
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Veiculo:");
+        sb.append("\nMatricula: ");
+        sb.append(this.matricula);
+        sb.append("\nVelocidade média: ");
+        sb.append(this.velMediaKM);
+        sb.append("\nPreço a pagar por KM: ");
+        sb.append(this.precoPorKM);
+        sb.append("\nFiabilidade: ");
+        sb.append(this.fiabilidade);
+        sb.append("\nPosicao onde se encontra no momento: ");
+        sb.append(this.posicao);
+        sb.append("\nTotal já facturado: ");
+        sb.append(this.totalFaturado);
+        sb.append("\nLista das Viagens já realizadas: ");
+        sb.append(this.listaViagens);
+        sb.append("\nEstado: ");
+        if (this.estado == false) sb.append("Livre");
+        else sb.append("Ocupado");
+        if (this.motorista!= null) sb.append(this.motorista.toStringParaEmpresa());
+        else sb.append("\nSem Motorista de momento");
+        return sb.toString();
+    }
+    
+    
 
     @Override
     public boolean equals(Object obj) {

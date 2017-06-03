@@ -21,32 +21,42 @@ public class UMer {
         LocalDate db = LocalDate.of(1994,06,8);
         LocalDate dc = LocalDate.of(1995,01,20);
         Coords co = new Coords(3,3);
+        Coords co2 = new Coords(5,3);
 
         Cliente a = new Cliente("jonas@gmail.com", "joao", "jo", "todoolado", da);
         Cliente b = new Cliente("rui@gmail.com", "rui", "321", "nunca", db);
-        Cliente c = new Cliente("manu@gmail.com", "manu", "123", "wow", dc);
+        Cliente c = new Cliente("manu", "manu", "123", "wow", dc);
         Cliente d = new Cliente("email", "joao", "qwerty", "todoolado", da);
         
         Motorista m = new Motorista("rute", "rute", "123","morada",da);
+        Motorista m3 = new Motorista("reno", "reno", "123","morada",da);
         Motorista m2 = new Motorista("bre", "bru", "123","morada",dc); // fite mi irl bru
         
         Veiculo v = new Veiculo("11-11-11",1,2,co);
-        Veiculo v3 = new Veiculo("33-33-33",1,2,co,m);
+        //Veiculo v3 = new Veiculo("33-33-33",1,2,co,m);
         listaVeiculo.put("11-11-11", v);
-        listaVeiculo.put("33-33-33", v3);
+        //listaVeiculo.put("33-33-33", v3);
+        
+        Viagem via = new Viagem(a, co, co2, 3.9, 3.5, 4.3,3.3,2.2,m,v,da,2);
+        listaViagens.put(1,via);
         
         Empresa e = new Empresa("js","juve sao","321","morada",db);
         e.viaturas.add(v);
+        
+        e.motoristas.add(m2);
+        e.motoristas.add(m3);
 
         m2.setEmpresa(e);
+        m3.setEmpresa(e);
         
         listaCliente.put("jonas@gmail.com", a);
         listaCliente.put("rui@gmail.com", b);
-        listaCliente.put("manu@gmail.com", c);
+        listaCliente.put("manu", c);
         listaCliente.put("email", d);
-        listaCliente.put("rute@gmail.com",m);
+        listaCliente.put("rute",m);
         listaCliente.put("js",e);
         listaCliente.put("bre",m2);
+        listaCliente.put("reno",m3);
         
     }
 
@@ -107,6 +117,18 @@ public class UMer {
         nome = ze.getNome();
         System.out.println(nome);
     }
+    
+    public void realizarViagem(String matricula, Coords inicio, Coords fim){
+        Veiculo v;
+        Motorista m;
+        Cliente aux = (Cliente) this.currentUser;
+        
+        v = listaVeiculo.get(matricula);
+        m = v.getMotorista();
+        
+        inserirViagem(aux, idViagem, inicio, fim, 0, m, v);
+    }
+
 
     public void inserirViagem(Cliente cliente, int id, Coords inicio, Coords fim, double precoAcordado, Motorista condutor, Veiculo veiculo){
 
@@ -118,7 +140,7 @@ public class UMer {
         Double desvio = 0.0;
         
         Double precoFinal = precoAcordado;
-        
+    
         Double tempoEstimado = distancia * veiculo.getVelMediaKM();
         Double tempoFinal = tempoEstimado * rng;
         desvio = (tempoEstimado/tempoFinal);
@@ -162,8 +184,8 @@ public class UMer {
     }
     
     public int verificarMatricula(String matricula){
-        if (this.listaVeiculo.containsKey(matricula)) return 0;
-        return 1;
+        if (this.listaVeiculo.containsKey(matricula)) return 1;
+        return 0;
     }
     
     public int registarNovaViatura(String matricula, int tipoVeiculo, int velMediaKm, int precoPorKM, Coords c){
@@ -333,7 +355,7 @@ public class UMer {
         return sortedMap;
     }
 
-     public Map<Veiculo,Double> viaturasProx (Coords posicao) {
+    public Map<Veiculo,Double> viaturasProx (Coords posicao) {
         Map<Veiculo, Double> temp = new HashMap <Veiculo, Double>();
         
         for (Veiculo aux : this.listaVeiculo.values()){
@@ -398,6 +420,9 @@ public class UMer {
 
     public void rate (Cliente cliente, Viagem viagem, int rate){
         if (rate > 0  && rate < 1);
-        	viagem.setRate(rate);
+            viagem.setNota(rate);
     }
+    
+    
+    
 }

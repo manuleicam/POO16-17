@@ -398,5 +398,6 @@ public class UMer {
 
     public void rate (Cliente cliente, Viagem viagem, int rate){
         if (rate > 0  && rate < 1);
+        	viagem.setRate(rate);
     }
 }

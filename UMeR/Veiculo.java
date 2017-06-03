@@ -1,9 +1,10 @@
 
 import java.util.Objects;
 import java.util.ArrayList;
+import java.io.Serializable;
 
 
-public class Veiculo {
+public class Veiculo implements Serializable {
 
     private String matricula;
     private int velMediaKM; //o que caralho é uma velocidade média por kilomtero, velocidade media ou uma lista de velocidades médias por cada km?

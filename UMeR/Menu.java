@@ -49,11 +49,11 @@ public class Menu {
         
         try {
             umer = UMer.createFromFile(OBJECT_FILE);
+            menuPrinc();
         }
         catch (Exception e) {
             System.out.println("NO OBJECT FILE");
             menuPrinc();
-            
         }
         
     }
@@ -66,7 +66,7 @@ public class Menu {
             System.out.println("ERROR");
             System.out.println(e.getMessage());
             System.out.println(e.getCause());
-            System.out.println(Arrays.toString(e.getStackTrace()));
+            e.printStackTrace();
         }
     }
     

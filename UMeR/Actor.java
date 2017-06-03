@@ -1,8 +1,9 @@
  import java.util.Date;
  import java.util.*;
  import java.time.LocalDate;
+ import java.io.Serializable;
 
- public class Actor 
+ public class Actor implements Serializable 
  {
     private String email;
     private String nome;

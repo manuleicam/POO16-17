@@ -1,9 +1,10 @@
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Objects;
+import java.io.Serializable;
 
 
-public class Viagem
+public class Viagem implements Serializable
 {
     private Cliente cliente;
     private Coords inicio;

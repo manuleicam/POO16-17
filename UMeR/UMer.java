@@ -15,8 +15,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class UMer {
+public class UMer implements Serializable{
 
     private HashMap<String, Actor> listaCliente = new HashMap<String, Actor>();
     private HashMap<String, Veiculo> listaVeiculo = new HashMap<String, Veiculo>();

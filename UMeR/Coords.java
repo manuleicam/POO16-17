@@ -1,7 +1,8 @@
 
 import static java.lang.Math.sqrt;
+import java.io.Serializable;
 
-public class Coords
+public class Coords implements Serializable
 {
     private int x; 
     private int y;

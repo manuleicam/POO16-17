@@ -33,7 +33,7 @@ public class UMer {
         Motorista m2 = new Motorista("bre", "bru", "123","morada",dc); // fite mi irl bru
         
         Veiculo v = new Veiculo("11-11-11",1,2,co);
-        Veiculo v3 = new Veiculo("33-33-33",1,2,co,m);
+        Veiculo v3 = new Veiculo("33-33-33",1,4,co,m);
         listaVeiculo.put("11-11-11", v);
         listaVeiculo.put("33-33-33", v3);
         
@@ -361,9 +361,9 @@ public class UMer {
         
         for (Veiculo aux : this.listaVeiculo.values()){
 
-                if (aux.getMotorista() != null){
+                if (aux.getMotorista() != null){           //ver se tem motorista
                     Motorista motorista = aux.getMotorista();
-                    if (motorista.getEstado()){
+                    if (motorista.getEstado()){             //ver se motorista esta livre                       
                         i = aux.getPosicao().distancia(posicao);
                         temp.put((aux), i);//mapa com cliente e distancia
 
@@ -428,10 +428,105 @@ public class UMer {
     }
 
     public void rate (Cliente cliente, Viagem viagem, int rate){
-        if (rate > 0  && rate < 1);
+        if (rate >= 0  && rate <= 5)
             viagem.setNota(rate);
     }
     
-    
+    public void popular(){
+        LocalDate d1 = LocalDate.of(1991,01,15);
+        LocalDate d2 = LocalDate.of(1994,06,8);
+        LocalDate d3 = LocalDate.of(1995,01,25);
+        LocalDate d4 = LocalDate.of(1954,03,01);
+        LocalDate d5 = LocalDate.of(1994,06,2);
+        LocalDate d6 = LocalDate.of(1976,12,20);
+        LocalDate d7 = LocalDate.of(1987,05,13);
+        LocalDate d8 = LocalDate.of(1964,06,17);
+        LocalDate d9 = LocalDate.of(1974,11,25);
+
+        Coords c1 = new Coords(1,3);
+        Coords c2 = new Coords(5,2);
+        Coords c3 = new Coords(4,1);
+        Coords c4 = new Coords(8,5);
+        Coords c5 = new Coords(1,1);
+        Coords c6 = new Coords(4,1);
+
+
+        Cliente a = new Cliente("jonas@gmail.com", "Joao", "jo", "Braga", d1);
+        Cliente b = new Cliente("rui@gmail.com", "Rui", "321", "Nogueiro", d2);
+        Cliente c = new Cliente("maria111@gmail.com", "Maria", "123", "Vila Verde", d3);
+        Cliente d = new Cliente("email@gmail.com",   "Antonio", "passesSaoParaLoosers", "Lamacaes", d4);
+        Cliente e = new Cliente("jonas@gmail.com", "Jonas", "yoyo123", "Fraiao", d5);
+        Cliente f = new Cliente("ruiSCB@gmail.com", "Rui", "321", "Porto", d6);
+        Cliente g = new Cliente("manu@hottestmail.com", "Manuel", "123", "Lisboa", d7);
+        Cliente h = new Cliente("joaozinho@gmail.com", "Joao", "qwerty", "Madera", d8);
+        
+
+        Motorista m1 = new Motorista("socrates@parthenon.com", "Socrates", "123","morada",d2);
+        Motorista m2 = new Motorista("Descartes@", "Descartes", "123","morada",d5);
+        Motorista m3 = new Motorista("Kant@gmail.com", "Kant", "123","morada",d1); 
+        Motorista m4 = new Motorista("Platao@gmail.com", "rute", "123","morada",d7);
+        Motorista m5 = new Motorista("KarlxMarx34@gmail.com", "Marx", "123","morada",d3);
+        Motorista m6 = new Motorista("MariaL@gmail.com", "bru", "123","morada",d9);
+        
+
+        Veiculo v1 = new Veiculo("11-FS-71",1,5,c1,m1);
+        Veiculo v2 = new Veiculo("HE-35-16",1,4,c2,m2);
+        Veiculo v3 = new Veiculo("18-HW-87",1,3,c3,m3);
+        Veiculo v4 = new Veiculo("OO-00-11",1,5,c4,m4);
+        Veiculo v5 = new Veiculo("92-GS-29",1,3,c5,m5);
+        Veiculo v6 = new Veiculo("FG-76-93",1,4,c6,m6);
+
+
+        listaVeiculo.put(v1.getMatricula(), v1);
+        listaVeiculo.put(v2.getMatricula(), v2);
+        listaVeiculo.put(v3.getMatricula(), v3);
+        listaVeiculo.put(v4.getMatricula(), v4);
+        listaVeiculo.put(v5.getMatricula(), v5);
+        listaVeiculo.put(v6.getMatricula(), v6);
+        
+
+        listaCliente.put(a.getEmail(),a);
+        listaCliente.put(b.getEmail(),b);
+        listaCliente.put(c.getEmail(),c);
+        listaCliente.put(d.getEmail(),d);
+        listaCliente.put(e.getEmail(),e);
+        listaCliente.put(f.getEmail(),f);
+        listaCliente.put(g.getEmail(),g);
+        listaCliente.put(h.getEmail(),h);
+
+
+        
+        Empresa continente = new Empresa("continente@gmail.com","Continente","cartaocliente","Minho Center",d1);
+        Empresa pingoDoce = new Empresa("pingodoce@gmail.com","Pingo Doce","321","Praga, em todo o lado",d3);
+        Empresa feiraNova = new Empresa("feiraNova@gmail.com","Feira Nova","123","fechou",d6);
+
+        continente.viaturas.add(v1);
+        continente.viaturas.add(v2);
+        continente.motoristas.add(m1);
+        continente.motoristas.add(m2);
+        m1.setEmpresa(continente);
+        m2.setEmpresa(continente);
+
+
+        pingoDoce.viaturas.add(v3);
+        pingoDoce.motoristas.add(m3);
+        m3.setEmpresa(pingoDoce);
+
+
+
+        inserirViagem(a, 1, c1, c2, 20.5, m1, v1);
+        inserirViagem(a, 2, c4, c1, 20.5, m2, v2);
+        inserirViagem(b, 3, c2, c5, 12.0, m4, v4);
+        inserirViagem(b, 4, c5, c2, 15.1, m1, v1);
+        inserirViagem(c, 5, c1, c2, 20.5, m3, v3);
+        inserirViagem(c, 6, c4, c1, 20.5, m2, v2);
+        inserirViagem(d, 7, c3, c1, 12.0, m4, v4);
+        inserirViagem(d, 8, c5, c6, 15.1, m1, v1);
+        inserirViagem(d, 9, c3, c5, 4.50, m1, v1);
+        inserirViagem(e, 10, c4, c1, 20.5, m4, v4);
+        inserirViagem(f, 11, c2, c3, 25.0, m4, v4);
+        inserirViagem(g, 12, c5, c2, 15.1, m6, v6);
+
+    }
     
 }

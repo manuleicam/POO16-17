@@ -28,13 +28,13 @@ public class UMer implements Serializable{
 
     
     public void save(String file) throws IOException {
-        	FileOutputStream fos = new FileOutputStream(file);
-        	ObjectOutputStream oos = new ObjectOutputStream(fos);
-        	oos.writeObject(this);
-        	oos.close();
-	}
-	
-	public static UMer createFromFile(String file) throws FileNotFoundException, IOException, ClassNotFoundException {
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this);
+            oos.close();
+    }
+    
+    public static UMer createFromFile(String file) throws FileNotFoundException, IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream(file);
         ObjectInputStream ois = new ObjectInputStream (fis);
         
@@ -85,39 +85,33 @@ public class UMer implements Serializable{
                 System.out.println(tempE.toString());
                 break;
         }
-       
-
-        testeActor(email); //teste, remover!
     }
 
     public boolean verificarMail(String email) {
         return listaCliente.containsKey(email);
     }
 
-    public void testeActor(String email) {
-        Actor ze = new Actor();
-        if (listaCliente.containsKey(email)) {
-            System.out.println("asdasdasasdasddsa");
-        }
-        ze = listaCliente.get(email);
-        String nome = new String();
-        nome = ze.getNome();
-        System.out.println(nome);
-    }
     
-    public void realizarViagem(String matricula, Coords inicio, Coords fim){
+    public int realizarViagem(String matricula, Coords inicio, Coords fim){
         Veiculo v;
         Motorista m;
         Cliente aux = (Cliente) this.currentUser;
+        double precoAcordado;
+        double dist;
+        
+        dist = inicio.distancia(fim);
+        
         
         v = listaVeiculo.get(matricula);
+        precoAcordado = dist * v.getPrecoPorKM();
         m = v.getMotorista();
         
-        inserirViagem(aux, idViagem, inicio, fim, 0, m, v);
+        inserirViagem(aux, inicio, fim, precoAcordado, m, v);
+        return idViagem;
     }
 
 
-    public void inserirViagem(Cliente cliente, int id, Coords inicio, Coords fim, double precoAcordado, Motorista condutor, Veiculo veiculo){
+    public void inserirViagem(Cliente cliente,Coords inicio, Coords fim, double precoAcordado, Motorista condutor, Veiculo veiculo){
 
       
         Random rando = new Random();
@@ -139,7 +133,7 @@ public class UMer implements Serializable{
         
         Viagem nova = new Viagem(cliente, inicio, fim, distancia, precoAcordado, precoFinal,tempoEstimado, tempoFinal, condutor, veiculo, data, -1);
         idViagem++;
-        listaViagens.put(id,nova);
+        listaViagens.put(idViagem,nova);
 
         cliente.addViagem(nova);
         condutor.addViagem(nova);
@@ -281,10 +275,13 @@ public class UMer implements Serializable{
         return sortedMap;
     }
     
-    public void assciarCondutor (String nome){ //associa a empresa e liberta current car
-
+    public void assciarCondutor(String nome){ //associa a empresa e liberta current car
+        Motorista m = (Motorista) this.currentUser;
         Empresa empresa = (Empresa)listaCliente.get(nome);
-        empresa.adicionarMotorista(currentUser);
+        empresa.adicionarMotorista(m);
+        m.setEmpresa(empresa);
+        System.out.println(empresa);
+        System.out.println(m);
         libertarCarro();
     }
     
@@ -421,10 +418,15 @@ public class UMer implements Serializable{
         return total;
     }
 
-    public void rate (Viagem viagem, int rate){
-        if (rate >= 0  && rate <= 5)
-            viagem.setNota(rate);
+    public int rate (int viagem, int rate){
+        if (rate >= 0  && rate <= 5){
+            listaViagens.get(viagem).setNota(rate);
+            return 1;
+        }
+        return 0;
     }
+    
+    
     
     public void popular(){
         LocalDate d1 = LocalDate.of(1991,01,15);
@@ -519,31 +521,32 @@ public class UMer implements Serializable{
 
 
 
-        inserirViagem(a, 1, c1, c2, 20.5, m1, v1);
-        inserirViagem(a, 2, c4, c1, 20.5, m2, v2);
-        inserirViagem(b, 3, c2, c5, 12.0, m4, v4);
-        inserirViagem(b, 4, c5, c2, 15.1, m1, v1);
-        inserirViagem(c, 5, c1, c2, 20.5, m3, v3);
-        inserirViagem(c, 6, c4, c1, 20.5, m2, v2);
-        inserirViagem(d, 7, c3, c1, 12.0, m4, v4);
-        inserirViagem(d, 8, c5, c6, 15.1, m1, v1);
-        inserirViagem(d, 9, c3, c5, 4.50, m1, v1);
-        inserirViagem(e, 10, c4, c1, 20.5, m4, v4);
-        inserirViagem(f, 11, c2, c3, 25.0, m4, v4);
-        inserirViagem(g, 12, c5, c2, 15.1, m6, v6);
-        
-        rate(listaViagens.get(1),5);
-        rate(listaViagens.get(2),3);
-        rate(listaViagens.get(3),2);
-        rate(listaViagens.get(4),4);
-        rate(listaViagens.get(5),5);
-        rate(listaViagens.get(6),3);
-        rate(listaViagens.get(7),2);
-        rate(listaViagens.get(8),6);
-        rate(listaViagens.get(9),1);
-        rate(listaViagens.get(10),5);
-        rate(listaViagens.get(11),2);
-        rate(listaViagens.get(12),4);
+        inserirViagem(a,c1, c2, 20.5, m1, v1);
+        inserirViagem(a, c4, c1, 20.5, m2, v2);
+        inserirViagem(b,c2, c5, 12.0, m4, v4);
+        inserirViagem(b,c5, c2, 15.1, m1, v1);
+        inserirViagem(c,c1, c2, 20.5, m3, v3);
+        inserirViagem(c,c4, c1, 20.5, m2, v2);
+
+        inserirViagem(d,c3, c1, 12.0, m4, v4);
+        inserirViagem(d,c5, c6, 15.1, m1, v1);
+        inserirViagem(d,c3, c5, 4.50, m1, v1);
+        inserirViagem(e,c4, c1, 20.5, m4, v4);
+        inserirViagem(f,c2, c3, 25.0, m4, v4);
+        inserirViagem(g,c5, c2, 15.1, m6, v6);
+
+        rate(1,5);
+        rate(2,3);
+        rate(3,2);
+        rate(4,4);
+        rate(5,5);
+        rate(6,3);
+        rate(7,2);
+        rate(8,6);
+        rate(9,1);
+        rate(10,5);
+        rate(11,2);
+        rate(12,4);
 
     }
     

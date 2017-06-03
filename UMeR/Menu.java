@@ -108,11 +108,9 @@ public class Menu {
             esc = getOpcao();
             switch(esc){
                 case 1: 
-                    System.out.println("1");
                     menuViagem();
                     break;
                 case 2:
-                    System.out.println("2");
                     verViagens();
                     break;
                 case 0:
@@ -131,11 +129,9 @@ public class Menu {
             switch(esc){
                 case 1:
                     posicaoInicialCliente(2);
-                    System.out.print("1");
                     break;
                 case 2:
-                    posicaoInicialCliente(6);
-                    System.out.println("2");
+                    posicaoInicialCliente(6);   
                     break;
                 case 0:
                     x = false;
@@ -204,13 +200,13 @@ public class Menu {
             esc = getOpcao();
             switch(esc){
                 case 1: 
-                    System.out.println("1");
                     registarNovaViatura();
                     break;
                 case 2:
-                    System.out.println("2");
                     verViagens();
                     break;
+                case 3:
+                    associarEmpresa();
                 case 0:
                     x = false;
                     break;
@@ -575,7 +571,7 @@ public class Menu {
     public void condutorMaisProximo(Coords c){
         Map<Veiculo,Double> sortedMap;
         Coords f;
-        int n=1;
+        int idV,n=1, rating,flag;
         String matricula = " ";
         Veiculo v;
         
@@ -588,14 +584,19 @@ public class Menu {
             if (n>1) break;
         }
         f = posicaoDestino();
-        umer.realizarViagem(matricula,c,f);
+        idV = umer.realizarViagem(matricula,c,f);
+        System.out.println("Insira o rating que pretende dar à viagem");
+        rating = escolha.nextInt();
+        flag = umer.rate(idV-1 ,rating);
+        if(flag == 1) System.out.println("Rating dado com sucesso");
+        else System.out.println("Ocorreu um erro a dar o rate");
     }
     
     public void escolherCondutor(Coords c){
         Coords f;
         Map<Veiculo,Double> sortedMap;
         String matricula = " ";
-        int n=1, flag = 0;
+        int rating,flag2,idV,n=1, flag = 0;
         sortedMap = umer.viaturasProx(c);
         Iterator<Map.Entry<Veiculo,Double>> it = sortedMap.entrySet().iterator();
         System.out.println("Os 5 condutores mais próximos de si são: ");
@@ -614,7 +615,12 @@ public class Menu {
             if (flag == 0) flag = 2;
         }
         f = posicaoDestino();
-        umer.realizarViagem(matricula,c,f);
+        idV = umer.realizarViagem(matricula,c,f);
+        System.out.println("Insira o rating que pretende dar à viagem");
+        rating = escolha.nextInt();
+        flag2 = umer.rate(idV-1 ,rating);
+        if(flag2 == 1) System.out.println("Rating dado com sucesso");
+        else System.out.println("Ocorreu um erro a dar o rate");
     }
     
     public void totalFacturadoEmpresa(int flag){
@@ -662,5 +668,17 @@ public class Menu {
             else {total = umer.totalFaturadoVeiculo(matricula, dataInicial, dataFinal); System.out.println("O total facturado pela viatura " + matricula + " foi de " + total);}
         }
         else {if(flag == 1)System.out.println("Empresa não encontrada"); else System.out.println("Veiculo não encontrado");}
+    }
+    
+    public void associarEmpresa(){
+        String empresa;
+        escolha.nextLine();
+        System.out.println("Insira o nome da empresa a que se quer associar");
+        empresa = escolha.nextLine() + "@gmail.com";
+        if(umer.verificarMail(empresa)){
+            umer.assciarCondutor(empresa);
+            System.out.println("Associado à empresa " + empresa + " com sucesso");
+        }
+        else System.out.println("Ocorreu um erro");
     }
 }

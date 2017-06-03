@@ -1,8 +1,9 @@
 #BlueJ class context
-comment0.params=
-comment0.target=NoveLugares()
-comment1.params=matricula\ velMediaKM\ precoPorKM\ posicao\ m
-comment1.target=NoveLugares(java.lang.String,\ int,\ int,\ Coords,\ Actor)
-comment2.params=matricula\ velMediaKM\ precoPorKM\ posicao
-comment2.target=NoveLugares(java.lang.String,\ int,\ int,\ Coords)
-numComments=3
+comment0.target=NoveLugares
+comment1.params=
+comment1.target=NoveLugares()
+comment2.params=matricula\ velMediaKM\ precoPorKM\ posicao\ m
+comment2.target=NoveLugares(java.lang.String,\ int,\ int,\ Coords,\ Actor)
+comment3.params=matricula\ velMediaKM\ precoPorKM\ posicao
+comment3.target=NoveLugares(java.lang.String,\ int,\ int,\ Coords)
+numComments=4

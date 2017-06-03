@@ -33,9 +33,9 @@ public class UMer {
         Motorista m2 = new Motorista("bre", "bru", "123","morada",dc); // fite mi irl bru
         
         Veiculo v = new Veiculo("11-11-11",1,2,co);
-        //Veiculo v3 = new Veiculo("33-33-33",1,2,co,m);
+        Veiculo v3 = new Veiculo("33-33-33",1,2,co,m);
         listaVeiculo.put("11-11-11", v);
-        //listaVeiculo.put("33-33-33", v3);
+        listaVeiculo.put("33-33-33", v3);
         
         Viagem via = new Viagem(a, co, co2, 3.9, 3.5, 4.3,3.3,2.2,m,v,da,2);
         listaViagens.put(1,via);
@@ -357,16 +357,25 @@ public class UMer {
 
     public Map<Veiculo,Double> viaturasProx (Coords posicao) {
         Map<Veiculo, Double> temp = new HashMap <Veiculo, Double>();
+        Double i;
         
         for (Veiculo aux : this.listaVeiculo.values()){
-                double i = aux.getPosicao().distancia(posicao);
-                temp.put((aux), i);//mapa com cliente e distancia
-                System.out.print("motorista ADDED \n"  );
+
+                if (aux.getMotorista() != null){
+                    Motorista motorista = aux.getMotorista();
+                    if (motorista.getEstado()){
+                        i = aux.getPosicao().distancia(posicao);
+                        temp.put((aux), i);//mapa com cliente e distancia
+
+                        //System.out.print("motorista ADDED \n"  );
+                    }
+                }
+        
         }
         
         Map<Veiculo,Double> sortedMap = sortByValueVeiculo(temp);
-        
-        /*System.out.println(temp.size());
+        /*
+        System.out.println(temp.size());
         System.out.println(sortedMap.size());
         for (Map.Entry<Veiculo, Double> e : sortedMap.entrySet()) {  
             System.out.println(e.getKey().getMatricula() + " " + e.getValue() + "\n");

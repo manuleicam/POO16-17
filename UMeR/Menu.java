@@ -10,6 +10,14 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Menu {
     // variáveis de instância
@@ -21,6 +29,7 @@ public class Menu {
     private String[] menuMotoristaComEmpresa = {"Associar-se a uma viatura","Ver Viagens Efectuadas", "Mudar o estado", "Libertar Carro"};
     private String[] menuMotoristaPrivado = {"Registar Nova Viatura", "Ver Viagens Efectuadas", "Associar-se a uma empresa", "Mudar o estado"};
     private String[] menuEmpresa = {"Registar Nova Viatura","Ver Frota", "Ver Viagens Efectuadas"};
+    private static final String OBJECT_FILE = "umerTaxis.obj";
     
     private int op, esc;
     public UMer umer;
@@ -37,7 +46,33 @@ public class Menu {
     }
     
     public void run(){
+        umer = null;
+        
+        try {
+            umer = UMer.createFromFile(OBJECT_FILE);
+        }
+        catch (Exception e) {
+            System.out.println("NO OBJECT FILE");
+            while (umer == null) {
+                try {
+                    umer.popular();
+                }
+                catch (Exception f) {
+
+                }
+            }
+            
+        }
         menuPrinc();
+    }
+    
+    public void save() {
+        try {
+            umer.save(OBJECT_FILE);
+        }
+        catch (Exception e) {
+            System.out.println("ERROR");
+        }
     }
     
     public void menuPrinc(){
@@ -593,7 +628,7 @@ public class Menu {
         else {System.out.println("Insira a matricula da viatura que quer ver o lucro"); matricula = escolha.next();}
         
         escolha.nextLine();
-        if (umer.verificarMail(empresa) || umer.verificarMail(matricula)) {
+        if (umer.verificarMail(empresa) || umer.verificarMatricula(matricula) == 1) {
             System.out.println("Insira a data incial da procura com o seguinte formato YYYY-MM-DD");
             data = escolha.nextLine();
             String[] datapartida = data.split("-");
@@ -625,9 +660,9 @@ public class Menu {
             dia = Integer.parseInt(datapartida2[2]);
             LocalDate dataFinal = LocalDate.of(ano,mes,dia);
             System.out.println(empresa);
-            if (flag == 1) {total = umer.totalFaturado(empresa, dataInicial, dataFinal); System.out.println("O total facturado pelo empresa " + empresa + "foi de " + total);}
-            else {total = umer.totalFaturadoVeiculo(matricula, dataInicial, dataFinal); System.out.println("O total facturado pela viatura " + matricula + "foi de " + total);}
+            if (flag == 1) {total = umer.totalFaturado(empresa, dataInicial, dataFinal); System.out.println("O total facturado pelo empresa " + empresa + " foi de " + total);}
+            else {total = umer.totalFaturadoVeiculo(matricula, dataInicial, dataFinal); System.out.println("O total facturado pela viatura " + matricula + " foi de " + total);}
         }
-        else System.out.println("Empresa não encontrada");
+        else {if(flag == 1)System.out.println("Empresa não encontrada"); else System.out.println("Veiculo não encontrado");}
     }
 }

@@ -7,6 +7,14 @@ import java.util.Random;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class UMer {
 
@@ -17,6 +25,25 @@ public class UMer {
     private Actor currentUser;
 
     public UMer() {
+    }
+    
+    public void save(String file) throws IOException {
+        	FileOutputStream fos = new FileOutputStream(file);
+        	ObjectOutputStream oos = new ObjectOutputStream(fos);
+        	oos.writeObject(this);
+        	oos.close();
+	}
+	public static UMer createFromFile(String file) throws FileNotFoundException, IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(file);
+        ObjectInputStream ois = new ObjectInputStream (fis);
+        
+        Object obj = ois.readObject();
+        ois.close();
+        
+        if (obj instanceof UMer) {
+            return (UMer)obj;
+        }
+         return null;
     }
 
     public int login(String email, String pass) {
@@ -388,7 +415,7 @@ public class UMer {
         Double total = 0.0;
         ArrayList<Veiculo> lista = e.getViaturas();
         for(Veiculo v : lista)
-            total+=totalFaturado(v.getMatricula(),after,before);
+            total+=totalFaturadoVeiculo(v.getMatricula(),after,before);
 
         return total;
     }

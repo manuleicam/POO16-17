@@ -187,8 +187,6 @@ public class Motorista extends Actor
         sb.append(" Estado: ");
         if(this.estado == true) sb.append("Livre,");
         else sb.append("Ocupado,");
-        sb.append(" Desvio entre valor acordado e valor final: ");
-        sb.append(this.desvioAcumulado);
         return sb.toString();
     }
     

@@ -270,7 +270,7 @@ public class Menu {
             } else {
                 System.out.println("O email inserido não se encontra registado");
             }
-            System.out.println("Insira o seu user");
+            System.out.println("Insira o seu Email");
             user = escolha.nextLine();
 
             System.out.println("Insira a sua password");
@@ -511,7 +511,6 @@ public class Menu {
     public void posicaoInicialCliente(int flag){
         int x, y;
         Coords c;
-        escolha.nextLine();
         System.out.println("Diga a posição X onde se encontra");
         x = escolha.nextInt();
         System.out.println("Diga a posição Y onde se encontra");
@@ -524,7 +523,6 @@ public class Menu {
     public Coords posicaoDestino(){
         int x, y;
         Coords c;
-        escolha.nextLine();
         System.out.println("Diga a posição X do destino");
         x = escolha.nextInt();
         System.out.println("Diga a posição Y do destino");

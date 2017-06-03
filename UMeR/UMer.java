@@ -17,47 +17,6 @@ public class UMer {
     private Actor currentUser;
 
     public UMer() {
-        LocalDate da = LocalDate.of(2000,01,01);
-        LocalDate db = LocalDate.of(1994,06,8);
-        LocalDate dc = LocalDate.of(1995,01,20);
-        Coords co = new Coords(3,3);
-        Coords co2 = new Coords(5,3);
-
-        Cliente a = new Cliente("jonas@gmail.com", "joao", "jo", "todoolado", da);
-        Cliente b = new Cliente("rui@gmail.com", "rui", "321", "nunca", db);
-        Cliente c = new Cliente("manu", "manu", "123", "wow", dc);
-        Cliente d = new Cliente("email", "joao", "qwerty", "todoolado", da);
-        
-        Motorista m = new Motorista("rute", "rute", "123","morada",da);
-        Motorista m3 = new Motorista("reno", "reno", "123","morada",da);
-        Motorista m2 = new Motorista("bre", "bru", "123","morada",dc); // fite mi irl bru
-        
-        Veiculo v = new Veiculo("11-11-11",1,2,co);
-        Veiculo v3 = new Veiculo("33-33-33",1,4,co,m);
-        listaVeiculo.put("11-11-11", v);
-        listaVeiculo.put("33-33-33", v3);
-        
-        Viagem via = new Viagem(a, co, co2, 3.9, 3.5, 4.3,3.3,2.2,m,v,da,2);
-        listaViagens.put(1,via);
-        
-        Empresa e = new Empresa("js","juve sao","321","morada",db);
-        e.viaturas.add(v);
-        
-        e.motoristas.add(m2);
-        e.motoristas.add(m3);
-
-        m2.setEmpresa(e);
-        m3.setEmpresa(e);
-        
-        listaCliente.put("jonas@gmail.com", a);
-        listaCliente.put("rui@gmail.com", b);
-        listaCliente.put("manu", c);
-        listaCliente.put("email", d);
-        listaCliente.put("rute",m);
-        listaCliente.put("js",e);
-        listaCliente.put("bre",m2);
-        listaCliente.put("reno",m3);
-        
     }
 
     public int login(String email, String pass) {
@@ -294,6 +253,13 @@ public class UMer {
         return sortedMap;
     }
     
+    public void assciarCondutor (String nome){ //associa a empresa e liberta current car
+
+        Empresa empresa = (Empresa)listaCliente.get(nome);
+        empresa.adicionarMotorista(currentUser);
+        libertarCarro();
+    }
+    
     private Map<Motorista,Double> sortByValueMotorista(Map<Motorista,Double> unsortedMap) {
         Map<Motorista,Double> sortedMap = new TreeMap<Motorista,Double>(new ValueComparator(unsortedMap));
 
@@ -405,10 +371,10 @@ public class UMer {
        return n;
    }
 
-    public Double totalFaturado(Veiculo veiculo, LocalDate after, LocalDate before){
-
+    public Double totalFaturadoVeiculo(String veiculo, LocalDate after, LocalDate before){
+        Veiculo v = listaVeiculo.get(veiculo);
         Double total = 0.0;
-        ArrayList<Viagem> lista =  veiculo.getListaViagens();
+        ArrayList<Viagem> lista =  v.getListaViagens();
         
         for (Viagem aux : lista){
                 if (aux.getData().isBefore(before) && aux.getData().isAfter(after))
@@ -417,17 +383,17 @@ public class UMer {
         return total;
     }
 
-    public Double totalFaturado(Empresa empresa,LocalDate after, LocalDate before){
-        
+    public Double totalFaturado(String empresa,LocalDate after, LocalDate before){
+        Empresa e = (Empresa) listaCliente.get(empresa);
         Double total = 0.0;
-        ArrayList<Veiculo> lista = empresa.getViaturas();
+        ArrayList<Veiculo> lista = e.getViaturas();
         for(Veiculo v : lista)
-            total+=totalFaturado(v,after,before);
+            total+=totalFaturado(v.getMatricula(),after,before);
 
         return total;
     }
 
-    public void rate (Cliente cliente, Viagem viagem, int rate){
+    public void rate (Viagem viagem, int rate){
         if (rate >= 0  && rate <= 5)
             viagem.setNota(rate);
     }
@@ -455,7 +421,7 @@ public class UMer {
         Cliente b = new Cliente("rui@gmail.com", "Rui", "321", "Nogueiro", d2);
         Cliente c = new Cliente("maria111@gmail.com", "Maria", "123", "Vila Verde", d3);
         Cliente d = new Cliente("email@gmail.com",   "Antonio", "passesSaoParaLoosers", "Lamacaes", d4);
-        Cliente e = new Cliente("jonas@gmail.com", "Jonas", "yoyo123", "Fraiao", d5);
+        Cliente e = new Cliente("jonas22@gmail.com", "Jonas", "yoyo123", "Fraiao", d5);
         Cliente f = new Cliente("ruiSCB@gmail.com", "Rui", "321", "Porto", d6);
         Cliente g = new Cliente("manu@hottestmail.com", "Manuel", "123", "Lisboa", d7);
         Cliente h = new Cliente("joaozinho@gmail.com", "Joao", "qwerty", "Madera", d8);
@@ -493,6 +459,13 @@ public class UMer {
         listaCliente.put(f.getEmail(),f);
         listaCliente.put(g.getEmail(),g);
         listaCliente.put(h.getEmail(),h);
+        listaCliente.put(m1.getEmail(),m1);
+        listaCliente.put(m2.getEmail(),m2);
+        listaCliente.put(m3.getEmail(),m3);
+        listaCliente.put(m4.getEmail(),m4);
+        listaCliente.put(m5.getEmail(),m5);
+        listaCliente.put(m6.getEmail(),m6);
+        
 
 
         
@@ -506,6 +479,10 @@ public class UMer {
         continente.motoristas.add(m2);
         m1.setEmpresa(continente);
         m2.setEmpresa(continente);
+        
+        listaCliente.put(continente.getEmail(),continente);
+        listaCliente.put(pingoDoce.getEmail(),pingoDoce);
+        listaCliente.put(feiraNova.getEmail(),feiraNova);
 
 
         pingoDoce.viaturas.add(v3);
@@ -526,6 +503,19 @@ public class UMer {
         inserirViagem(e, 10, c4, c1, 20.5, m4, v4);
         inserirViagem(f, 11, c2, c3, 25.0, m4, v4);
         inserirViagem(g, 12, c5, c2, 15.1, m6, v6);
+        
+        rate(listaViagens.get(1),5);
+        rate(listaViagens.get(2),3);
+        rate(listaViagens.get(3),2);
+        rate(listaViagens.get(4),4);
+        rate(listaViagens.get(5),5);
+        rate(listaViagens.get(6),3);
+        rate(listaViagens.get(7),2);
+        rate(listaViagens.get(8),6);
+        rate(listaViagens.get(9),1);
+        rate(listaViagens.get(10),5);
+        rate(listaViagens.get(11),2);
+        rate(listaViagens.get(12),4);
 
     }
     

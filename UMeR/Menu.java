@@ -14,12 +14,12 @@ import java.util.Iterator;
 public class Menu {
     // variáveis de instância
     private List<String> opcoes;
-    private String[] menuPrinc = {"LogIn", "Registar", "Estatistica"};
-    private String[] menuCliente = {"Realizar Viagem", "Ver Viagens Efectuadas", "Bla3", "Bla4"};
+    private String[] menuPrinc = {"LogIn", "Registar", "Estatistica", "Povoar"};
+    private String[] menuCliente = {"Realizar Viagem", "Ver Viagens Efectuadas"};
     private String[] menuViagem = {"Viatura mais próxima","Escolher viatura"};
-    private String[] menuEstatistica = {"Top 10 clientes gastadores", "Piores 5 motoristas"};
+    private String[] menuEstatistica = {"Top 10 clientes gastadores", "Piores 5 motoristas", "Total facturado por uma empresa", "Total facturado por um veiculo"};
     private String[] menuMotoristaComEmpresa = {"Associar-se a uma viatura","Ver Viagens Efectuadas", "Mudar o estado", "Libertar Carro"};
-    private String[] menuMotoristaPrivado = {"Registar Nova Viatura","Associar-se a uma empresa", "Ver Viagens Efectuadas", "Mudar o estado"};
+    private String[] menuMotoristaPrivado = {"Registar Nova Viatura", "Ver Viagens Efectuadas", "Associar-se a uma empresa", "Mudar o estado"};
     private String[] menuEmpresa = {"Registar Nova Viatura","Ver Frota", "Ver Viagens Efectuadas"};
     
     private int op, esc;
@@ -55,6 +55,9 @@ public class Menu {
                     break;
                 case 3:
                     estatistica();
+                    break;
+                case 4:
+                    umer.popular();
                     break;
                 case 0:
                     x = false;
@@ -117,10 +120,15 @@ public class Menu {
             switch(esc){
                 case 1:
                     top10Clientes();
-                    System.out.print("1");
                     break;
                 case 2:
                     pioresCondutores();
+                    break;
+                case 3:
+                    totalFacturadoEmpresa(1);
+                    break;
+                case 4:
+                    totalFacturadoEmpresa(2);
                     break;
                 case 0:
                     x = false;
@@ -574,5 +582,52 @@ public class Menu {
         }
         f = posicaoDestino();
         umer.realizarViagem(matricula,c,f);
+    }
+    
+    public void totalFacturadoEmpresa(int flag){
+        String empresa = "",matricula = "", data;
+        double total;
+        
+        if (flag == 1){ System.out.println("Insira o nome da empresa que quer ver o lucro"); empresa = escolha.next() + "@gmail.com"; }
+        
+        else {System.out.println("Insira a matricula da viatura que quer ver o lucro"); matricula = escolha.next();}
+        
+        escolha.nextLine();
+        if (umer.verificarMail(empresa) || umer.verificarMail(matricula)) {
+            System.out.println("Insira a data incial da procura com o seguinte formato YYYY-MM-DD");
+            data = escolha.nextLine();
+            String[] datapartida = data.split("-");
+    
+            while (data.length() != 10 || datapartida[0].length() != 4 || datapartida[1].length() != 2 || datapartida[2].length() != 2) {
+                System.out.println("Por favor use o formato descrito");
+                System.out.println("Insira a data incial da procura com o seguinte formato YYYY-MM-DD");
+                data = escolha.nextLine();
+                datapartida = data.split("-");
+            }
+            
+            System.out.println("Insira a data final da procura com o seguinte formato YYYY-MM-DD");
+            data = escolha.nextLine();
+            String[] datapartida2 = data.split("-");
+    
+            while (data.length() != 10 || datapartida[0].length() != 4 || datapartida[1].length() != 2 || datapartida[2].length() != 2) {
+                System.out.println("Por favor use o formato descrito");
+                System.out.println("Insira a data final da procura com o seguinte formato YYYY-MM-DD");
+                data = escolha.nextLine();
+                datapartida2 = data.split("-");
+            }
+            
+            int ano = Integer.parseInt(datapartida[0]);
+            int mes = Integer.parseInt(datapartida[1]);
+            int dia = Integer.parseInt(datapartida[2]);
+            LocalDate dataInicial = LocalDate.of(ano, mes, dia);
+            ano = Integer.parseInt(datapartida2[0]);
+            mes = Integer.parseInt(datapartida2[1]);
+            dia = Integer.parseInt(datapartida2[2]);
+            LocalDate dataFinal = LocalDate.of(ano,mes,dia);
+            System.out.println(empresa);
+            if (flag == 1) {total = umer.totalFaturado(empresa, dataInicial, dataFinal); System.out.println("O total facturado pelo empresa " + empresa + "foi de " + total);}
+            else {total = umer.totalFaturadoVeiculo(matricula, dataInicial, dataFinal); System.out.println("O total facturado pela viatura " + matricula + "foi de " + total);}
+        }
+        else System.out.println("Empresa não encontrada");
     }
 }

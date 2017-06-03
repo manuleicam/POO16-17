@@ -136,4 +136,8 @@ public class Empresa extends Actor {
         return null;
     }
     
+     public void adicionarMotorista(Actor v){
+        this.motoristas.add(v);
+    }
+    
 }

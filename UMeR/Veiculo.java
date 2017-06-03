@@ -243,6 +243,7 @@ public class Veiculo {
 
         this.listaViagens.add(nova);
         this.totalFaturado += nova.getPrecoFinal();
+        this.posicao = nova.getFim();
 
     }
     

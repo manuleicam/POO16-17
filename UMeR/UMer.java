@@ -293,7 +293,7 @@ public class UMer implements Serializable{
     }
     
         private Map<Veiculo,Double> sortByValueVeiculo(Map<Veiculo,Double> unsortedMap) {
-        Map<Veiculo,Double> sortedMap = new TreeMap<Veiculo,Double>(new ValueComparator(unsortedMap));
+        Map<Veiculo,Double> sortedMap = new TreeMap<Veiculo,Double>(new ValueComparatorRev(unsortedMap));
 
         sortedMap.putAll(unsortedMap);
         return sortedMap;

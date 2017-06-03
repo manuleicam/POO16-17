@@ -155,6 +155,14 @@ public class Motorista extends Actor
         return sb.toString();
     }
     
+    public String toStringParaCliente(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nMotorista:");
+        sb.append("\n Nome: ");
+        sb.append(this.getNome());
+        return sb.toString();
+    }
+    
     public Motorista Clone(){
         return new Motorista(this);
     }

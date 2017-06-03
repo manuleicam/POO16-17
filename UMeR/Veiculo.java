@@ -148,18 +148,9 @@ public class Veiculo implements Serializable {
         sb.append("Veiculo:");
         sb.append("\nMatricula: ");
         sb.append(this.matricula);
-        sb.append("\nVelocidade média: ");
-        sb.append(this.velMediaKM);
-        sb.append("\nPreço a pagar por KM: ");
-        sb.append(this.precoPorKM);
-        sb.append("\nFiabilidade: ");
-        sb.append(this.fiabilidade);
         sb.append("\nPosicao onde se encontra no momento: ");
         sb.append(this.posicao);
-        sb.append("\nEstado: ");
-        if (this.estado == false) sb.append("Livre");
-        else sb.append("Ocupado");
-        if (this.motorista!= null) sb.append(this.motorista.toStringParaEmpresa());
+        if (this.motorista!= null) sb.append(this.motorista.toStringParaCliente());
         else sb.append("\nSem Motorista de momento");
         return sb.toString();
     }

@@ -596,13 +596,20 @@ public class Menu {
         Coords f;
         Map<Veiculo,Double> sortedMap;
         String matricula = " ";
+        double distCM, distF, pagarEstimado, tempoEstimado;
         int rating,flag2,idV,n=1, flag = 0;
         sortedMap = umer.viaturasProx(c);
         Iterator<Map.Entry<Veiculo,Double>> it = sortedMap.entrySet().iterator();
+        f = posicaoDestino();
         System.out.println("Os 5 condutores mais próximos de si são: ");
         for (Map.Entry<Veiculo, Double> e : sortedMap.entrySet()) {
+            distCM = e.getKey().getPosicao().distancia(c);
+            distF = c.distancia(f) + distCM;
+            pagarEstimado = distF * e.getKey().getPrecoPorKM();
+            tempoEstimado = distF * e.getKey().getVelMediaKM();
             System.out.println(n + ": ");
-            System.out.println(e.getKey().toStringCliente() + " " + e.getValue() + "\n");
+            System.out.println(e.getKey().toStringCliente() + " " +  "\n" + "Distância se encontra o veiculo: " + e.getValue() + "kms");
+            System.out.println("Total estimado a pagar: " + pagarEstimado + "€, Tempo estimado que a viagem demora: "+ tempoEstimado + "minutos \n");
             n++;
             if(n>5) break;
         }
@@ -614,7 +621,7 @@ public class Menu {
             flag = umer.verificarMatricula(matricula);
             if (flag == 0) flag = 2;
         }
-        f = posicaoDestino();
+        
         idV = umer.realizarViagem(matricula,c,f);
         System.out.println("Insira o rating que pretende dar à viagem");
         rating = escolha.nextInt();

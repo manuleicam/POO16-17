@@ -3,8 +3,6 @@ import java.time.LocalDate;
 
 public class Motorista extends Actor
 {
-    private int grauCumpHorario; 
-    private int classificacao;
     private int nrViagens;
     private int numKms;
     private Empresa empresa;
@@ -17,8 +15,6 @@ public class Motorista extends Actor
    public Motorista()
    {
         super();
-        this.grauCumpHorario=0;
-        this.classificacao=0;
         this.nrViagens=0;
         this.numKms=0;
         this.empresa=null;
@@ -28,8 +24,6 @@ public class Motorista extends Actor
    
    public Motorista(Motorista m){
        super(m.getEmail(), m.getNome(), m.getPassword(), m.getMorada(), m.getNascimento());
-       this.grauCumpHorario = m.getGrauCumpHorario();
-       this.classificacao = m.getClassificacao();
        this.nrViagens = m.getNrViagens();
        this.numKms = m.getNumKms();
        this.estado = m.getEstado();
@@ -40,8 +34,6 @@ public class Motorista extends Actor
 
     public Motorista(String email, String nome, String password, String morada, LocalDate nascimento) {
         super(email,nome,password,morada,nascimento);
-        this.grauCumpHorario=0;
-        this.classificacao=0;
         this.nrViagens=0;
         this.numKms=0;
         this.estado=true;
@@ -52,8 +44,6 @@ public class Motorista extends Actor
     
     public Motorista(String email, String nome, String password, String morada, LocalDate nascimento, int grauCumpHorario, int classificacao, int nrViagens, int numKms, Empresa empresa, boolean estado, Double desvioAcumulado) {
         super(email,nome,password,morada,nascimento);
-        this.grauCumpHorario = grauCumpHorario;
-        this.classificacao = classificacao;
         this.nrViagens = nrViagens;
         this.numKms = numKms;
         this.empresa = empresa;
@@ -67,13 +57,7 @@ public class Motorista extends Actor
 
     //GETS E SETS
 
-    public int getGrauCumpHorario() {
-        return grauCumpHorario;
-    }
 
-    public int getClassificacao() {
-        return classificacao;
-    }
 
     public int getNrViagens() {
         return nrViagens;
@@ -93,14 +77,6 @@ public class Motorista extends Actor
 
     public Double getDesvioAcumulado() {
         return desvioAcumulado;
-    }
-
-    public void setGrauCumpHorario(int grauCumpHorario) {
-        this.grauCumpHorario = grauCumpHorario;
-    }
-
-    public void setClassificacao(int classificacao) {
-        this.classificacao = classificacao;
     }
 
     public void setNrViagens(int nrViagens) {
@@ -130,8 +106,9 @@ public class Motorista extends Actor
       
       this.listaViagens.add(nova);
       this.numKms += nova.getDistancia();
-      this.desvioAcumulado += (nova.getPrecoFinal() - nova.getPrecoAcordado());
+      this.desvioAcumulado += Math.abs(nova.getPrecoFinal() - nova.getPrecoAcordado());
       this.nrViagens++;
+      
     }
     
     public void trocaEstado(){
@@ -150,13 +127,7 @@ public class Motorista extends Actor
         sb.append(this.getMorada());
         sb.append("\nDataNascimento: ");
         sb.append(this.getNascimento());
-        sb.append("\nPotuação de cumprir horários: ");
-        sb.append(this.grauCumpHorario);
-        sb.append(",");
-        sb.append(" Classificação: ");
-        sb.append(this.classificacao);
-        sb.append(",");
-        sb.append(" Estado: ");
+        sb.append("\n Estado: ");
         if(this.estado == true) sb.append("Livre,");
         else sb.append("Ocupado,");
         sb.append(" Desvio entre valor acordado e valor final: ");
@@ -178,13 +149,7 @@ public class Motorista extends Actor
         sb.append(this.getMorada());
         sb.append("\n DataNascimento: ");
         sb.append(this.getNascimento());
-        sb.append("\n Potuação de cumprir horários: ");
-        sb.append(this.grauCumpHorario);
-        sb.append(",");
-        sb.append(" Classificação: ");
-        sb.append(this.classificacao);
-        sb.append(",");
-        sb.append(" Estado: ");
+        sb.append("\n Estado: ");
         if(this.estado == true) sb.append("Livre,");
         else sb.append("Ocupado,");
         return sb.toString();

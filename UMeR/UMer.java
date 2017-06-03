@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.Math;
 
 public class UMer implements Serializable{
 
@@ -115,30 +116,29 @@ public class UMer implements Serializable{
 
       
         Random rando = new Random();
-        Double  rng = ((rando.nextInt(41) + (Double)85.0)/100.0); //de 0.9 a 1.1
+        Double  rng = ((rando.nextInt(51) + (Double)85.0)/100.0); //de 0.85 a 1.35
         Double distancia = inicio.distancia(fim); //Double//discantica por calcular funçao manu
         LocalDate data = LocalDate.now(); //current date
-        Double desvio = 0.0;
+        Double desvio;
         
         Double precoFinal = precoAcordado;
-    
-        Double tempoEstimado = distancia * veiculo.getVelMediaKM();
+        Double tempoEstimado = distancia*veiculo.getPrecoPorKM();
         Double tempoFinal = tempoEstimado * rng;
-        desvio = (tempoEstimado/tempoFinal);
-        double precoEstimado = distancia*veiculo.getPrecoPorKM();
+
+        desvio = Math.abs(tempoEstimado-tempoFinal)/tempoEstimado;
+        
         if (desvio<=0.25){
-            precoFinal = precoEstimado * desvio;
+            precoFinal = precoAcordado * desvio;
         }
         
         
         Viagem nova = new Viagem(cliente, inicio, fim, distancia, precoAcordado, precoFinal,tempoEstimado, tempoFinal, condutor, veiculo, data, -1);
         idViagem++;
         listaViagens.put(idViagem,nova);
-
+        
         cliente.addViagem(nova);
         condutor.addViagem(nova);
         veiculo.addViagem(nova);
-
     }
     
 

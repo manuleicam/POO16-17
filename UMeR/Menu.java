@@ -22,7 +22,7 @@ import java.io.ObjectOutputStream;
 public class Menu {
     // variáveis de instância
     private List<String> opcoes;
-    private String[] menuPrinc = {"LogIn", "Registar", "Estatistica", "Povoar"};
+    private String[] menuPrinc = {"LogIn", "Registar", "Estatistica", "Povoar", "Gravar"};
     private String[] menuCliente = {"Realizar Viagem", "Ver Viagens Efectuadas"};
     private String[] menuViagem = {"Viatura mais próxima","Escolher viatura"};
     private String[] menuEstatistica = {"Top 10 clientes gastadores", "Piores 5 motoristas", "Total facturado por uma empresa", "Total facturado por um veiculo"};
@@ -46,24 +46,16 @@ public class Menu {
     }
     
     public void run(){
-        umer = null;
         
         try {
             umer = UMer.createFromFile(OBJECT_FILE);
         }
         catch (Exception e) {
             System.out.println("NO OBJECT FILE");
-            while (umer == null) {
-                try {
-                    umer.popular();
-                }
-                catch (Exception f) {
-
-                }
-            }
+            menuPrinc();
             
         }
-        menuPrinc();
+        
     }
     
     public void save() {
@@ -72,6 +64,9 @@ public class Menu {
         }
         catch (Exception e) {
             System.out.println("ERROR");
+            System.out.println(e.getMessage());
+            System.out.println(e.getCause());
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
     }
     
@@ -93,6 +88,9 @@ public class Menu {
                     break;
                 case 4:
                     umer.popular();
+                    break;
+                case 5:
+                    save();
                     break;
                 case 0:
                     x = false;

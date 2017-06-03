@@ -24,8 +24,7 @@ public class UMer {
     private int idViagem = 0;
     private Actor currentUser;
 
-    public UMer() {
-    }
+
     
     public void save(String file) throws IOException {
         	FileOutputStream fos = new FileOutputStream(file);
@@ -33,6 +32,7 @@ public class UMer {
         	oos.writeObject(this);
         	oos.close();
 	}
+	
 	public static UMer createFromFile(String file) throws FileNotFoundException, IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream(file);
         ObjectInputStream ois = new ObjectInputStream (fis);
@@ -43,7 +43,7 @@ public class UMer {
         if (obj instanceof UMer) {
             return (UMer)obj;
         }
-         return null;
+        return null;
     }
 
     public int login(String email, String pass) {
